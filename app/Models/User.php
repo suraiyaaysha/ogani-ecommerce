@@ -93,7 +93,11 @@ class User extends Authenticatable
         return $this->hasMany(Blog::class, 'user_id', 'id');
     }
 
-
+    // With contact form
+    public function contacts(): HasMany
+    {
+        return $this->hasMany(Contact::class);
+    }
 
 
 }
