@@ -18,6 +18,7 @@ return new class extends Migration
             $table->longText('description');
             $table->longText('information');
             $table->decimal('price', 8, 2);
+            $table->decimal('discount', 8, 2);
             $table->integer('quantity');
             $table->string('featured_image');
             $table->json('gallery_images')->nullable();

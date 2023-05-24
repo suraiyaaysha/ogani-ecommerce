@@ -40,6 +40,7 @@ class ProductFactory extends Factory
             'description' => $this->faker->sentence,
             'information' => $this->faker->sentence,
             'price' => $this->faker->randomFloat(2, 1, 1000),
+            'discount' => $this->faker->randomFloat(2, 1, 1000),
             'quantity' => $this->faker->numberBetween(1, 100),
             'featured_image' => $this->faker->imageUrl(),
             // 'gallery_images' => [], // Modify as per your requirement
