@@ -12,7 +12,9 @@ class ProductCategory extends Model
     protected $fillable = [
     'name',
     'slug',
-    // 'thumbnail',
+    'thumbnail',
+    'status',
+    'is_featured',
     // 'product_id',
     ];
 

@@ -14,7 +14,28 @@ class BlogCategorySeeder extends Seeder
      */
     public function run(): void
     {
+        BlogCategory::create([
+            'name' => 'Beauty',
+            'slug' => 'beauty',
+            // 'blog_id' => '1',
+        ]);
+        BlogCategory::create([
+            'name' => 'Food',
+            'slug' => 'food',
+            // 'blog_id' => '1',
+        ]);
+        BlogCategory::create([
+            'name' => 'Life Style',
+            'slug' => 'life-style',
+            // 'blog_id' => '1',
+        ]);
+        BlogCategory::create([
+            'name' => 'Travel',
+            'slug' => 'travel',
+            // 'blog_id' => '1',
+        ]);
+
         // Create 10 Blog Post
-        BlogCategory::factory()->count(10)->create();
+        BlogCategory::factory()->count(5)->create();
     }
 }

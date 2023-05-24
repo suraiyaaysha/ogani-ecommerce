@@ -17,15 +17,17 @@ return new class extends Migration
             $table->string('slug');
             $table->longText('description');
             $table->longText('information');
-            $table->string('price');
-            $table->string('quantity');
-            $table->string('thumbnail');
-            $table->string('weight');
+            $table->decimal('price', 8, 2);
+            $table->integer('quantity');
+            $table->string('featured_image');
+            $table->json('gallery_images')->nullable();
+            $table->decimal('weight', 8, 2);
             $table->string('color');
             $table->string('product_size');
-
-            // $table->string('category_id');
-
+            $table->decimal('shipping_duration', 8, 2);
+            $table->decimal('shipping_charge', 8, 2);
+            $table->enum('status', ['active', 'inactive'])->default('active');
+            // $table->string('product_category_id');
             $table->timestamps();
         });
     }

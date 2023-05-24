@@ -23,13 +23,15 @@ class ProductCategoryFactory extends Factory
 
     public function definition(): array
     {
-        
+
         $name = $this->faker->word;
 
         return [
             'name' => $name,
             'slug' => Str::slug($name),
-            // 'thumbnail' => $this->faker->imageUrl(),
+            'thumbnail' => $this->faker->imageUrl(),
+            'status' => $this->faker->randomElement(['active', 'inactive']),
+            'is_featured' => $this->faker->boolean(),
         ];
     }
 }

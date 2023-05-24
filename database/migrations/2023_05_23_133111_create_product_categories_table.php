@@ -11,10 +11,14 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('product_categories', function (Blueprint $table) {
+         Schema::create('product_categories', function (Blueprint $table) {
             $table->id();
             $table->string('name');
             $table->string('slug');
+            $table->string('thumbnail')->nullable();
+            // $table->string('status');
+             $table->enum('status', ['active', 'inactive'])->default('active');
+            $table->boolean('is_featured')->default(false);
             $table->timestamps();
         });
     }

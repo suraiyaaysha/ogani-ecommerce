@@ -18,77 +18,98 @@ class ProductCategorySeeder extends Seeder
         ProductCategory::create([
             'name' => 'Fresh Meat',
             'slug' => 'fresh-meat',
-            // 'thumbnail' => 'frontend/assets/images/category-01.jpg',
+            'thumbnail' => 'https://via.placeholder.com/640x480.png/00dd00?text=doloribus',
+            'status' => 'active',
+            'is_featured' => true,
             // 'product_id' => '1',
         ]);
 
         ProductCategory::create([
             'name' => 'Vegetables',
             'slug' => 'vegetables',
-            // 'thumbnail' => 'frontend/assets/images/category-02.jpg',
+            'thumbnail' => 'https://via.placeholder.com/640x480.png/0066ee?text=magni',
+            'status' => 'active',
+            'is_featured' => false,
             // 'product_id' => '1',
         ]);
 
         ProductCategory::create([
             'name' => 'Fruit & Nut Gifts',
             'slug' => 'Fruit-&-nut-gifts',
-            // 'thumbnail' => 'frontend/assets/images/category-02.jpg',
-            // 'product_id' => '1',
+            'thumbnail' => 'https://via.placeholder.com/640x480.png/009955?text=aut',
+            'status' => 'active',
+            'is_featured' => true,
         ]);
 
         ProductCategory::create([
             'name' => 'Fresh Berries',
             'slug' => 'fresh-berries',
-            // 'thumbnail' => 'frontend/assets/images/category-02.jpg',
+            'thumbnail' => 'https://via.placeholder.com/640x480.png/00dd66?text=excepturi',
+            'status' => 'active',
+            'is_featured' => false,
             // 'product_id' => '1',
         ]);
 
         ProductCategory::create([
             'name' => 'Ocean Foods',
             'slug' => 'Ocean Foods',
-            // 'thumbnail' => 'frontend/assets/images/category-02.jpg',
+            'thumbnail' => 'https://via.placeholder.com/640x480.png/00dd66?text=excepturi',
+            'status' => 'active',
+            'is_featured' => false,
             // 'product_id' => '1',
         ]);
 
         ProductCategory::create([
             'name' => 'Butter & Eggs',
             'slug' => 'Butter & Eggs',
-            // 'thumbnail' => 'frontend/assets/images/category-02.jpg',
+            'thumbnail' => 'https://via.placeholder.com/640x480.png/00dd66?text=excepturi',
+            'status' => 'active',
+            'is_featured' => false,
             // 'product_id' => '1',
         ]);
 
         ProductCategory::create([
             'name' => 'Fastfood',
             'slug' => 'Fastfood',
-            // 'thumbnail' => 'frontend/assets/images/category-02.jpg',
+            'thumbnail' => 'https://via.placeholder.com/640x480.png/00dd66?text=excepturi',
+            'status' => 'active',
+            'is_featured' => false,
             // 'product_id' => '1',
         ]);
 
         ProductCategory::create([
             'name' => 'Fresh Onion',
             'slug' => 'Fresh Onion',
-            // 'thumbnail' => 'frontend/assets/images/category-02.jpg',
+            'thumbnail' => 'https://via.placeholder.com/640x480.png/00dd66?text=excepturi',
+            'status' => 'active',
+            'is_featured' => false,
             // 'product_id' => '1',
         ]);
 
         ProductCategory::create([
             'name' => 'Papayaya & Crisps',
             'slug' => 'Papayaya & Crisps',
-            // 'thumbnail' => 'frontend/assets/images/category-02.jpg',
+            'thumbnail' => 'https://via.placeholder.com/640x480.png/00dd66?text=excepturi',
+            'status' => 'active',
+            'is_featured' => false,
             // 'product_id' => '1',
         ]);
 
         ProductCategory::create([
             'name' => 'Oatmeal',
             'slug' => 'Oatmeal',
-            // 'thumbnail' => 'frontend/assets/images/category-02.jpg',
+            'thumbnail' => 'https://via.placeholder.com/640x480.png/00dd66?text=excepturi',
+            'status' => 'active',
+            'is_featured' => false,
             // 'product_id' => '1',
         ]);
 
         ProductCategory::create([
             'name' => 'Fresh Bananas',
             'slug' => 'Fresh-Bananas',
-            // 'thumbnail' => 'frontend/assets/images/category-02.jpg',
+            'thumbnail' => 'https://via.placeholder.com/640x480.png/00dd66?text=excepturi',
+            'status' => 'active',
+            'is_featured' => false,
             // 'product_id' => '1',
         ]);
 

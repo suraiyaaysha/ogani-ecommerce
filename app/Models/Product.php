@@ -16,11 +16,15 @@ class Product extends Model
         'information',
         'price',
         'quantity',
-        'thumbnail',
+        'featured_image',
+        'gallery_images',
         'weight',
         'color',
         'product_size',
-        // 'category_id'
+        'shipping_duration',
+        'shipping_charge',
+        'status',
+        // 'product_category_id'
     ];
 
 }
