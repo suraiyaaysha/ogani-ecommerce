@@ -88,6 +88,13 @@ class User extends Authenticatable
         return $this->hasOne(ShippingDetails::class);
     }
 
+    // with Wishlists
+    public function wishlists(): HasMany
+    {
+        return $this->hasMany(Wishlist::class);
+    }
+
+
     // Relation between User and Blog
     public function blogs(){
         return $this->hasMany(Blog::class, 'user_id', 'id');
