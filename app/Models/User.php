@@ -88,6 +88,11 @@ class User extends Authenticatable
         return $this->hasOne(ShippingDetails::class);
     }
 
+    // Relation between User and Blog
+    public function blogs(){
+        return $this->hasMany(Blog::class, 'user_id', 'id');
+    }
+
 
 
 

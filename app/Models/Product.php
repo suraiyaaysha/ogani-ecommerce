@@ -46,5 +46,11 @@ class Product extends Model
         return $this->hasMany(Order::class);
     }
 
+    public function reviews()
+    {
+        // return $this->hasMany(Comment::class)->whereNull('parent_id');
+        return $this->hasMany(Review::class)->whereNull('parent_id')->latest();
+    }
+
 
 }

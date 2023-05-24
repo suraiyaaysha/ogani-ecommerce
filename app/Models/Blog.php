@@ -23,4 +23,15 @@ class Blog extends Model
         return $this->belongsTo(BlogCategory::class);
     }
 
+    // Relation between Blog and User
+    public function user(){
+        return $this->belongsTo(User::class, 'user_id', 'id');
+    }
+
+    public function comments()
+    {
+        // return $this->hasMany(Comment::class)->whereNull('parent_id');
+        return $this->hasMany(Comment::class)->whereNull('parent_id')->latest();
+    }
+
 }
