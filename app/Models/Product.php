@@ -39,6 +39,12 @@ class Product extends Model
         return $this->belongsTo(ProductCategory::class);
     }
 
+    // with tags
+    public function tags(): MorphToMany
+    {
+        return $this->morphToMany(Tag::class, 'taggable');
+    }
+
 
     // with orders
     public function orders()

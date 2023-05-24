@@ -18,9 +18,15 @@ class Blog extends Model
 
     ];
 
-    public function category()
+    public function blogCategory()
     {
         return $this->belongsTo(BlogCategory::class);
+    }
+
+    // with tags
+    public function tags(): MorphToMany
+    {
+        return $this->morphToMany(Tag::class, 'taggable');
     }
 
     // Relation between Blog and User
