@@ -27,4 +27,17 @@ class Product extends Model
         // 'product_category_id'
     ];
 
+    // Wih user
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
+
+    // with orders
+    public function orders()
+    {
+        return $this->hasMany(Order::class);
+    }
+
+
 }
