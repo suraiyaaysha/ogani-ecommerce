@@ -18,4 +18,12 @@ class ProductCategory extends Model
     // 'product_id',
     ];
 
+
+    // With Products
+    public function products()
+    {
+        return $this->hasMany(Product::class);
+    }
+
+
 }

@@ -33,6 +33,13 @@ class Product extends Model
         return $this->belongsTo(User::class);
     }
 
+    // With Product Category
+    public function productCategory()
+    {
+        return $this->belongsTo(ProductCategory::class);
+    }
+
+
     // with orders
     public function orders()
     {
