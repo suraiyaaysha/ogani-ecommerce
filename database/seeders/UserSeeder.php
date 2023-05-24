@@ -16,73 +16,94 @@ class UserSeeder extends Seeder
      */
     public function run(): void
     {
-        // User::create([
-        //     [
-        //         'name' => 'Admin',
-        //         'email' => 'admin@gmail.com',
-        //         'email_verified_at' => now(),
-        //         'password' => Hash::make('12345678'), //password is '12345678'
-        //         'is_admin' => 1,
-        //         // 'profile_photo' => 'admin/assets/img/user2-160x160.jpg',
-        //     ],
-        //     [
-        //         'name' => 'User',
-        //         'email' => 'user@gmail.com',
-        //         'email_verified_at' => now(),
-        //         'password' => Hash::make('12345678'), //password is '12345678'
-        //         'is_admin' => 0,
-        //         // 'profile_photo' => 'admin/assets/img/user2-160x160.jpg',
-        //     ]
-        // ]);
-
-        //Admin User
+        // Admin User
         User::create([
-            'name' => 'Admin',
+            'first_name' => 'Admin',
+            'last_name' => 'Main',
             'email' => 'admin@gmail.com',
             'email_verified_at' => now(),
-            'password' => Hash::make('12345678'), //password is '12345678'
+            'password' => Hash::make('12345678'), // password is '12345678'
+            'profile_photo' => 'https://images.pexels.com/photos/8993561/pexels-photo-8993561.jpeg?auto=compress&cs=tinysrgb&w=1600',
+            'phone' => '',
+            'country' => '',
+            'address_1' => '',
+            'address_2' => '',
+            'city' => '',
+            'state' => '',
+            'zip' => '',
             'is_admin' => 1,
-            // 'profile_photo' => 'admin/assets/img/user2-160x160.jpg',
         ]);
 
         // Default User
         User::create([
-            'name' => 'User',
+            'first_name' => 'User',
+            'last_name' => 'Default',
             'email' => 'user@gmail.com',
             'email_verified_at' => now(),
-            'password' => Hash::make('12345678'), //password is '12345678'
+            'password' => Hash::make('12345678'), // password is '12345678'
+            'profile_photo' => 'https://images.pexels.com/photos/5384445/pexels-photo-5384445.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1',
+            'phone' => '',
+            'country' => '',
+            'address_1' => '',
+            'address_2' => '',
+            'city' => '',
+            'state' => '',
+            'zip' => '',
             'is_admin' => 0,
-            // 'profile_photo' => 'admin/assets/img/user2-160x160.jpg',
         ]);
 
         // Test Purpose User | Will remove later
         User::create([
-            'name' => 'Jui Monika',
+            'first_name' => 'Jui',
+            'last_name' => 'Monika',
             'email' => 'jui@gmail.com',
             'email_verified_at' => now(),
-            'password' => Hash::make('12345678'), //password is '12345678'
+            'password' => Hash::make('12345678'), // password is '12345678'
+            'profile_photo' => 'https://img.freepik.com/free-photo/playful-brunette-girl-circlet-flowers-standing-indoor-shot-jocund-woman-with-wavy-hair-posing-cute-dress_197531-20586.jpg?w=1060&t=st=1684916970~exp=1684917570~hmac=a638f24b176c2542024323c1a5bf678109b24efaba7db55a9b633027566e0b3b',
+            'phone' => '',
+            'country' => '',
+            'address_1' => '',
+            'address_2' => '',
+            'city' => '',
+            'state' => '',
+            'zip' => '',
             'is_admin' => 0,
-            // 'profile_photo' => 'admin/assets/img/user3-160x160.jpg',
         ]);
 
         // Test Purpose User | Will remove later
         User::create([
-            'name' => 'Jitu Moni',
+            'first_name' => 'Jitu',
+            'last_name' => 'Moni',
             'email' => 'jitu@gmail.com',
             'email_verified_at' => now(),
-            'password' => Hash::make('12345678'), //password is '12345678'
+            'password' => Hash::make('12345678'), // password is '12345678'
+            'profile_photo' => 'https://img.freepik.com/free-photo/young-beautiful-woman-pink-warm-sweater-natural-look-smiling-portrait-isolated-long-hair_285396-896.jpg?w=1060&t=st=1684916953~exp=1684917553~hmac=77adf5956a5b59ef31f3e2bae3f2aff34c57e5d253e56ef31e09f80c47e10fcc',
+            'phone' => '',
+            'country' => '',
+            'address_1' => '',
+            'address_2' => '',
+            'city' => '',
+            'state' => '',
+            'zip' => '',
             'is_admin' => 0,
-            // 'profile_photo' => 'admin/assets/img/user4-160x160.jpg',
         ]);
 
         // Test Purpose User | Will remove later
         User::create([
-            'name' => 'Suraiya Aysha Asa',
+            'first_name' => 'Suraiya Aysha',
+            'last_name' => 'Asa',
             'email' => 'asa@gmail.com',
             'email_verified_at' => now(),
-            'password' => Hash::make('12345678'), //password is '12345678'
+            'password' => Hash::make('12345678'), // password is '12345678'
+            'profile_photo' => 'https://img.freepik.com/free-photo/pretty-smiling-joyfully-female-with-fair-hair-dressed-casually-looking-with-satisfaction_176420-15187.jpg?w=1060&t=st=1684916955~exp=1684917555~hmac=16cfb3963373471ea10d6de5c5f7f5582e0b2ace0141a7b2f55a5c19944530dd',
+            'phone' => '',
+            'country' => '',
+            'address_1' => '',
+            'address_2' => '',
+            'city' => '',
+            'state' => '',
+            'zip' => '',
             'is_admin' => 0,
-            // 'profile_photo' => 'admin/assets/img/user5-160x160.jpg',
         ]);
 
     }
