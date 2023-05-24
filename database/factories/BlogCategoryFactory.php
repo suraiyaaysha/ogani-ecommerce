@@ -31,6 +31,7 @@ class BlogCategoryFactory extends Factory
 
             'name' => $name,
             'slug' => Str::slug($name),
+            'status' => $this->faker->randomElement(['active', 'inactive']),
         ];
     }
 }
