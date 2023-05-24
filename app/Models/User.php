@@ -82,6 +82,13 @@ class User extends Authenticatable
         return $this->hasOne(BillingDetails::class);
     }
 
+    // Relation with Shipping details
+    public function shippingDetails()
+    {
+        return $this->hasOne(ShippingDetails::class);
+    }
+
+
 
 
 }
