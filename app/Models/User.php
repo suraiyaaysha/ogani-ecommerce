@@ -8,6 +8,8 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
 
+use App\Models\UserDetails;
+
 class User extends Authenticatable
 {
     use HasApiTokens, HasFactory, Notifiable;
@@ -22,7 +24,7 @@ class User extends Authenticatable
         'last_name',
         'email',
         'password',
-        
+
         // 'profile_photo',
         // 'phone',
         // 'country',
@@ -54,4 +56,12 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
         'password' => 'hashed',
     ];
+
+
+    // Relation with user details
+    public function userDetails()
+    {
+        return $this->hasOne(UserDetails::class);
+    }
+
 }
