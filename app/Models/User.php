@@ -76,5 +76,12 @@ class User extends Authenticatable
         return $this->hasMany(Order::class);
     }
 
+    // With billing details model
+    public function billingDetails()
+    {
+        return $this->hasOne(BillingDetails::class);
+    }
+
+
 
 }
