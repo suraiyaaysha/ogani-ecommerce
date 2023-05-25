@@ -26,10 +26,6 @@ class BlogFactory extends Factory
     public function definition(): array
     {
 
-        $blog_category_id = BlogCategory::inRandomOrder()->first(); //Get a random category
-        $user = User::inRandomOrder()->first(); //Get a random user_id
-
-
         $title = $this->faker->sentence;
 
         return [
