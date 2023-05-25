@@ -24,12 +24,12 @@ class OrderFactory extends Factory
     public function definition(): array
     {
 
-        $product_id = Product::inRandomOrder()->first(); //Get a random category
+        $product = Product::inRandomOrder()->first(); //Get a random category
         $user = User::inRandomOrder()->first(); //Get a random user_id
 
         return [
-            'user_id' => User::factory()->create()->id,
-            'product_id' => Product::factory()->create()->id,
+            'user_id' => $user->id,
+            'product_id' => $product->id,
 
             // 'user_id' => $this->faker->numberBetween(1, 10),
             // 'product_id' => $this->faker->numberBetween(1, 10),
