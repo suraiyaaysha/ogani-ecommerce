@@ -29,6 +29,7 @@ class DatabaseSeeder extends Seeder
             SubscriberSeeder::class,
             CouponSeeder::class,
             CompareSeeder::class,
+            OrderSeeder::class,
         ]);
 
     }
