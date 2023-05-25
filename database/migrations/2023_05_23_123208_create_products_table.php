@@ -37,15 +37,17 @@ return new class extends Migration
             $table->timestamps();
         });
 
-        // Schema::create('reviews', function (Blueprint $table) {
-        //     $table->increments('id');
-        //     $table->integer('user_id')->unsigned();
-        //     $table->integer('post_id')->unsigned();
-        //     $table->integer('parent_id')->unsigned()->nullable();
-        //     $table->text('body');
-        //     $table->timestamps();
-        //     $table->softDeletes();
-        // });
+        Schema::create('reviews', function (Blueprint $table) {
+            $table->id();
+
+            $table->text('body');
+            $table->foreignId('user_id')->constrained();
+            $table->foreignId('product_id')->constrained();
+            $table->integer('parent_id')->unsigned()->nullable();
+
+            $table->timestamps();
+            $table->softDeletes();
+        });
 
     }
 

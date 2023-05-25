@@ -29,16 +29,13 @@ class ProductFactory extends Factory
     public function definition(): array
     {
 
-        $product_category_id = ProductCategory::inRandomOrder()->first(); //Get a random category
-        $user = User::inRandomOrder()->first(); //Get a random user_id
-
-
-
         $name = $this->faker->word;
 
         return [
-            // 'product_category_id' => $product_category_id->id,
             'user_id' => User::where('email', 'admin@gmail.com')->first()->id, //Only Admin Can create posts
+            'product_category_id' => ProductCategory::factory(),
+
+
             // 'name' => $this->faker->word,
             // 'slug' => $this->faker->slug,
 
@@ -60,8 +57,6 @@ class ProductFactory extends Factory
             'shipping_duration' => $this->faker->numberBetween(1, 10),
             'shipping_charge' => $this->faker->randomFloat(2, 0, 50),
             'status' => $this->faker->randomElement(['active', 'inactive']),
-            
-            'product_category_id' => ProductCategory::factory()->create()->id,
         ];
     }
 }
