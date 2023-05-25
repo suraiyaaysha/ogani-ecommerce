@@ -26,6 +26,18 @@ return new class extends Migration
 
             $table->timestamps();
         });
+
+        Schema::create('comments', function (Blueprint $table) {
+            $table->id();
+
+            $table->text('body');
+            $table->foreignId('user_id')->constrained();
+            $table->foreignId('blog_id')->constrained();
+            $table->integer('parent_id')->unsigned()->nullable();
+
+            $table->timestamps();
+            $table->softDeletes();
+        });
     }
 
     /**
