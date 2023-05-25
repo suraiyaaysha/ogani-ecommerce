@@ -60,6 +60,7 @@ class ProductFactory extends Factory
             'shipping_duration' => $this->faker->numberBetween(1, 10),
             'shipping_charge' => $this->faker->randomFloat(2, 0, 50),
             'status' => $this->faker->randomElement(['active', 'inactive']),
+            
             'product_category_id' => ProductCategory::factory()->create()->id,
         ];
     }

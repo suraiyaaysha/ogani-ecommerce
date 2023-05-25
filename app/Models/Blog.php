@@ -14,7 +14,8 @@ class Blog extends Model
         'slug',
         'details',
         'thumbnail',
-        // 'blog_category_id'
+        'user_id',
+        'blog_category_id'
 
     ];
 
