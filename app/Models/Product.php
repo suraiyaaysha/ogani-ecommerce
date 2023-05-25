@@ -25,19 +25,24 @@ class Product extends Model
         'shipping_duration',
         'shipping_charge',
         'status',
-        // 'product_category_id'
+
+        'user_id',
+
+        'product_category_id'
+
     ];
 
     // Wih user
     public function user()
     {
-        return $this->belongsTo(User::class);
+        return $this->belongsTo(User::class, 'user_id', 'id');
     }
 
     // With Product Category
     public function productCategory()
     {
-        return $this->belongsTo(ProductCategory::class);
+        // return $this->belongsTo(ProductCategory::class);
+        return $this->belongsTo(ProductCategory::class, 'product_category_id', 'id');
     }
 
     // with tags
@@ -65,6 +70,5 @@ class Product extends Model
         // return $this->hasMany(Comment::class)->whereNull('parent_id');
         return $this->hasMany(Review::class)->whereNull('parent_id')->latest();
     }
-
 
 }

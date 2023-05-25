@@ -56,6 +56,9 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
         'password' => 'hashed',
+
+        // 'is_admin' => 'boolean'
+
     ];
 
 
@@ -98,7 +101,8 @@ class User extends Authenticatable
 
     // Relation between User and Blog
     public function blogs(){
-        return $this->hasMany(Blog::class, 'user_id', 'id');
+        // return $this->hasMany(Blog::class, 'user_id', 'id');
+        return $this->hasMany(Blog::class);
     }
 
     // With contact form

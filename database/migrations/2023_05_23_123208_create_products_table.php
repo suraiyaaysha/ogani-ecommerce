@@ -28,9 +28,25 @@ return new class extends Migration
             $table->decimal('shipping_duration', 8, 2);
             $table->decimal('shipping_charge', 8, 2);
             $table->enum('status', ['active', 'inactive'])->default('active');
-            // $table->string('product_category_id');
+            $table->unsignedBigInteger('user_id');
+            $table->unsignedBigInteger('product_category_id');
+
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
+            $table->foreign('product_category_id')->references('id')->on('product_categories')->onDelete('cascade');
+
             $table->timestamps();
         });
+
+        // Schema::create('reviews', function (Blueprint $table) {
+        //     $table->increments('id');
+        //     $table->integer('user_id')->unsigned();
+        //     $table->integer('post_id')->unsigned();
+        //     $table->integer('parent_id')->unsigned()->nullable();
+        //     $table->text('body');
+        //     $table->timestamps();
+        //     $table->softDeletes();
+        // });
+
     }
 
     /**
