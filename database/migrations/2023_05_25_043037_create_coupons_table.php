@@ -17,7 +17,7 @@ return new class extends Migration
             $table->string('code')->unique();
             $table->decimal('discount', 8, 2);
             $table->dateTime('expiry_date');
-            $table->unsignedInteger('usage_count')->default(0);
+            $table->unsignedInteger('usage_limit')->default(0);
             $table->timestamps();
         });
     }
