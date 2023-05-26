@@ -55,7 +55,7 @@ class LoginController extends Controller
             if (auth()->user()->is_admin == 1) {
                 return redirect()->route('admin.route');
             }else{
-                return redirect()->route('home'); // Later it will declear user dashboard
+                return redirect()->route('home'); // Later it will declare user dashboard
             }
         }else{
             return redirect()->route('login')

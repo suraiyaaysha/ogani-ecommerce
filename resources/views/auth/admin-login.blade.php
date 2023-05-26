@@ -1,4 +1,4 @@
-@extends('layouts.app')
+{{-- @extends('layouts.app')
 
 @section('content')
 <div class="container admin-login-area">
@@ -70,4 +70,92 @@
         </div>
     </div>
 </div>
-@endsection
+@endsection --}}
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Login Admin</title>
+
+    <!-- css starts -->
+      @include('admin.layouts.styles')
+    <!-- css ends -->
+
+  </head>
+  <body>
+    <div class="container-scroller">
+      <div class="container-fluid page-body-wrapper full-page-wrapper">
+        <div class="row w-100 m-0">
+          <div class="content-wrapper full-page-wrapper d-flex align-items-center auth login-bg">
+            <div class="card col-lg-4 mx-auto">
+              <div class="card-body px-5 py-5">
+                    <h3 class="card-title text-left mb-3">{{ __('Admin Login') }}</h3>
+                    <form method="POST" action="{{ route('login') }}">
+                        @csrf
+                        <div class="form-group">
+                            <label for="email">{{ __('Username or email *') }}</label>
+                            <input id="email" type="email" class="form-control p_input @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email" autofocus>
+
+                            @error('email')
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                            @enderror
+                        </div>
+
+                        <div class="form-group">
+                            <label for="password">{{ __('Password *') }}</label>
+                            <input id="password" type="password" class="form-control p_input @error('password') is-invalid @enderror" name="password" required autocomplete="current-password">
+
+                            @error('password')
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                            @enderror
+                        </div>
+
+                        <div class="form-group d-flex align-items-center justify-content-between">
+                            <div class="form-check">
+                            <label class="form-check-label">
+                                <input type="checkbox" name="remember" id="remember" {{ old('remember') ? 'checked' : '' }} class="form-check-input"> {{ __('Remember Me') }} </label>
+                            </div>
+                            @if (Route::has('password.request'))
+                                <a class="forgot-pass" href="{{ route('password.request') }}">
+                                    {{ __('Forgot Your Password?') }}
+                                </a>
+                            @endif
+                        </div>
+
+                        <div class="text-center">
+                            <button type="submit" class="btn btn-primary btn-block enter-btn">{{ __('Login') }}</button>
+                        </div>
+
+                        <div class="d-flex">
+                            <button class="btn btn-facebook me-2 col">
+                            <i class="mdi mdi-facebook"></i> Facebook </button>
+                            <button class="btn btn-google col">
+                            <i class="mdi mdi-google-plus"></i> Google plus </button>
+                        </div>
+
+                    </form>
+              </div>
+            </div>
+          </div>
+          <!-- content-wrapper ends -->
+        </div>
+        <!-- row ends -->
+      </div>
+      <!-- page-body-wrapper ends -->
+    </div>
+    <!-- container-scroller -->
+
+    <!-- scripts start-->
+    @include('admin.layouts.scripts')
+    <!-- scripts ends-->
+
+  </body>
+</html>
+

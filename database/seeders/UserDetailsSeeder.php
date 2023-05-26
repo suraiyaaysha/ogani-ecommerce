@@ -14,6 +14,6 @@ class UserDetailsSeeder extends Seeder
      */
     public function run(): void
     {
-        UserDetails::factory()->count(5)->create();
+        // UserDetails::factory()->count(5)->create();
     }
 }

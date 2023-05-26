@@ -23,7 +23,7 @@ class UserSeeder extends Seeder
             'email' => 'admin@gmail.com',
             'email_verified_at' => now(),
             'password' => Hash::make('12345678'), // password is '12345678'
-            'profile_photo' => '',
+            // 'profile_photo' => '',
             // 'phone' => '',
             // 'country' => '',
             // 'address_1' => '',
@@ -41,42 +41,7 @@ class UserSeeder extends Seeder
             'email' => 'user@gmail.com',
             'email_verified_at' => now(),
             'password' => Hash::make('12345678'), // password is '12345678'
-            'profile_photo' => '',
-            // 'phone' => '',
-            // 'country' => '',
-            // 'address_1' => '',
-            // 'address_2' => '',
-            // 'city' => '',
-            // 'state' => '',
-            // 'zip' => '',
-            'is_admin' => 0,
-        ]);
-
-        // Test Purpose User | Will remove later
-        User::create([
-            'first_name' => 'Jui',
-            'last_name' => 'Monika',
-            'email' => 'jui@gmail.com',
-            'email_verified_at' => now(),
-            'password' => Hash::make('12345678'), // password is '12345678'
-            'profile_photo' => null,
-            // 'country' => '',
-            // 'address_1' => '',
-            // 'address_2' => '',
-            // 'city' => '',
-            // 'state' => '',
-            // 'zip' => '',
-            'is_admin' => 0,
-        ]);
-
-        // Test Purpose User | Will remove later
-        User::create([
-            'first_name' => 'Jitu',
-            'last_name' => 'Moni',
-            'email' => 'jitu@gmail.com',
-            'email_verified_at' => now(),
-            'password' => Hash::make('12345678'), // password is '12345678'
-            'profile_photo' => null,
+            // 'profile_photo' => '',
             // 'phone' => '',
             // 'country' => '',
             // 'address_1' => '',
@@ -94,7 +59,7 @@ class UserSeeder extends Seeder
             'email' => 'asa@gmail.com',
             'email_verified_at' => now(),
             'password' => Hash::make('12345678'), // password is '12345678'
-            'profile_photo' => null,
+            // 'profile_photo' => null,
             // 'phone' => '',
             // 'country' => '',
             // 'address_1' => '',
@@ -105,8 +70,43 @@ class UserSeeder extends Seeder
             'is_admin' => 0,
         ]);
 
+        // Test Purpose User | Will remove later
+        // User::create([
+        //     'first_name' => 'Jui',
+        //     'last_name' => 'Monika',
+        //     'email' => 'jui@gmail.com',
+        //     'email_verified_at' => now(),
+        //     'password' => Hash::make('12345678'), // password is '12345678'
+        //     // 'profile_photo' => null,
+        //     // 'country' => '',
+        //     // 'address_1' => '',
+        //     // 'address_2' => '',
+        //     // 'city' => '',
+        //     // 'state' => '',
+        //     // 'zip' => '',
+        //     'is_admin' => 0,
+        // ]);
+
+        // Test Purpose User | Will remove later
+        // User::create([
+        //     'first_name' => 'Jitu',
+        //     'last_name' => 'Moni',
+        //     'email' => 'jitu@gmail.com',
+        //     'email_verified_at' => now(),
+        //     'password' => Hash::make('12345678'), // password is '12345678'
+        //     // 'profile_photo' => null,
+        //     // 'phone' => '',
+        //     // 'country' => '',
+        //     // 'address_1' => '',
+        //     // 'address_2' => '',
+        //     // 'city' => '',
+        //     // 'state' => '',
+        //     // 'zip' => '',
+        //     'is_admin' => 0,
+        // ]);
+
         // Create 10 Blog Post
-        User::factory()->count(5)->create();
+        // User::factory()->count(5)->create();
 
     }
 }
