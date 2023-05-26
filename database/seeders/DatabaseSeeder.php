@@ -32,6 +32,11 @@ class DatabaseSeeder extends Seeder
             OrderSeeder::class,
             ReviewSeeder::class,
             CommentSeeder::class,
+            TagSeeder::class,
+            ContactSeeder::class,
+            WishlistSeeder::class,
+            BillingDetailsSeeder::class,
+            ShippingDetailsSeeder::class,
         ]);
 
     }
