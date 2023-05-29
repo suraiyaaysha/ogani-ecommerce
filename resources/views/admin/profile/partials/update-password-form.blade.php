@@ -3,7 +3,7 @@
         <div class="card-body">
             <h4 class="card-title">{{ ('Update Password') }}</h4>
 
-            <form class="form-horizontal" method="POST" action="{{ route('admin.profile') }}">
+            <form class="form-horizontal" method="POST" action="{{ route('admin.change_password') }}">
                 {{ csrf_field() }}
 
                 <div class="form-group{{ $errors->has('current-password') ? ' has-error' : '' }}">
