@@ -19,7 +19,7 @@ return new class extends Migration
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
 
-            // $table->string('profile_photo')->nullable();
+            $table->string('profile_photo')->nullable();
 
             // $table->boolean('is_admin')->nullable();
             $table->tinyInteger('is_admin')->default(0);

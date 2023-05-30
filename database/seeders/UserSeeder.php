@@ -23,6 +23,7 @@ class UserSeeder extends Seeder
             'email' => 'admin@gmail.com',
             'email_verified_at' => now(),
             'password' => Hash::make('12345678'), // password is '12345678'
+            'profile_photo' => 'admin/images/face1.jpg',
             // 'profile_photo' => '',
             // 'phone' => '',
             // 'country' => '',
@@ -41,6 +42,7 @@ class UserSeeder extends Seeder
             'email' => 'user@gmail.com',
             'email_verified_at' => now(),
             'password' => Hash::make('12345678'), // password is '12345678'
+            'profile_photo' => 'admin/images/face2.jpg',
             // 'profile_photo' => '',
             // 'phone' => '',
             // 'country' => '',
@@ -59,6 +61,7 @@ class UserSeeder extends Seeder
             'email' => 'asa@gmail.com',
             'email_verified_at' => now(),
             'password' => Hash::make('12345678'), // password is '12345678'
+            'profile_photo' => 'admin/images/face3.jpg',
             // 'profile_photo' => null,
             // 'phone' => '',
             // 'country' => '',
