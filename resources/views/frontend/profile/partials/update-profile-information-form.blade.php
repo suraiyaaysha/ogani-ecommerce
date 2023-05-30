@@ -7,31 +7,40 @@
                 enctype="multipart/form-data">
                 @csrf
 
-                <div class="form-group">
-                    <label>{{ __('First Name') }}</label>
-                    <input type="text" class="form-control" name="first_name" placeholder="First Name"
-                        value="{{ old('first_name', auth()->user()->first_name) }}" required autocomplete="first_name">
+                <div class="row">
 
-                    @error('first_name')
-                        <span class="invalid-feedback" role="alert">
-                            <strong>{{ $message }}</strong>
-                        </span>
-                    @enderror
-                </div>
-                <div class="form-group">
-                    <label>{{ __('Last Name') }}</label>
-                    <input type="text" class="form-control" name="last_name" placeholder="Last Name" value="{{ old('last_name', auth()->user()->last_name) }}" required autocomplete="last_name">
+                    <div class="col-lg-6">
+                        <div class="form-group">
+                            <label>{{ __('First Name') }}</label>
+                            <input type="text" class="" name="first_name" placeholder="First Name"
+                                value="{{ old('first_name', auth()->user()->first_name) }}" required autocomplete="first_name">
 
-                    @error('last_name')
-                        <span class="invalid-feedback" role="alert">
-                            <strong>{{ $message }}</strong>
-                        </span>
-                    @enderror
+                            @error('first_name')
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                            @enderror
+                        </div>
+                    </div>
+
+                    <div class="col-lg-6">
+                        <div class="form-group">
+                            <label>{{ __('Last Name') }}</label>
+                            <input type="text" class="" name="last_name" placeholder="Last Name" value="{{ old('last_name', auth()->user()->last_name) }}" required autocomplete="last_name">
+
+                            @error('last_name')
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                            @enderror
+                        </div>
+                    </div>
+
                 </div>
 
                 <div class="form-group">
                     <label>{{ __('Email address') }}</label>
-                    <input type="email" class="form-control" name="email" placeholder="Email Address" name="email" value="{{ old('email', auth()->user()->email) }}" required autocomplete="email">
+                    <input type="email" class="" name="email" placeholder="Email Address" name="email" value="{{ old('email', auth()->user()->email) }}" required autocomplete="email">
 
                     @error('email')
                         <span class="invalid-feedback" role="alert">
@@ -42,9 +51,9 @@
 
                 <div class="form-group">
                     <label>Change Profile Photo</label>
-                    <div class="col-sm-12">
+                    <div class="">
                         <img id="preview" src="#" alt="your image" class="mt-3 mb-3" style="display:none;" class="admin-profile-photo">
-                        <input type="file" class="form-control" name="profile_photo" @error('profile_photo') is-invalid @enderror id="selectImage">
+                        <input type="file" class="" name="profile_photo" @error('profile_photo') is-invalid @enderror id="selectImage">
 
                         @error('profile_photo')
                             <span class="invalid-feedback" role="alert">

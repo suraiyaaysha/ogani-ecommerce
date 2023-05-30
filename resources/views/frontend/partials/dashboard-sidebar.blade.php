@@ -4,8 +4,8 @@
                             @if (auth()->user()->profile_photo)
                                 <img src="{{ asset(url(auth()->user()->profile_photo)) }}" class="rounded-circle mx-auto d-block" alt="">
                             @endif
-                            <h6>{{ auth()->user()->first_name }} {{ auth()->user()->last_name }}</h6>
-                            <p>{{ auth()->user()->created_at->format('F j, Y') }}</p>
+                            <h6 class="text-center mt-3">{{ auth()->user()->first_name }} {{ auth()->user()->last_name }}</h6>
+                            <p class="text-center">{{ auth()->user()->created_at->format('F j, Y') }}</p>
                         </div>
 
                         <ul class="nav flex-column user-dashboard-sidebar">
@@ -25,10 +25,15 @@
                                 <a class="" href="{{ url('/') }}">Address</a>
                             </li>
                             <li class="">
-                                <a class="" href="#">Delete Account</a>
-                            </li>
-                            <li class="">
-                                <a class="" href="#">Log out</a>
+                                <a href="{{ route('logout') }}"
+                                    onclick="event.preventDefault();
+                                            document.getElementById('logout-form').submit();">
+                                    {{ __('Logout') }}
+                                </a>
+
+                                <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                                    @csrf
+                                </form>
                             </li>
                         </ul>
 
