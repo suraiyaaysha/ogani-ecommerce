@@ -26,9 +26,13 @@ class WishlistFactory extends Factory
      */
     public function definition(): array
     {
+
+        $user = User::inRandomOrder()->first();
+
         return [
             'name' => $this->faker->word,
-            'user_id'=> User::factory()->create()->id,
+            // 'user_id'=> User::factory()->create()->id,
+            'user_id' => $user->id,
         ];
     }
 }
