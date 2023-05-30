@@ -37,3 +37,18 @@
     </div>
 
 @endsection
+
+{{-- Script for Uploaded image preview show --}}
+@push('script')
+    <script>
+        selectImage.onchange = evt => {
+            preview = document.getElementById('preview');
+            preview.style.display = 'block';
+            const [file] = selectImage.files
+            if (file) {
+                preview.src = URL.createObjectURL(file)
+            }
+        }
+    </script>
+@endpush
+{{-- Script for Uploaded image preview show --}}

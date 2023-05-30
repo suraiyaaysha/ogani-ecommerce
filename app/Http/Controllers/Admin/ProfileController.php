@@ -9,6 +9,7 @@ use Illuminate\Http\Request;
 
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\File;
 
 class ProfileController extends Controller
 {
@@ -26,15 +27,34 @@ class ProfileController extends Controller
 
     public function update(User $user, Request $request)
     {
-        $user->update([
-            'first_name' => $request->first_name,
-            'last_name' => $request->last_name,
-            'email' => $request->email,
-            'updated_at' => now()
-        ]);
-        
-        return back()->withSuccess('User Updated successfully');
 
+        // Profile photo
+        if ($request->hasFile('profile_photo')) {
+            $file = $request->file('profile_photo');
+            $filename = $file->hashName();
+            $file->move('uploads/profile-img', $filename);
+
+            // Delete previous profile photo
+            if ($user->profile_photo) {
+                $previousPhotoPath = public_path($user->profile_photo);
+                if (file_exists($previousPhotoPath)) {
+                    File::delete($previousPhotoPath);
+                }
+            }
+
+            $user->profile_photo = 'uploads/profile-img/' . $filename; // Set the new profile photo URL
+        }
+        // Profile photo
+
+            $user->update([
+                'first_name' => $request->first_name,
+                'last_name' => $request->last_name,
+                'email' => $request->email,
+                // 'profile_photo' => $url,
+                'updated_at' => now()
+            ]);
+
+        return back()->withSuccess('User Updated successfully');
     }
 
     public function updatePassword(Request $request){

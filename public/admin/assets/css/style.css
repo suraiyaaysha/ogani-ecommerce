@@ -20848,4 +20848,7 @@ div.tagsinput {
     font-size: 0.875em;
     color: #dc3545;
 }
+.admin-profile-photo {
+    max-height: 120px;
+}
 /* My Custom css for Admin */

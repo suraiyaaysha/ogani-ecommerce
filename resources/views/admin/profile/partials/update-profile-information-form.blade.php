@@ -40,10 +40,35 @@
                     @enderror
                 </div>
 
+                <div class="form-group">
+                    <label>Change Profile Photo</label>
+                    <div class="col-sm-12">
+                        <img id="preview" src="#" alt="your image" class="mt-3 mb-3" style="display:none;" class="admin-profile-photo">
+                        <input type="file" class="form-control" name="profile_photo" @error('profile_photo') is-invalid @enderror id="selectImage">
+
+                        @error('profile_photo')
+                            <span class="invalid-feedback" role="alert">
+                                <strong>{{ $message }}</strong>
+                            </span>
+                        @enderror
+
+                        {{-- Show previous image --}}
+                        <label class="col-12 mt-3">Previous Profile Photo:</label>
+                        @if(auth()->user()->profile_photo)
+
+                            <img src="{{ asset(url(auth()->user()->profile_photo)) }}" class="admin-profile-photo">
+
+                        @else
+                            <p>No image found!</p>
+                        @endif
+                        {{-- Show previous image --}}
+
+                    </div>
+                </div>
+
                 <button type="submit" class="btn btn-primary me-2">Update</button>
             </form>
 
         </div>
     </div>
 </div>
-

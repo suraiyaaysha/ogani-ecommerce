@@ -9,6 +9,9 @@
     <!-- scripts start-->
     @include('admin.layouts.styles')
     <!-- scripts ends-->
+
+    @stack('style')
+
   </head>
   <body>
     <div class="container-scroller">
@@ -47,6 +50,8 @@
     <!-- scripts start-->
     @include('admin.layouts.scripts')
     <!-- scripts ends-->
+
+    @stack('script')
 
   </body>
 </html>
