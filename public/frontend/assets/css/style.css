@@ -2135,7 +2135,7 @@ ol {
 	color: #dd2222;
 }
 
-.checkout__input input {
+.checkout__input input, input {
 	width: 100%;
 	height: 46px;
 	border: 1px solid #ebebeb;
@@ -3483,3 +3483,58 @@ ol {
 		font-size: 24px;
 	}
 }
+
+/* Custom css for frontend */
+.user-dashboard-aside {
+    background: #f5f5f5;
+    /* padding: 40px; */
+    padding-top: 30px;
+}
+.frontend-user-photo {
+    padding: 40px;
+}
+.user-dashboard-sidebar li a, .user-dashboard-sidebar button {
+    font-size: 14px;
+    color: #252525;
+    text-transform: uppercase;
+    font-weight: 700;
+    letter-spacing: 2px;
+    -webkit-transition: all, 0.3s;
+    -moz-transition: all, 0.3s;
+    -ms-transition: all, 0.3s;
+    -o-transition: all, 0.3s;
+    transition: all, 0.3s;
+    padding: 13px 40px;
+    display: block;
+    border:none;
+    border-top: 1px solid rgba(0,0,0,.125);
+    background-color: transparent;
+}
+.user-dashboard-sidebar li a:hover, .user-dashboard-sidebar li a.active,
+.user-dashboard-sidebar button:hover, .user-dashboard-sidebar button.active {
+    color: #7fad39!important;
+    background-color: transparent!important;
+}
+.font-18 {
+    font-size: 18px;
+}
+.fw-700 {
+    font-weight: 700;
+}
+.fw-600 {
+    font-weight: 600;
+}
+.fw-500 {
+    font-weight: 500;
+}
+.text-black {
+    color: #252525;
+}
+
+@media (min-width: 576px){
+    #confirm-user-deletion .modal-dialog {
+        max-width: 595px;
+        margin: 1.75rem auto;
+    }
+}
+/* Custom css for frontend */

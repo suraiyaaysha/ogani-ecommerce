@@ -6,6 +6,7 @@ use App\Http\Controllers\HomeController;
 use App\Http\Controllers\Auth\LoginController;
 
 use App\Http\Controllers\Admin\ProfileController;
+use App\Http\Controllers\Frontend\FrontendProfileController;
 
 /*
 |--------------------------------------------------------------------------
@@ -32,7 +33,7 @@ Route::get('/', function () {
 
 Auth::routes();
 
-Route::get('/dashboard', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::get('/dashboard', [App\Http\Controllers\HomeController::class, 'index'])->name('home')->middleware('auth');
 
 // Admin routes
 // Route::get('/admin/dashboard', [App\Http\Controllers\HomeController::class, 'handleAdmin'])->name('admin.route')->middleware('admin');
@@ -51,6 +52,14 @@ Route::get('/admin/login',[LoginController::class,'showAdminLoginForm'])->name('
 // Route::get('/', function () {
 //     return view('frontend.index');
 // });
+
+Route::middleware('auth')->group(function () {
+    Route::get('profile',[FrontendProfileController::class,'index'])->name('frontend.profile');
+    Route::post('profile/{user}',[FrontendProfileController::class,'update'])->name('frontend.profile');
+
+    Route::post('profile',[FrontendProfileController::class,'updatePassword'])->name('frontend.change_password');
+    Route::delete('profile',[FrontendProfileController::class,'destroy'])->name('frontend.profile.destroy');
+});
 
 
 /*--------------------------------------------------------------------------
