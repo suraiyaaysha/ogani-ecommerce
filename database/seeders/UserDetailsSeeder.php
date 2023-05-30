@@ -54,7 +54,7 @@ class UserDetailsSeeder extends Seeder
         // Create user details for Admin
         UserDetails::create([
             'user_id' => 1,
-            'profile_photo' => 'admin/images/face1.jpg',
+            // 'profile_photo' => 'admin/images/face1.jpg',
             'phone' => '123456789',
             'country' => 'Bangladesh',
             'address_1' => 'Doulatpur',
@@ -67,7 +67,7 @@ class UserDetailsSeeder extends Seeder
         // Create user details for Default User
         UserDetails::create([
             'user_id' => 2,
-            'profile_photo' => 'admin/images/face2.jpg',
+            // 'profile_photo' => 'admin/images/face2.jpg',
             'phone' => '123456789',
             'country' => 'Canada',
             'address_1' => 'Gulshan 1',
@@ -80,7 +80,7 @@ class UserDetailsSeeder extends Seeder
         // Create user details for Default User
         UserDetails::create([
             'user_id' => 3,
-            'profile_photo' => 'admin/images/face3.jpg',
+            // 'profile_photo' => 'admin/images/face3.jpg',
             'phone' => '123456789',
             'country' => 'Australia',
             'address_1' => 'Address 1',

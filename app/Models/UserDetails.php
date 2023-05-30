@@ -12,7 +12,7 @@ class UserDetails extends Model
     use HasFactory;
 
     protected $fillable = [
-        'profile_photo',
+        // 'profile_photo',
         'phone',
         'country',
         'address_1',
