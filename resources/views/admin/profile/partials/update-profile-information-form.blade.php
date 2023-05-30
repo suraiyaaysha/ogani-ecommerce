@@ -53,7 +53,7 @@
                         @enderror
 
                         {{-- Show previous image --}}
-                        <label class="col-12 mt-3">Previous Profile Photo:</label>
+                        <label class="col-12 mt-3 mb-3">Previous Profile Photo:</label>
                         @if(auth()->user()->profile_photo)
 
                             <img src="{{ asset(url(auth()->user()->profile_photo)) }}" class="admin-profile-photo">
