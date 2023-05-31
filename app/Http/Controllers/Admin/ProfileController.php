@@ -35,7 +35,15 @@ class ProfileController extends Controller
             $file->move('uploads/profile-img', $filename);
 
             // Delete previous profile photo
-            if ($user->profile_photo) {
+            // if ($user->profile_photo) {
+            //     $previousPhotoPath = public_path($user->profile_photo);
+            //     if (file_exists($previousPhotoPath)) {
+            //         File::delete($previousPhotoPath);
+            //     }
+            // }
+            
+            // Delete previous profile photo
+            if ($user->profile_photo !== 'admin/assets/images/faces/face1.jpg') {
                 $previousPhotoPath = public_path($user->profile_photo);
                 if (file_exists($previousPhotoPath)) {
                     File::delete($previousPhotoPath);

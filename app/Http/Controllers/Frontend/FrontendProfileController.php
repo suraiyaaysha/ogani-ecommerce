@@ -14,8 +14,6 @@ use Illuminate\Support\Facades\File;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\Redirect;
 
-
-
 use Illuminate\Validation\ValidationException;
 
 class FrontendProfileController extends Controller
@@ -39,10 +37,11 @@ class FrontendProfileController extends Controller
         if ($request->hasFile('profile_photo')) {
             $file = $request->file('profile_photo');
             $filename = $file->hashName();
+
             $file->move('uploads/profile-img', $filename);
 
             // Delete previous profile photo
-            if ($user->profile_photo) {
+            if ($user->profile_photo !== 'admin/assets/images/faces/face1.jpg') {
                 $previousPhotoPath = public_path($user->profile_photo);
                 if (file_exists($previousPhotoPath)) {
                     File::delete($previousPhotoPath);
