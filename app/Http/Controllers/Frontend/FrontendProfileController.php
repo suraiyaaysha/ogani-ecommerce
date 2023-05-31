@@ -114,26 +114,4 @@ class FrontendProfileController extends Controller
         return Redirect::to('/');
     }
 
-//     public function destroy(Request $request): RedirectResponse
-// {
-//     try {
-//         $request->validateWithBag('userDeletion', [
-//             'password' => ['required', 'current-password'],
-//         ]);
-
-//         $user = $request->user();
-
-//         Auth::logout();
-
-//         $user->delete();
-
-//         $request->session()->invalidate();
-//         $request->session()->regenerateToken();
-
-//         return redirect('/')->withSuccess('Account deleted successfully');
-//     } catch (ValidationException $e) {
-//         return back()->withErrors($e->errors(), 'userDeletion');
-//     }
-// }
-
 }
