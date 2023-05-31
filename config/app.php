@@ -168,6 +168,11 @@ return [
         // App\Providers\BroadcastServiceProvider::class,
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
+
+        // For profile picture Laravolt
+        // $app->register(Laravolt\Avatar\LumenServiceProvider),
+        Laravolt\Avatar\ServiceProvider::class,
+
     ])->toArray(),
 
     /*

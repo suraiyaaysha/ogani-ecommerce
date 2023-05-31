@@ -1,9 +1,21 @@
                     <div class="user-dashboard-aside">
 
-                        <div class="frontend-user-photo">
+                        {{-- <div class="frontend-user-photo">
                             @if (auth()->user()->profile_photo)
                                 <img src="{{ asset(url(auth()->user()->profile_photo)) }}" class="rounded-circle mx-auto d-block" alt="">
                             @endif
+
+                            <h6 class="text-center mt-3">{{ auth()->user()->first_name }} {{ auth()->user()->last_name }}</h6>
+                            <p class="text-center">{{ auth()->user()->created_at->format('F j, Y') }}</p>
+                        </div> --}}
+
+                        <div class="frontend-user-photo">
+                            @if (auth()->user()->profile_photo)
+                                <img src="{{ asset(auth()->user()->profile_photo) }}" class="rounded-circle mx-auto d-block" alt="Profile Photo">
+                            @else
+                                <img src="{{ Avatar::create(auth()->user()->first_name)->toBase64() }}" class="rounded-circle mx-auto d-block" alt="Avatar">
+                            @endif
+
                             <h6 class="text-center mt-3">{{ auth()->user()->first_name }} {{ auth()->user()->last_name }}</h6>
                             <p class="text-center">{{ auth()->user()->created_at->format('F j, Y') }}</p>
                         </div>

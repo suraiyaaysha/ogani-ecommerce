@@ -68,6 +68,7 @@
                 <div>{{ Auth::user()->first_name }}</div>
                 <span class="arrow_carrot-down"></span>
                 <ul>
+                    <li><a href="{{ url('profile') }}">{{ __('Profile') }}</a></li>
                     <li>
                         <a href="{{ route('logout') }}"
                         onclick="event.preventDefault();
@@ -164,6 +165,7 @@
                                         <div>{{ Auth::user()->first_name }}</div>
                                         <span class="arrow_carrot-down"></span>
                                         <ul>
+                                            <li><a href="{{ url('profile') }}">{{ __('Profile') }}</a></li>
                                             <li>
                                                 <a href="{{ route('logout') }}"
                                                 onclick="event.preventDefault();
