@@ -8,6 +8,10 @@ use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Admin\ProfileController;
 use App\Http\Controllers\Frontend\FrontendProfileController;
 
+
+use App\Http\Controllers\Frontend\FrontendProductCategoryController;
+use App\Http\Controllers\Frontend\FrontendProductController;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -60,6 +64,10 @@ Route::middleware('auth')->group(function () {
     Route::post('profile',[FrontendProfileController::class,'updatePassword'])->name('frontend.change_password');
     Route::delete('profile',[FrontendProfileController::class,'destroy'])->name('frontend.profile.destroy');
 });
+
+Route::get('/',[FrontendProductCategoryController::class,'index'])->name('frontend.index');
+Route::get('/',[FrontendProductCategoryController::class,'featuredProduct'])->name('frontend.index');
+// Route::get('/',[FrontendProductCategoryController::class,'categoryFeaturedProduct'])->name('frontend.index');
 
 
 /*--------------------------------------------------------------------------

@@ -4,29 +4,10 @@
 @section('content')
 
     <!-- Hero Section Begin -->
-    <section class="hero">
+    <section class="hero hero-banner-area">
         <div class="container">
             <div class="row">
                 <div class="col-lg-3">
-                    {{-- <div class="hero__categories">
-                        <div class="hero__categories__all">
-                            <i class="fa fa-bars"></i>
-                            <span>All departments</span>
-                        </div>
-                        <ul>
-                            <li><a href="#">Fresh Meat</a></li>
-                            <li><a href="#">Vegetables</a></li>
-                            <li><a href="#">Fruit & Nut Gifts</a></li>
-                            <li><a href="#">Fresh Berries</a></li>
-                            <li><a href="#">Ocean Foods</a></li>
-                            <li><a href="#">Butter & Eggs</a></li>
-                            <li><a href="#">Fastfood</a></li>
-                            <li><a href="#">Fresh Onion</a></li>
-                            <li><a href="#">Papayaya & Crisps</a></li>
-                            <li><a href="#">Oatmeal</a></li>
-                            <li><a href="#">Fresh Bananas</a></li>
-                        </ul>
-                    </div> --}}
                 </div>
                 <div class="col-lg-9">
                     <div class="hero__item set-bg" data-setbg="frontend/assets/img/hero/banner.jpg">
@@ -48,7 +29,7 @@
         <div class="container">
             <div class="row">
                 <div class="categories__slider owl-carousel">
-                    <div class="col-lg-3">
+                    {{-- <div class="col-lg-3">
                         <div class="categories__item set-bg" data-setbg="frontend/assets/img/categories/cat-1.jpg">
                             <h5><a href="#">Fresh Fruit</a></h5>
                         </div>
@@ -72,7 +53,16 @@
                         <div class="categories__item set-bg" data-setbg="frontend/assets/img/categories/cat-5.jpg">
                             <h5><a href="#">drink fruits</a></h5>
                         </div>
-                    </div>
+                    </div> --}}
+
+                    @foreach ($categories as $category)
+                        <div class="col-lg-3">
+                            <div class="categories__item set-bg" data-setbg="{{ asset(url($category->thumbnail)) }}">
+                                <h5><a href="#">{{ $category->name }}</a></h5>
+                            </div>
+                        </div>
+                    @endforeach
+
                 </div>
             </div>
         </div>
@@ -85,21 +75,44 @@
             <div class="row">
                 <div class="col-lg-12">
                     <div class="section-title">
-                        <h2>Featured Product</h2>
+                        <h2>{{ __('Featured Product') }}</h2>
                     </div>
                     <div class="featured__controls">
                         <ul>
                             <li class="active" data-filter="*">All</li>
-                            <li data-filter=".oranges">Oranges</li>
+                            {{-- <li data-filter=".oranges">Oranges</li>
                             <li data-filter=".fresh-meat">Fresh Meat</li>
                             <li data-filter=".vegetables">Vegetables</li>
-                            <li data-filter=".fastfood">Fastfood</li>
+                            <li data-filter=".fastfood">Fastfood</li> --}}
+                            @foreach ($categories as $category)
+                                <li data-filter=".{{ $category->slug }}">{{ $category->name }}</li>
+                            @endforeach
                         </ul>
                     </div>
                 </div>
             </div>
             <div class="row featured__filter">
-                <div class="col-lg-3 col-md-4 col-sm-6 mix oranges fresh-meat">
+
+                @foreach ($featuredProducts as $product)
+                    <div class="col-lg-3 col-md-4 col-sm-6 mix {{ $product->productCategory->slug }}">
+                        <div class="featured__item">
+                            <div class="featured__item__pic set-bg" data-setbg="{{ $product->featured_image }}">
+                                <ul class="featured__item__pic__hover">
+                                    <li><a href="#"><i class="fa fa-heart"></i></a></li>
+                                    <li><a href="#"><i class="fa fa-retweet"></i></a></li>
+                                    <li><a href="#"><i class="fa fa-shopping-cart"></i></a></li>
+                                </ul>
+                            </div>
+                            <h5>{{ $product->is_featured }}</h5>
+                            <div class="featured__item__text">
+                                <h6><a href="#">{{ $product->name }}</a></h6>
+                                <h5>${{ $product->price }}</h5>
+                            </div>
+                        </div>
+                    </div>
+                @endforeach
+
+                {{-- <div class="col-lg-3 col-md-4 col-sm-6 mix oranges fresh-meat">
                     <div class="featured__item">
                         <div class="featured__item__pic set-bg" data-setbg="frontend/assets/img/featured/feature-1.jpg">
                             <ul class="featured__item__pic__hover">
@@ -218,7 +231,7 @@
                             <h5>$30.00</h5>
                         </div>
                     </div>
-                </div>
+                </div> --}}
             </div>
         </div>
     </section>

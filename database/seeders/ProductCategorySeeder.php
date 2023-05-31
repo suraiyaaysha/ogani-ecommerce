@@ -114,6 +114,6 @@ class ProductCategorySeeder extends Seeder
         ]);
 
         // Create 5 Product
-        ProductCategory::factory()->count(5)->create();
+        // ProductCategory::factory()->count(5)->create();
     }
 }

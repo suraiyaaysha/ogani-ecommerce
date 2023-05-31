@@ -27,6 +27,7 @@ return new class extends Migration
             $table->string('product_size');
             $table->decimal('shipping_duration', 8, 2);
             $table->decimal('shipping_charge', 8, 2);
+            $table->boolean('is_featured')->default(false);
             $table->enum('status', ['active', 'inactive'])->default('active');
             $table->unsignedBigInteger('user_id');
             $table->unsignedBigInteger('product_category_id');

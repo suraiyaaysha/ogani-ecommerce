@@ -24,6 +24,7 @@ class Product extends Model
         'product_size',
         'shipping_duration',
         'shipping_charge',
+        'is_featured',
         'status',
 
         'user_id',

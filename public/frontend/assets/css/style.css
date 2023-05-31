@@ -563,6 +563,9 @@ ol {
 .hero {
 	/* padding-bottom: 50px; */
 }
+.hero-banner-area {
+	padding-bottom: 50px;
+}
 
 .hero.hero-normal {
 	padding-bottom: 30px;
@@ -631,6 +634,8 @@ ol {
     background-color: #fff;
     z-index: 9;
     width: 90%;
+    max-height: 465px;
+    overflow-x: auto;
 }
 
 @media only screen and (max-width: 991px) {

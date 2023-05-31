@@ -3,26 +3,44 @@
 namespace Database\Factories;
 
 use Illuminate\Database\Eloquent\Factories\Factory;
+
 use Illuminate\Support\Str;
+// use Illuminate\Support\Facades\Json;
+use Illuminate\Support\Facades\Json;
+
 
 use App\Models\Product;
 use App\Models\User;
 use App\Models\ProductCategory;
 
+/**
+ * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Product>
+ */
 class ProductFactory extends Factory
 {
+    /**
+     * Define the model's default state.
+     *
+     * @return array<string, mixed>
+     */
+
     protected $model = Product::class;
 
     public function definition(): array
     {
-        $name = $this->faker->word;
 
-        // Get a random product category
-        $productCategory = ProductCategory::inRandomOrder()->first();
+        $name = $this->faker->word;
+        // $productCategory = ProductCategory::inRandomOrder()->first();
 
         return [
-            'user_id' => User::where('email', 'admin@gmail.com')->first()->id,
-            'product_category_id' => $productCategory->id,
+            'user_id' => User::where('email', 'admin@gmail.com')->first()->id, //Only Admin Can create posts
+            'product_category_id' => ProductCategory::factory(),
+            // 'product_category_id' => $productCategory->id,
+
+
+            // 'name' => $this->faker->word,
+            // 'slug' => $this->faker->slug,
+
             'name' => $name,
             'slug' => Str::slug($name),
             'description' => $this->faker->sentence,
@@ -31,13 +49,16 @@ class ProductFactory extends Factory
             'discount' => $this->faker->randomFloat(2, 1, 1000),
             'quantity' => $this->faker->numberBetween(1, 100),
             'featured_image' => $this->faker->imageUrl(),
+            // 'gallery_images' => [], // Modify as per your requirement
+            // 'gallery_images' => serialize([]), // Serialize the array
+            // 'gallery_images' => Json::encode([]), // Encode the array as JSON string
             'gallery_images' => json_encode([]),
             'weight' => $this->faker->randomFloat(2, 0.1, 100),
             'color' => $this->faker->colorName,
             'product_size' => $this->faker->randomElement(['XS', 'S', 'M', 'L', 'XL']),
             'shipping_duration' => $this->faker->numberBetween(1, 10),
             'shipping_charge' => $this->faker->randomFloat(2, 0, 50),
-            'is_featured' => rand(0, 1),
+            'is_featured' => rand(0, 1), // random value of 0 or 1
             'status' => $this->faker->randomElement(['active', 'inactive']),
         ];
     }

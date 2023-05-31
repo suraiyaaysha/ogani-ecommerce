@@ -48,8 +48,8 @@
                 <div>English</div>
                 <span class="arrow_carrot-down"></span>
                 <ul>
-                    <li><a href="#">Spanis</a></li>
-                    <li><a href="#">English</a></li>
+                    <li><a href="#">{{ __('Spanis') }}</a></li>
+                    <li><a href="#">{{ __('English') }}</a></li>
                 </ul>
             </div>
             <div class="header__top__right__language header__top__right__auth">
@@ -239,7 +239,7 @@
                             <span>All departments</span>
                         </div>
                         <ul style="@if (!request()->is('/')) display: none; @endif">
-                            <li><a href="#">Fresh Meat</a></li>
+                            {{-- <li><a href="#">Fresh Meat</a></li>
                             <li><a href="#">Vegetables</a></li>
                             <li><a href="#">Fruit & Nut Gifts</a></li>
                             <li><a href="#">Fresh Berries</a></li>
@@ -249,7 +249,12 @@
                             <li><a href="#">Fresh Onion</a></li>
                             <li><a href="#">Papayaya & Crisps</a></li>
                             <li><a href="#">Oatmeal</a></li>
-                            <li><a href="#">Fresh Bananas</a></li>
+                            <li><a href="#">Fresh Bananas</a></li> --}}
+
+                            @foreach ($categories as $category)
+                                <li><a href="#">{{ $category->name }}</a></li>
+                            @endforeach
+
                         </ul>
                     </div>
                 </div>
