@@ -35,7 +35,7 @@ class ProductCategorySeeder extends Seeder
 
         ProductCategory::create([
             'name' => 'Fruit & Nut Gifts',
-            'slug' => 'Fruit-&-nut-gifts',
+            'slug' => 'fruit-nut-gifts',
             'thumbnail' => 'https://via.placeholder.com/640x480.png/009955?text=aut',
             'status' => 'active',
             'is_featured' => true,
@@ -52,7 +52,7 @@ class ProductCategorySeeder extends Seeder
 
         ProductCategory::create([
             'name' => 'Ocean Foods',
-            'slug' => 'Ocean Foods',
+            'slug' => 'ocean-foods',
             'thumbnail' => 'https://via.placeholder.com/640x480.png/00dd66?text=excepturi',
             'status' => 'active',
             'is_featured' => false,
@@ -61,7 +61,7 @@ class ProductCategorySeeder extends Seeder
 
         ProductCategory::create([
             'name' => 'Butter & Eggs',
-            'slug' => 'Butter & Eggs',
+            'slug' => 'butter-eggs',
             'thumbnail' => 'https://via.placeholder.com/640x480.png/00dd66?text=excepturi',
             'status' => 'active',
             'is_featured' => false,
@@ -70,7 +70,7 @@ class ProductCategorySeeder extends Seeder
 
         ProductCategory::create([
             'name' => 'Fastfood',
-            'slug' => 'Fastfood',
+            'slug' => 'fastfood',
             'thumbnail' => 'https://via.placeholder.com/640x480.png/00dd66?text=excepturi',
             'status' => 'active',
             'is_featured' => false,
@@ -79,7 +79,7 @@ class ProductCategorySeeder extends Seeder
 
         ProductCategory::create([
             'name' => 'Fresh Onion',
-            'slug' => 'Fresh Onion',
+            'slug' => 'fresh-onion',
             'thumbnail' => 'https://via.placeholder.com/640x480.png/00dd66?text=excepturi',
             'status' => 'active',
             'is_featured' => false,
@@ -88,7 +88,7 @@ class ProductCategorySeeder extends Seeder
 
         ProductCategory::create([
             'name' => 'Papayaya & Crisps',
-            'slug' => 'Papayaya & Crisps',
+            'slug' => 'papayaya-crisps',
             'thumbnail' => 'https://via.placeholder.com/640x480.png/00dd66?text=excepturi',
             'status' => 'active',
             'is_featured' => false,
@@ -97,7 +97,7 @@ class ProductCategorySeeder extends Seeder
 
         ProductCategory::create([
             'name' => 'Oatmeal',
-            'slug' => 'Oatmeal',
+            'slug' => 'oatmeal',
             'thumbnail' => 'https://via.placeholder.com/640x480.png/00dd66?text=excepturi',
             'status' => 'active',
             'is_featured' => false,
@@ -106,7 +106,7 @@ class ProductCategorySeeder extends Seeder
 
         ProductCategory::create([
             'name' => 'Fresh Bananas',
-            'slug' => 'Fresh-Bananas',
+            'slug' => 'fresh-bananas',
             'thumbnail' => 'https://via.placeholder.com/640x480.png/00dd66?text=excepturi',
             'status' => 'active',
             'is_featured' => false,

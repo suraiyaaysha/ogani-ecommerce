@@ -16,30 +16,25 @@ class FrontendProductCategoryController extends Controller
     {
         $categories = ProductCategory::all();
 
-        // $featuredProducts = $categories->products()->where('is_featured', true)->get();
-
         return view('frontend.index', compact('categories'));
     }
 
-    // public function categoryFeaturedProduct(ProductCategory $productCategory) {
-    //     $categories = ProductCategory::all();
-
-    //     $featuredProducts = $productCategory->products()->where('is_featured', true)->get();
-
-    //     return view('frontend.index', compact('productCategory', 'featuredProducts', 'categories'));
-    // }
-
-
+    /**
+     * Show the featuredProduct based on Categories which has many featuedProducts.
+    */
     public function featuredProduct(){
 
         $categories = ProductCategory::all();
 
-        // $featuredProducts = Product::where('is_featured', true)->take(4)->get();
+        // This categories which have featured products
+        $categoriesHasFeaturedProducts = ProductCategory::whereHas('products', function ($query) {
+            $query->where('is_featured', true);
+        })->get();
+
         $featuredProducts = Product::where('is_featured', true)->get();
 
-        return view('frontend.index', compact('featuredProducts', 'categories'));
+        return view('frontend.index', compact('categories','featuredProducts', 'categoriesHasFeaturedProducts'));
     }
-
 
     /**
      * Show the form for creating a new resource.
