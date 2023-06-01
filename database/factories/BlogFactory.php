@@ -28,9 +28,13 @@ class BlogFactory extends Factory
 
         $title = $this->faker->sentence;
 
+        // Get a random blog category
+        $blogCategory = BlogCategory::inRandomOrder()->first();
+
         return [
             'user_id' => User::where('email', 'admin@gmail.com')->first()->id, //Only Admin Can create posts
-            'blog_category_id' => BlogCategory::factory()->create()->id,
+            // 'blog_category_id' => BlogCategory::factory()->create()->id,
+            'blog_category_id' => $blogCategory->id,
 
             'title' => $title,
             'slug' => Str::slug($title),

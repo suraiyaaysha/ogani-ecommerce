@@ -8,7 +8,11 @@ use Illuminate\Support\ServiceProvider;
 // For adding globally header category variable, So that I don't have to call the variable again & again.
 use App\Models\ProductCategory;
 use App\Models\Product;
+use App\Models\Blog;
 use Illuminate\Support\Facades\View;
+
+// Add pagination
+use Illuminate\Pagination\Paginator;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -52,6 +56,17 @@ class AppServiceProvider extends ServiceProvider
             $view->with('latestProducts', Product::get());
             $view->with('reviewedProducts', Product::has('reviews')->get());
         });
+
+
+        // share allBlog variable with frontend.blog view
+        View::composer('frontend.blog.index', function ($view) {
+            $view->with('allBlog', Blog::all());
+        });
+
+
+        // Add pagination
+        // Paginator::defaultView('vendor.pagination.bootstrap-4');
+        Paginator::useBootstrap();
 
     }
 }

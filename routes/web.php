@@ -74,6 +74,14 @@ Route::get('/',[FrontendProductController::class,'productsWithReviews'])->name('
 
 Route::get('/',[FrontendBlogController::class,'getAllBlog'])->name('frontend.index');
 
+// Blog Pages route
+Route::get('/blog',[FrontendBlogController::class,'index'])->name('frontend.blog');
+
+
+
+Route::get('/contact', function () {
+    return view('frontend.contact');
+});
 
 /*--------------------------------------------------------------------------
 | Admin Routes start

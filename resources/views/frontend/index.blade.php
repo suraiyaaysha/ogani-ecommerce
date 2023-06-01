@@ -247,7 +247,7 @@
                                     <li><i class="fa fa-comment-o"></i> {{ $blog->comments->count() }}</li>
                                 </ul>
                                 <h5><a href="#">{!! Str::limit($blog->details, 20) !!}</a></h5>
-                                <p>{{ $blog->details }}</p>
+                                <p>{!! Str::limit($blog->details, 30) !!}</p>
                             </div>
                         </div>
                     </div>
