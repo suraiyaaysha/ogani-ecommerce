@@ -72,8 +72,6 @@
                                     <li><a href="#"><i class="fa fa-shopping-cart"></i></a></li>
                                 </ul>
                             </div>
-                            <h5>{{ $product->is_featured }}</h5>
-                            <h4>SLUG IS::{{ $product->productCategory->slug }}</h4>
                             <div class="featured__item__text">
                                 <h6><a href="#">{{ $product->name }}</a></h6>
                                 <h5>${{ $product->price }}</h5>
