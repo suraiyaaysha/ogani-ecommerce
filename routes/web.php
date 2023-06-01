@@ -79,6 +79,7 @@ Route::get('/blog',[FrontendBlogController::class,'index'])->name('frontend.blog
 Route::get('/blog',[FrontendBlogController::class,'getBlogCategories'])->name('frontend.blog');
 // Blog tags
 Route::get('/blog',[FrontendBlogController::class,'getTags'])->name('frontend.blog');
+Route::get('/blog/{blog_slug}',[FrontendBlogController::class,'blogDetails'])->name('frontend.blogDetails');
 
 
 

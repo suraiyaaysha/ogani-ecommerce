@@ -10,6 +10,7 @@ use App\Models\ProductCategory;
 use App\Models\Product;
 use App\Models\Blog;
 use App\Models\BlogCategory;
+use App\Models\Tag;
 use Illuminate\Support\Facades\View;
 
 // Add pagination
@@ -68,6 +69,11 @@ class AppServiceProvider extends ServiceProvider
                     ->paginate(6));
 
             $view->with('blogCategories', BlogCategory::all());
+        });
+        View::composer('frontend.partials.blog-aside', function ($view) {
+            $view->with('blogCategories', BlogCategory::all());
+            $view->with('latestBlog', Blog::latest()->take(3)->get());
+            $view->with('tags', Tag::all());
         });
 
 

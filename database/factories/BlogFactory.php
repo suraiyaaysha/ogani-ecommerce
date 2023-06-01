@@ -38,7 +38,7 @@ class BlogFactory extends Factory
 
             'title' => $title,
             'slug' => Str::slug($title),
-            'details' => $this->faker->sentence,
+            'details' => $this->faker->paragraph,
             'thumbnail' => $this->faker->imageUrl(),
         ];
     }

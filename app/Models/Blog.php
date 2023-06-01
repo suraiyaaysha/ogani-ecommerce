@@ -25,7 +25,8 @@ class Blog extends Model
     }
 
     // with tags
-    public function tags(): MorphToMany
+    // public function tags(): MorphToMany
+    public function tags()
     {
         return $this->morphToMany(Tag::class, 'taggable');
     }

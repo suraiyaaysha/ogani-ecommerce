@@ -18,7 +18,7 @@
                             <h4>{{ __('Recent News') }}</h4>
                             <div class="blog__sidebar__recent">
                                 @foreach ($latestBlog as $blog)
-                                    <a href="#" class="blog__sidebar__recent__item">
+                                    <a href="{{ url('blog/' . $blog->slug) }}" class="blog__sidebar__recent__item">
                                         <div class="blog__sidebar__recent__item__pic">
                                             <img src="{{ $blog->thumbnail }}" alt="">
                                         </div>

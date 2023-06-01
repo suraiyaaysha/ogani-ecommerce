@@ -42,9 +42,9 @@
                                             <li><i class="fa fa-calendar-o"></i> {{ $blog->created_at->format('F j, Y') }}</li>
                                             <li><i class="fa fa-comment-o"></i> {{ $blog->comments->count() }}</li>
                                         </ul>
-                                        <h5><a href="#">{!! Str::limit($blog->title, 20) !!}</a></h5>
+                                        <h5><a href="{{ url('blog/' . $blog->slug) }}">{!! Str::limit($blog->title, 20) !!}</a></h5>
                                         <p>{!! Str::limit($blog->details, 30) !!}</p>
-                                        <a href="#" class="blog__btn">{{ __('READ MORE') }} <span class="arrow_right"></span></a>
+                                        <a href="{{ url('blog/' . $blog->slug) }}" class="blog__btn">{{ __('READ MORE') }} <span class="arrow_right"></span></a>
                                     </div>
                                 </div>
                             </div>
