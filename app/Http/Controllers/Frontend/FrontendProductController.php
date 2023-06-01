@@ -9,19 +9,50 @@ use Illuminate\Http\Request;
 
 class FrontendProductController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
-    public function index()
+    public function getProductCategories()
     {
-        //
+        $categories = ProductCategory::all();
+
+        return view('frontend.index', compact('categories'));
+    }
+
+    /**
+     * Show the featuredProduct based on Categories which has many featuredProducts.
+    */
+    public function featuredProduct(){
+
+        $categories = ProductCategory::all();
+
+        // This categories which have featured products
+        $categoriesHasFeaturedProducts = ProductCategory::whereHas('products', function ($query) {
+            $query->where('is_featured', true);
+        })->get();
+
+        $featuredProducts = Product::where('is_featured', true)->get();
+
+        return view('frontend.index', compact('categories','featuredProducts', 'categoriesHasFeaturedProducts'));
     }
 
     public function latestProducts()
     {
+
         $latestProducts = Product::get();
 
-        return view('frontend.index', compact('latestProducts'));
+        $reviewedProducts = Product::has('reviews')->get();
+
+        return view('frontend.index', compact('latestProducts', 'reviewedProducts'));
+    }
+
+    /**
+     * Get products with reviews.
+    */
+    public function productsWithReviews()
+    {
+        $latestProducts = Product::get();
+
+        $reviewedProducts = Product::has('reviews')->get();
+
+        return view('frontend.index', compact('reviewedProducts', 'latestProducts'));
     }
 
     // /**

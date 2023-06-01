@@ -42,11 +42,15 @@ class AppServiceProvider extends ServiceProvider
 
         // Share categoriesHasFeaturedProducts variable with index view
         View::composer('frontend.index', function ($view) {
-            $view->with('categoriesHasFeaturedProducts', ProductCategory::all());
+            $view->with('categoriesHasFeaturedProducts',ProductCategory::whereHas('products', function ($query) {
+            $query->where('is_featured', true);
+        })->get());
         });
         // Share categoriesHasFeaturedProducts variable with index view
         View::composer('frontend.index', function ($view) {
-            $view->with('featuredProducts', Product::all());
+            $view->with('featuredProducts', Product::where('is_featured', true)->get());
+            $view->with('latestProducts', Product::get());
+            $view->with('reviewedProducts', Product::has('reviews')->get());
         });
 
     }

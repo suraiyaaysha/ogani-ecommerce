@@ -12,6 +12,8 @@ use App\Http\Controllers\Frontend\FrontendProfileController;
 use App\Http\Controllers\Frontend\FrontendProductCategoryController;
 use App\Http\Controllers\Frontend\FrontendProductController;
 
+use App\Http\Controllers\Frontend\FrontendBlogController;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -65,9 +67,12 @@ Route::middleware('auth')->group(function () {
     Route::delete('profile',[FrontendProfileController::class,'destroy'])->name('frontend.profile.destroy');
 });
 
-Route::get('/',[FrontendProductCategoryController::class,'index'])->name('frontend.index');
-Route::get('/',[FrontendProductCategoryController::class,'featuredProduct'])->name('frontend.index');
+Route::get('/',[FrontendProductController::class,'getProductCategories'])->name('frontend.index');
+Route::get('/',[FrontendProductController::class,'featuredProduct'])->name('frontend.index');
 Route::get('/',[FrontendProductController::class,'latestProducts'])->name('frontend.index');
+Route::get('/',[FrontendProductController::class,'productsWithReviews'])->name('frontend.index');
+
+Route::get('/',[FrontendBlogController::class,'getAllBlog'])->name('frontend.index');
 
 
 /*--------------------------------------------------------------------------
