@@ -235,7 +235,8 @@
                 </div>
             </div>
             <div class="row">
-                @foreach ($allBlog->take(3) as $blog)
+                {{-- @foreach ($allBlog->take(3) as $blog) --}}
+                @foreach ($latestBlog as $blog)
                     <div class="col-lg-4 col-md-4 col-sm-6">
                         <div class="blog__item">
                             <div class="blog__item__pic">
@@ -246,7 +247,7 @@
                                     <li><i class="fa fa-calendar-o"></i> {{ $blog->created_at->format('F j, Y') }}</li>
                                     <li><i class="fa fa-comment-o"></i> {{ $blog->comments->count() }}</li>
                                 </ul>
-                                <h5><a href="#">{!! Str::limit($blog->details, 20) !!}</a></h5>
+                                <h5><a href="#">{!! Str::limit($blog->title, 20) !!}</a></h5>
                                 <p>{!! Str::limit($blog->details, 30) !!}</p>
                             </div>
                         </div>

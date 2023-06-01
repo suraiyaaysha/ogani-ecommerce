@@ -2465,9 +2465,14 @@ ol {
 	margin-bottom: 20px;
 }
 
-.blog__sidebar__recent__item__pic {
+/* .blog__sidebar__recent__item__pic {
 	float: left;
 	margin-right: 20px;
+} */
+.blog__sidebar__recent__item__pic {
+    float: left;
+    margin-right: 20px;
+    width: 90px;
 }
 
 .blog__sidebar__recent__item__text {

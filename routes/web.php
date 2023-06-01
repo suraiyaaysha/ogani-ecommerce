@@ -72,10 +72,13 @@ Route::get('/',[FrontendProductController::class,'featuredProduct'])->name('fron
 Route::get('/',[FrontendProductController::class,'latestProducts'])->name('frontend.index');
 Route::get('/',[FrontendProductController::class,'productsWithReviews'])->name('frontend.index');
 
-Route::get('/',[FrontendBlogController::class,'getAllBlog'])->name('frontend.index');
+Route::get('/',[FrontendBlogController::class,'latestBlog'])->name('frontend.index');
 
 // Blog Pages route
 Route::get('/blog',[FrontendBlogController::class,'index'])->name('frontend.blog');
+Route::get('/blog',[FrontendBlogController::class,'getBlogCategories'])->name('frontend.blog');
+// Blog tags
+Route::get('/blog',[FrontendBlogController::class,'getTags'])->name('frontend.blog');
 
 
 

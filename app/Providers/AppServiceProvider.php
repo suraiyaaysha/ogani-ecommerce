@@ -9,6 +9,7 @@ use Illuminate\Support\ServiceProvider;
 use App\Models\ProductCategory;
 use App\Models\Product;
 use App\Models\Blog;
+use App\Models\BlogCategory;
 use Illuminate\Support\Facades\View;
 
 // Add pagination
@@ -60,7 +61,13 @@ class AppServiceProvider extends ServiceProvider
 
         // share allBlog variable with frontend.blog view
         View::composer('frontend.blog.index', function ($view) {
-            $view->with('allBlog', Blog::all());
+            // $view->with('allBlog', Blog::all());
+            // $view->with('allBlog', Blog::all());
+            $view->with('latestBlog', Blog::latest()->take(3)->get());
+            $view->with('blogs', Blog::latest()
+                    ->paginate(6));
+
+            $view->with('blogCategories', BlogCategory::all());
         });
 
 
