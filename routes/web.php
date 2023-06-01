@@ -67,7 +67,7 @@ Route::middleware('auth')->group(function () {
 
 Route::get('/',[FrontendProductCategoryController::class,'index'])->name('frontend.index');
 Route::get('/',[FrontendProductCategoryController::class,'featuredProduct'])->name('frontend.index');
-// Route::get('/',[FrontendProductCategoryController::class,'categoryFeaturedProduct'])->name('frontend.index');
+Route::get('/',[FrontendProductController::class,'latestProducts'])->name('frontend.index');
 
 
 /*--------------------------------------------------------------------------
