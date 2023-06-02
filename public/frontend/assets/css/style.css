@@ -3563,4 +3563,19 @@ ol {
         margin: 1.75rem auto;
     }
 }
+
+/* User dashboard page */
+span.icon_cart.dashboard-item-icon {
+    height: 50px;
+    width: 50px;
+    background: #7fad39;
+    border-radius: 50%;
+    color: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 24px auto 0;
+}
+/* User dashboard page */
+
 /* Custom css for frontend */
