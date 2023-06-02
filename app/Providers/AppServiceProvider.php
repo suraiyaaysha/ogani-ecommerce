@@ -44,34 +44,25 @@ class AppServiceProvider extends ServiceProvider
         // Share categories variable with index view
         View::composer('frontend.index', function ($view) {
             $view->with('categories', ProductCategory::all());
-        });
 
-        // Share categoriesHasFeaturedProducts variable with index view
-        View::composer('frontend.index', function ($view) {
+            // Share categoriesHasFeaturedProducts variable with index view
             $view->with('categoriesHasFeaturedProducts',ProductCategory::whereHas('products', function ($query) {
-            $query->where('is_featured', true);
-        })->get());
-        });
-        // Share categoriesHasFeaturedProducts variable with index view
-        View::composer('frontend.index', function ($view) {
+                $query->where('is_featured', true);
+                })->get());
+
             $view->with('featuredProducts', Product::where('is_featured', true)->get());
             $view->with('latestProducts', Product::get());
             $view->with('reviewedProducts', Product::has('reviews')->get());
-
-            // $view->with('latestBlog', Blog::latest()->take(3)->get());
         });
-
 
         // share allBlog variable with frontend.blog view
         View::composer('frontend.blog.index', function ($view) {
-            // $view->with('allBlog', Blog::all());
             // $view->with('allBlog', Blog::all());
             $view->with('latestBlog', Blog::latest()->take(3)->get());
             $view->with('blogs', Blog::latest()
                     ->paginate(6));
 
             $view->with('blogCategories', BlogCategory::all());
-
         });
 
         // });
@@ -80,7 +71,6 @@ class AppServiceProvider extends ServiceProvider
             $view->with('latestBlog', Blog::latest()->take(3)->get());
             $view->with('tags', Tag::all());
         });
-
 
         // Add pagination
         // Paginator::defaultView('vendor.pagination.bootstrap-4');
