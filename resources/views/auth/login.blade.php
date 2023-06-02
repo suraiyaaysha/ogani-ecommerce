@@ -2,17 +2,21 @@
 
 @section('content')
 <div class="container user-login-area">
-    <div class="row justify-content-center">
-        <div class="col-md-6">
+    <div class="row justify-content-center align-items-center vh-100">
+        <div class="col-md-7">
 
             <div class="humberger__menu__logo text-center mb-3">
                 <a href="{{ url('/') }}"><img src="frontend/assets/img/logo.png" alt=""></a>
             </div>
 
             <div class="card">
-                <h5 class="card-header">{{ __('User Login') }}</h5>
+                {{-- <h5 class="card-header">{{ __('User Login') }}</h5> --}}
 
-                <div class="card-body">
+
+                <div class="card-body p-4">
+
+                    <h3 class="text-center">{{ __('Login') }}</h3>
+
                     {{-- <form method="POST" action="{{ route('login') }}"> --}}
 
                     @isset($route)
@@ -72,7 +76,7 @@
 
                         <div class="row">
                             <div class="col-md-12 text-center">
-                                <button type="submit" class="primary-btn border-0">
+                                <button type="submit" class="primary-btn border-0 w-100">
                                     {{ __('Login') }}
                                 </button>
                             </div>

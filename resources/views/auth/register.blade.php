@@ -2,17 +2,20 @@
 
 @section('content')
 <div class="container">
-    <div class="row justify-content-center">
-        <div class="col-md-6">
+    <div class="row justify-content-center align-items-center vh-100">
+        <div class="col-md-7">
 
             <div class="humberger__menu__logo text-center mb-3">
                 <a href="{{ url('/') }}"><img src="frontend/assets/img/logo.png" alt=""></a>
             </div>
 
             <div class="card">
-                <h5 class="card-header">{{ __('Register') }}</h5>
+                {{-- <h5 class="card-header">{{ __('Register') }}</h5> --}}
 
-                <div class="card-body">
+                <div class="card-body p-4">
+
+                    <h5 class="text-center">{{ __('Register') }}</h5>
+
                     <form method="POST" action="{{ route('register') }}">
                         @csrf
 
@@ -87,8 +90,8 @@
                         </div>
 
                         <div class="row">
-                            <div class="col-md-6 offset-md-4">
-                                <button type="submit" class="primary-btn border-0">
+                            <div class="col-md-12">
+                                <button type="submit" class="primary-btn border-0 w-100">
                                     {{ __('Register') }}
                                 </button>
                             </div>
