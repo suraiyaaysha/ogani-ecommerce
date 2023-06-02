@@ -248,7 +248,6 @@
                                 <div class="product__discount__item__text">
                                     <span>{{ $product->productCategory->name }}</span>
                                     <h5><a href="#">{{ $product->name }}</a></h5>
-                                    <h1><a href="#">{{ $product->id }}</a></h1>
                                     <div class="product__item__price">${{ $product->discounted_price }} <span>${{ $product->price }}</span></div>
                                 </div>
                             </div>
