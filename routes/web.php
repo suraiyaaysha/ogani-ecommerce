@@ -88,8 +88,8 @@ Route::get('/blog/tag/{slug}', [FrontendBlogController::class, 'blogsByTag'])->n
 
 // Contact Page Route
 Route::get('/contact', function () {
-    return view('frontend.contact');
-});
+    return view('frontend.contact.index');
+})->name('frontend.contact');
 
 /*--------------------------------------------------------------------------
 | Admin Routes start
