@@ -68,23 +68,14 @@ Route::middleware('auth')->group(function () {
 });
 
 Route::get('/',[FrontendProductController::class,'index'])->name('frontend.index');
-// Route::get('/',[FrontendProductController::class,'getProductCategories'])->name('frontend.index');
-// Route::get('/',[FrontendProductController::class,'featuredProduct'])->name('frontend.index');
-// Route::get('/',[FrontendProductController::class,'latestProducts'])->name('frontend.index');
-// Route::get('/',[FrontendProductController::class,'productsWithReviews'])->name('frontend.index');
-
-
-// Route::get('/',[FrontendBlogController::class,'latestBlog'])->name('frontend.index');
-
-
 
 
 
 // Blog Pages route
 Route::get('/blog',[FrontendBlogController::class,'index'])->name('frontend.blog');
-Route::get('/blog',[FrontendBlogController::class,'getBlogCategories'])->name('frontend.blog');
+// Route::get('/blog',[FrontendBlogController::class,'getBlogCategories'])->name('frontend.blog');
 // Blog tags
-Route::get('/blog',[FrontendBlogController::class,'getTags'])->name('frontend.blog');
+// Route::get('/blog',[FrontendBlogController::class,'getTags'])->name('frontend.blog');
 Route::get('/blog/{blog_slug}',[FrontendBlogController::class,'blogDetails'])->name('frontend.blogDetails');
 // Blog Categories
 Route::get('/blog/category/{category_slug}', [FrontendBlogController::class, 'blogsByCategory'])->name('frontend.blogsByCategory');

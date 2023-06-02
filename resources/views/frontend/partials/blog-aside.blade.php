@@ -42,7 +42,7 @@
 
                                 @foreach ($tags as $tag)
                                     <a href="{{ route('frontend.blogsByTag', $tag->slug) }}"  class="{{ Request::is('blog/tag/'.$tag->slug) ? 'active' : '' }}">
-                                        {{ $tag->name }} -- ({{ $tag->blogs->count() }})
+                                        {{ $tag->name }}
                                     </a>
                                 @endforeach
 

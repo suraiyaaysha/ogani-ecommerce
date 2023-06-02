@@ -14,40 +14,17 @@ class FrontendBlogController extends Controller
 
     public function index()
     {
-        // $allBlog = Blog::all();
-        // $blogs = Blog::paginate(6); // Change 10 to the number of blogs you want to display per page
-        // $blogs = Blog::query()
-        //             ->paginate(6);
-        $blogs = Blog::latest()
-                    ->paginate(6);
+        $blogs = Blog::latest()->paginate(6);
 
         // Call the latestBlog method to retrieve the latest 3 blog posts in other method, without declare method again and again
         $latestBlog = $this->latestBlog();
 
-        return view('frontend.blog.index', compact('blogs', 'latestBlog'));
-    }
-
-    // public function latestBlog()
-    // {
-    //     // $allBlog = Blog::latest();
-    //     $latestBlog = Blog::latest()->take(3)->get();
-
-    //     return view('frontend.index', compact('latestBlog'));
-    // }
-
-    public function getBlogCategories()
-    {
         $blogCategories = BlogCategory::all();
 
-        return view('frontend.blog.index', compact('blogCategories'));
-    }
-
-    public function getTags()
-    {
         // Get all tags
         $tags = Tag::all();
 
-        return view('frontend.blog.index', compact('tags'));
+        return view('frontend.blog.index', compact('blogs', 'latestBlog', 'blogCategories', 'tags'));
     }
 
     // Show Blog Details | Blog Details page for showing Blog Details via blog_slug Start
@@ -98,6 +75,5 @@ class FrontendBlogController extends Controller
 
         return view('frontend.blog.blog-by-tag', compact('blogsByTag', 'blogs'));
     }
-
 
 }
