@@ -28,7 +28,53 @@
                 </div>
 
                 <div class="col-md-8">
-                    dashboard page content here
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="card user-dashboard-item mb-4">
+                                <span class="icon_cart dashboard-item-icon"></span>
+                                <div class="card-body text-center">
+                                    <p class="card-text">All Order</p>
+                                    <h4 class="card-title mb-0">6</h4>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="card user-dashboard-item mb-4">
+                                <span class="icon_cart dashboard-item-icon"></span>
+                                <div class="card-body text-center">
+                                    <p class="card-text">Completed Order</p>
+                                    <h4 class="card-title mb-0">0</h4>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="card user-dashboard-item mb-4">
+                                <span class="icon_cart dashboard-item-icon"></span>
+                                <div class="card-body text-center">
+                                    <p class="card-text">Processing Order</p>
+                                    <h4 class="card-title mb-0">0</h4>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="card user-dashboard-item mb-4">
+                                <span class="icon_cart dashboard-item-icon"></span>
+                                <div class="card-body text-center">
+                                    <p class="card-text">Canceled Order</p>
+                                    <h4 class="card-title mb-0">0</h4>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="card user-dashboard-item mb-4">
+                                <span class="icon_cart dashboard-item-icon"></span>
+                                <div class="card-body text-center">
+                                    <p class="card-text">All Order</p>
+                                    <h4 class="card-title mb-0">6</h4>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>

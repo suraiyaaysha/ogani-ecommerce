@@ -224,6 +224,42 @@
     </section>
     <!-- Latest Product Section End -->
 
+    <div class="product__discount">
+        <div class="container">
+
+            <div class="section-title product__discount__title">
+                <h2>{{ __('Sale Off') }}</h2>
+            </div>
+
+            <div class="row">
+                <div class="product__discount__slider owl-carousel">
+                    @foreach ($discountedProducts as $product)
+                        <div class="col-lg-4">
+                            <div class="product__discount__item">
+                                <div class="product__discount__item__pic set-bg"
+                                    data-setbg="{{ $product->featured_image }}">
+                                    <div class="product__discount__percent">-{{ $product->discount }}%</div>
+                                    <ul class="product__item__pic__hover">
+                                        <li><a href="#"><i class="fa fa-heart"></i></a></li>
+                                        <li><a href="#"><i class="fa fa-retweet"></i></a></li>
+                                        <li><a href="#"><i class="fa fa-shopping-cart"></i></a></li>
+                                    </ul>
+                                </div>
+                                <div class="product__discount__item__text">
+                                    <span>{{ $product->productCategory->name }}</span>
+                                    <h5><a href="#">{{ $product->name }}</a></h5>
+                                    <h1><a href="#">{{ $product->id }}</a></h1>
+                                    <div class="product__item__price">${{ $product->discounted_price }} <span>${{ $product->price }}</span></div>
+                                </div>
+                            </div>
+                        </div>
+                    @endforeach
+                </div>
+
+            </div>
+        </div>
+    </div>
+
     <!-- Blog Section Begin -->
     <section class="from-blog spad">
         <div class="container">
@@ -235,7 +271,6 @@
                 </div>
             </div>
             <div class="row">
-                {{-- @foreach ($allBlog->take(3) as $blog) --}}
                 @foreach ($latestBlog as $blog)
                     <div class="col-lg-4 col-md-4 col-sm-6">
                         <div class="blog__item">

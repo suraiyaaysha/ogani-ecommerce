@@ -57,6 +57,8 @@ class AppServiceProvider extends ServiceProvider
             $view->with('featuredProducts', Product::where('is_featured', true)->get());
             $view->with('latestProducts', Product::get());
             $view->with('reviewedProducts', Product::has('reviews')->get());
+
+            // $view->with('latestBlog', Blog::latest()->take(3)->get());
         });
 
 
@@ -71,7 +73,7 @@ class AppServiceProvider extends ServiceProvider
             $view->with('blogCategories', BlogCategory::all());
 
         });
-        
+
         // });
         View::composer('frontend.partials.blog-aside', function ($view) {
             $view->with('blogCategories', BlogCategory::all());

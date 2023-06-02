@@ -27,13 +27,13 @@ class FrontendBlogController extends Controller
         return view('frontend.blog.index', compact('blogs', 'latestBlog'));
     }
 
-    public function latestBlog()
-    {
-        // $allBlog = Blog::latest();
-        $latestBlog = Blog::latest()->take(3)->get();
+    // public function latestBlog()
+    // {
+    //     // $allBlog = Blog::latest();
+    //     $latestBlog = Blog::latest()->take(3)->get();
 
-        return view('frontend.index', compact('latestBlog'));
-    }
+    //     return view('frontend.index', compact('latestBlog'));
+    // }
 
     public function getBlogCategories()
     {

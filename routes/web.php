@@ -67,12 +67,18 @@ Route::middleware('auth')->group(function () {
     Route::delete('profile',[FrontendProfileController::class,'destroy'])->name('frontend.profile.destroy');
 });
 
-Route::get('/',[FrontendProductController::class,'getProductCategories'])->name('frontend.index');
-Route::get('/',[FrontendProductController::class,'featuredProduct'])->name('frontend.index');
-Route::get('/',[FrontendProductController::class,'latestProducts'])->name('frontend.index');
-Route::get('/',[FrontendProductController::class,'productsWithReviews'])->name('frontend.index');
+Route::get('/',[FrontendProductController::class,'index'])->name('frontend.index');
+// Route::get('/',[FrontendProductController::class,'getProductCategories'])->name('frontend.index');
+// Route::get('/',[FrontendProductController::class,'featuredProduct'])->name('frontend.index');
+// Route::get('/',[FrontendProductController::class,'latestProducts'])->name('frontend.index');
+// Route::get('/',[FrontendProductController::class,'productsWithReviews'])->name('frontend.index');
 
-Route::get('/',[FrontendBlogController::class,'latestBlog'])->name('frontend.index');
+
+// Route::get('/',[FrontendBlogController::class,'latestBlog'])->name('frontend.index');
+
+
+
+
 
 // Blog Pages route
 Route::get('/blog',[FrontendBlogController::class,'index'])->name('frontend.blog');
@@ -84,6 +90,11 @@ Route::get('/blog/{blog_slug}',[FrontendBlogController::class,'blogDetails'])->n
 Route::get('/blog/category/{category_slug}', [FrontendBlogController::class, 'blogsByCategory'])->name('frontend.blogsByCategory');
 // Blog tags
 Route::get('/blog/tag/{slug}', [FrontendBlogController::class, 'blogsByTag'])->name('frontend.blogsByTag');
+
+
+// Shop|Products Pages route
+Route::get('/shop',[FrontendProductController::class,'getAllProducts'])->name('frontend.shop');
+
 
 
 // Contact Page Route

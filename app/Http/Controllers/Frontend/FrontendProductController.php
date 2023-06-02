@@ -3,24 +3,16 @@
 namespace App\Http\Controllers\Frontend;
 
 use App\Http\Controllers\Controller;
-use App\Models\Product;
 use App\Models\ProductCategory;
+use App\Models\Product;
+use App\Models\Blog;
 use Illuminate\Http\Request;
 
 class FrontendProductController extends Controller
 {
-    public function getProductCategories()
+
+    public function index()
     {
-        $categories = ProductCategory::all();
-
-        return view('frontend.index', compact('categories'));
-    }
-
-    /**
-     * Show the featuredProduct based on Categories which has many featuredProducts.
-    */
-    public function featuredProduct(){
-
         $categories = ProductCategory::all();
 
         // This categories which have featured products
@@ -30,76 +22,33 @@ class FrontendProductController extends Controller
 
         $featuredProducts = Product::where('is_featured', true)->get();
 
-        return view('frontend.index', compact('categories','featuredProducts', 'categoriesHasFeaturedProducts'));
-    }
-
-    public function latestProducts()
-    {
 
         $latestProducts = Product::get();
 
         $reviewedProducts = Product::has('reviews')->get();
 
-        return view('frontend.index', compact('latestProducts', 'reviewedProducts'));
+        $discountedProducts = Product::where('discount', '>', 0)->get();
+          // Calculate the discounted price for each discounted product
+        foreach ($discountedProducts as $product) {
+            $product->discounted_price = $product->price - (($product->price * $product->discount) / 100);
+        }
+
+        $latestBlog = Blog::latest()->take(3)->get();
+
+
+        return view('frontend.index',
+            compact(
+                'categories','featuredProducts', 'categoriesHasFeaturedProducts', 'latestProducts', 'reviewedProducts', 'discountedProducts',
+                'latestBlog'
+            ));
     }
 
-    /**
-     * Get products with reviews.
-    */
-    public function productsWithReviews()
+
+    public function getAllProducts()
     {
-        $latestProducts = Product::get();
+        $products = Product::all();
 
-        $reviewedProducts = Product::has('reviews')->get();
-
-        return view('frontend.index', compact('reviewedProducts', 'latestProducts'));
+        return view('frontend.shop.index', compact('products'));
     }
 
-    // /**
-    //  * Show the form for creating a new resource.
-    //  */
-    // public function create()
-    // {
-    //     //
-    // }
-
-    // /**
-    //  * Store a newly created resource in storage.
-    //  */
-    // public function store(Request $request)
-    // {
-    //     //
-    // }
-
-    // /**
-    //  * Display the specified resource.
-    //  */
-    // public function show(Product $product)
-    // {
-    //     //
-    // }
-
-    // /**
-    //  * Show the form for editing the specified resource.
-    //  */
-    // public function edit(Product $product)
-    // {
-    //     //
-    // }
-
-    // /**
-    //  * Update the specified resource in storage.
-    //  */
-    // public function update(Request $request, Product $product)
-    // {
-    //     //
-    // }
-
-    // /**
-    //  * Remove the specified resource from storage.
-    //  */
-    // public function destroy(Product $product)
-    // {
-    //     //
-    // }
 }
