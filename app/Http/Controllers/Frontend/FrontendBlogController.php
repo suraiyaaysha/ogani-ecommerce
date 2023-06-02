@@ -51,9 +51,15 @@ class FrontendBlogController extends Controller
     }
 
     // Show Blog Details | Blog Details page for showing Blog Details via blog_slug Start
-    public function blogDetails(string $blog_slug) {
-
+    public function blogDetails(string $blog_slug)
+    {
         $blog = Blog::where('slug', $blog_slug)->first();
+
+        if (!$blog) {
+            // Blog not found, handle the situation (e.g., redirect or show error message)
+            // For example:
+            return redirect()->route('frontend.blog')->with('error', 'Blog not found.');
+        }
 
         // Get related blogs from the same category
         $relatedBlogs = $blog->blogCategory->blogs()
@@ -69,9 +75,29 @@ class FrontendBlogController extends Controller
             $relatedBlogs = $relatedBlogs->merge($relatedBlogsFromOtherCategories);
         }
 
-        // return view('frontend.posts.post-details', compact('post', 'category', 'viewAllLinkUrl', 'relatedPosts', 'featuredCategories'));
-        return view('frontend.blog.blog-details', compact('blog','relatedBlogs'));
+        return view('frontend.blog.blog-details', compact('blog', 'relatedBlogs'));
     }
-    // Post Details page End
+
+
+    // Blog Details page End
+
+    // Show Posts under a single category
+    public function blogsByCategory($category_slug) {
+        $blogsByCategory = BlogCategory::where('slug', $category_slug)->first();
+
+        $blogs = $blogsByCategory->blogs()->paginate(6); // Retrieve all blogs from $blogsByCategory
+
+        return view('frontend.blog.blog-by-category', compact('blogsByCategory', 'blogs'));
+    }
+
+    // Show Posts under a single category
+    public function blogsByTag($tag_slug) {
+        $blogsByTag = Tag::where('slug', $tag_slug)->first();
+
+        $blogs = $blogsByTag->blogs()->paginate(6); // Retrieve all blogs from $blogsByTag
+
+        return view('frontend.blog.blog-by-tag', compact('blogsByTag', 'blogs'));
+    }
+
 
 }

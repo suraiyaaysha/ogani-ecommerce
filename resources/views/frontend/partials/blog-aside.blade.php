@@ -8,9 +8,15 @@
                         <div class="blog__sidebar__item">
                             <h4>{{ __('Categories') }}</h4>
                             <ul>
-                                <li><a href="#">{{ __('All') }}</a></li>
+                                <li><a href="{{ route('frontend.blog') }}" class="{{ Request::is('blog*') && !Request::is('blog/category/*') ? 'active' : '' }}">{{ __('All') }}</a></li>
+
                                 @foreach ($blogCategories as $blogCategory)
-                                    <li><a href="#">{{ $blogCategory->name }} ({{ $blogCategory->blogs->count() }})</a></li>
+                                    <li>
+                                        <a href="{{ route('frontend.blogsByCategory', $blogCategory->slug) }}" class="{{ Request::is('blog/category/'.$blogCategory->slug) ? 'active' : '' }}">
+                                           {{ $blogCategory->name }} ({{ $blogCategory->blogs->count() }})
+                                        </a>
+
+                                    </li>
                                 @endforeach
                             </ul>
                         </div>
@@ -35,7 +41,9 @@
                             <div class="blog__sidebar__item__tags">
 
                                 @foreach ($tags as $tag)
-                                    <a href="#">{{ $tag->name }}</a>
+                                    <a href="{{ route('frontend.blogsByTag', $tag->slug) }}"  class="{{ Request::is('blog/tag/'.$tag->slug) ? 'active' : '' }}">
+                                        {{ $tag->name }} -- ({{ $tag->blogs->count() }})
+                                    </a>
                                 @endforeach
 
                             </div>

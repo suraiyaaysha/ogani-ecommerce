@@ -80,9 +80,13 @@ Route::get('/blog',[FrontendBlogController::class,'getBlogCategories'])->name('f
 // Blog tags
 Route::get('/blog',[FrontendBlogController::class,'getTags'])->name('frontend.blog');
 Route::get('/blog/{blog_slug}',[FrontendBlogController::class,'blogDetails'])->name('frontend.blogDetails');
+// Blog Categories
+Route::get('/blog/category/{category_slug}', [FrontendBlogController::class, 'blogsByCategory'])->name('frontend.blogsByCategory');
+// Blog tags
+Route::get('/blog/tag/{slug}', [FrontendBlogController::class, 'blogsByTag'])->name('frontend.blogsByTag');
 
 
-
+// Contact Page Route
 Route::get('/contact', function () {
     return view('frontend.contact');
 });

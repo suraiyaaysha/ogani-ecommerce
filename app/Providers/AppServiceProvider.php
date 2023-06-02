@@ -69,7 +69,13 @@ class AppServiceProvider extends ServiceProvider
                     ->paginate(6));
 
             $view->with('blogCategories', BlogCategory::all());
+
         });
+        // share blogCategories variable with frontend.blog.blog-by-category page view
+        // View::composer('frontend.blog.blog-by-category', function ($view) {
+        //     $view->with('blogCategories', BlogCategory::all());
+
+        // });
         View::composer('frontend.partials.blog-aside', function ($view) {
             $view->with('blogCategories', BlogCategory::all());
             $view->with('latestBlog', Blog::latest()->take(3)->get());

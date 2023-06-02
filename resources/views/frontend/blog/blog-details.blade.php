@@ -64,7 +64,7 @@
                                             <span>{{ __('Tags') }}:</span>
                                             {{ __('All') }}
                                             {{-- First check if blogs has tags then execute retrive tags --}}
-                                            @if ($blog->tags->count() > 1)
+                                            @if ($blog->tags->count() > 0)
                                                 ,
                                                 @foreach ($blog->tags as $tag)
                                                     {{ $tag->name }}
