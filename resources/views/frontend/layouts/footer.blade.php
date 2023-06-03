@@ -76,6 +76,8 @@
     <script src="{{ asset(url('frontend/assets/js/owl.carousel.min.js')) }}"></script>
     <script src="{{ asset(url('frontend/assets/js/main.js')) }}"></script>
 
+    @stack('script')
+
 </body>
 
 </html>

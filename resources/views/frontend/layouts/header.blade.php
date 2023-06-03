@@ -21,6 +21,7 @@
     <link rel="stylesheet" href="{{ asset(url('frontend/assets/css/owl.carousel.min.css')) }}">
     <link rel="stylesheet" href="{{ asset(url('frontend/assets/css/slicknav.min.css')) }}">
     <link rel="stylesheet" href="{{ asset(url('frontend/assets/css/style.css')) }}">
+    @stack('style')
 </head>
 
 <body>
