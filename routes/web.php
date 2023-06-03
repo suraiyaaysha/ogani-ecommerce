@@ -9,7 +9,7 @@ use App\Http\Controllers\Admin\ProfileController;
 use App\Http\Controllers\Frontend\FrontendProfileController;
 
 
-use App\Http\Controllers\Frontend\FrontendProductCategoryController;
+// use App\Http\Controllers\Frontend\FrontendProductCategoryController;
 use App\Http\Controllers\Frontend\FrontendProductController;
 
 use App\Http\Controllers\Frontend\FrontendBlogController;
@@ -29,9 +29,9 @@ use App\Http\Controllers\Frontend\FrontendBlogController;
 //     return view('welcome');
 // })
 
-Route::get('/', function () {
-    return view('frontend.index');
-});
+// Route::get('/', function () {
+//     return view('frontend.index');
+// });
 
 /*--------------------------------------------------------------------------
 | Authentication Routes start
@@ -45,7 +45,7 @@ Route::get('/dashboard', [App\Http\Controllers\HomeController::class, 'index'])-
 // Route::get('/admin/dashboard', [App\Http\Controllers\HomeController::class, 'handleAdmin'])->name('admin.route')->middleware('admin');
 Route::get('/admin/dashboard', [App\Http\Controllers\HomeController::class, 'handleAdmin'])->name('admin.route')->middleware(['auth','admin']);
 
-Route::get('/admin',[LoginController::class,'showAdminLoginForm'])->name('admin-login');
+// Route::get('/admin',[LoginController::class,'showAdminLoginForm'])->name('admin-login');
 Route::get('/admin/login',[LoginController::class,'showAdminLoginForm'])->name('admin-login');
 
 /*--------------------------------------------------------------------------
@@ -59,15 +59,17 @@ Route::get('/admin/login',[LoginController::class,'showAdminLoginForm'])->name('
 //     return view('frontend.index');
 // });
 
+Route::get('/',[FrontendProductController::class,'index'])->name('frontend.index');
+
 Route::middleware('auth')->group(function () {
     Route::get('profile',[FrontendProfileController::class,'index'])->name('frontend.profile');
-    Route::post('profile/{user}',[FrontendProfileController::class,'update'])->name('frontend.profile');
+    Route::post('profile/{user}',[FrontendProfileController::class,'update'])->name('frontend.update');
 
     Route::post('profile',[FrontendProfileController::class,'updatePassword'])->name('frontend.change_password');
     Route::delete('profile',[FrontendProfileController::class,'destroy'])->name('frontend.profile.destroy');
 });
 
-Route::get('/',[FrontendProductController::class,'index'])->name('frontend.index');
+
 
 
 
@@ -102,8 +104,8 @@ Route::get('/contact', function () {
 
 
 Route::middleware(['auth','admin'])->group(function () {
-    Route::get('admin/profile',[ProfileController::class,'index'])->name('profile');
-    Route::post('admin/profile/{user}',[ProfileController::class,'update'])->name('admin.profile');
+    Route::get('admin/profile',[ProfileController::class,'index'])->name('admin.index');
+    Route::post('admin/profile/{user}',[ProfileController::class,'update'])->name('admin.update');
 
     Route::post('admin/profile',[ProfileController::class,'updatePassword'])->name('admin.change_password');
 

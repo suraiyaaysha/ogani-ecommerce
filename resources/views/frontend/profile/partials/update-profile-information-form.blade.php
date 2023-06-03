@@ -3,7 +3,8 @@
         <div class="card-body">
             <h4 class="card-title">{{ ('Update Info') }}</h4>
 
-            <form class="forms-sample" method="POST" action="{{ route('frontend.profile', auth()->id()) }}"
+            {{-- <form class="forms-sample" method="POST" action="{{ route('frontend.profile', auth()->id()) }}" --}}
+            <form class="forms-sample" method="POST" action="{{ route('frontend.update', auth()->id()) }}"
                 enctype="multipart/form-data">
                 @csrf
 
