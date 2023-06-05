@@ -31,7 +31,7 @@
                 <div class="col-lg-8 col-md-7">
                     <div class="row">
 
-                        @foreach ($blogs as $blog)
+                        @foreach ($allBlog as $blog)
                             <div class="col-lg-6 col-md-6 col-sm-6">
                                 <div class="blog__item">
                                     <div class="blog__item__pic">
@@ -58,7 +58,7 @@
 
                         <div class="col-lg-12">
                             <div class="product__pagination blog__pagination">
-                                {{  $blogs->withQueryString()->links('frontend.partials.custom-pagination') }}
+                                {{  $allBlog->withQueryString()->links('frontend.partials.custom-pagination') }}
                             </div>
                         </div>
 

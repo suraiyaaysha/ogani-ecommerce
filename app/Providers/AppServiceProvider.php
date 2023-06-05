@@ -44,7 +44,7 @@ class AppServiceProvider extends ServiceProvider
         // });
         View::composer('frontend.partials.blog-aside', function ($view) {
             $view->with('blogCategories', BlogCategory::all());
-            $view->with('latestBlog', Blog::latest()->take(3)->get());
+            $view->with('latestAllBlog', Blog::latest()->take(3)->get());
             $view->with('tags', Tag::all());
         });
 

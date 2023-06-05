@@ -270,7 +270,7 @@
                 </div>
             </div>
             <div class="row">
-                @foreach ($latestBlog as $blog)
+                @foreach ($latestAllBlog as $blog)
                     <div class="col-lg-4 col-md-4 col-sm-6">
                         <div class="blog__item">
                             <div class="blog__item__pic">

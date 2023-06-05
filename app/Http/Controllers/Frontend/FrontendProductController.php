@@ -33,13 +33,13 @@ class FrontendProductController extends Controller
             $product->discounted_price = $product->price - (($product->price * $product->discount) / 100);
         }
 
-        $latestBlog = Blog::latest()->take(3)->get();
+        $latestAllBlog = Blog::latest()->take(3)->get();
 
 
         return view('frontend.index',
             compact(
                 'categories','featuredProducts', 'categoriesHasFeaturedProducts', 'latestProducts', 'reviewedProducts', 'discountedProducts',
-                'latestBlog'
+                'latestAllBlog'
             ));
     }
 
@@ -47,6 +47,9 @@ class FrontendProductController extends Controller
     public function getAllProducts()
     {
         $products = Product::all();
+
+        // get latest product shop sidebar
+        $latestProducts = Product::get();
 
         return view('frontend.shop.index', compact('products'));
     }

@@ -14,17 +14,18 @@ class FrontendBlogController extends Controller
 
     public function index()
     {
-        $blogs = Blog::latest()->paginate(6);
+        $allBlog = Blog::latest()->paginate(6);
 
         // Call the latestBlog method to retrieve the latest 3 blog posts in other method, without declare method again and again
-        $latestBlog = $this->latestBlog();
+        // $latestBlog = $this->latestBlog();
+        $latestAllBlog = Blog::latest()->take(3)->get();
 
         $blogCategories = BlogCategory::all();
 
         // Get all tags
         $tags = Tag::all();
 
-        return view('frontend.blog.index', compact('blogs', 'latestBlog', 'blogCategories', 'tags'));
+        return view('frontend.blog.index', compact('allBlog', 'latestAllBlog', 'blogCategories', 'tags'));
     }
 
     // Show Blog Details | Blog Details page for showing Blog Details via blog_slug Start
