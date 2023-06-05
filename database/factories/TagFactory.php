@@ -23,8 +23,12 @@ class TagFactory extends Factory
 
     public function definition(): array
     {
-        $name = $this->faker->word;
+        // $name = $this->faker->word;
+        // $slug = Str::slug($name, '-');
+
+        $name = $this->faker->unique()->word;
         $slug = Str::slug($name, '-');
+
         return [
             'name' => $name,
             'slug' => $slug,

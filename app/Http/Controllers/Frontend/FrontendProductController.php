@@ -6,6 +6,8 @@ use App\Http\Controllers\Controller;
 use App\Models\ProductCategory;
 use App\Models\Product;
 use App\Models\Blog;
+use App\Models\Color;
+use App\Models\Size;
 use Illuminate\Http\Request;
 
 class FrontendProductController extends Controller
@@ -35,11 +37,14 @@ class FrontendProductController extends Controller
 
         $latestAllBlog = Blog::latest()->take(3)->get();
 
+        $colors = Color::all();
+        $sizes = Size::all();
+
 
         return view('frontend.index',
             compact(
                 'categories','featuredProducts', 'categoriesHasFeaturedProducts', 'latestProducts', 'reviewedProducts', 'discountedProducts',
-                'latestAllBlog'
+                'latestAllBlog', 'colors', 'sizes'
             ));
     }
 
@@ -54,7 +59,10 @@ class FrontendProductController extends Controller
         // get product categories
         $categories = ProductCategory::all();
 
-        return view('frontend.shop.index', compact('products', 'latestProducts', 'categories'));
+        $colors = Color::all();
+        $sizes = Size::all();
+
+        return view('frontend.shop.index', compact('products', 'latestProducts', 'categories', 'colors', 'sizes'));
     }
 
 }

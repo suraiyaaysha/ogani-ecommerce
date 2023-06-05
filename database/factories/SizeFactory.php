@@ -3,8 +3,8 @@
 namespace Database\Factories;
 
 use Illuminate\Database\Eloquent\Factories\Factory;
-use Illuminate\Support\Str;
-use App\Models\Size;
+// use Illuminate\Support\Str;
+// use App\Models\Size;
 
 /**
  * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Size>
@@ -17,13 +17,17 @@ class SizeFactory extends Factory
      * @return array<string, mixed>
      */
 
-    protected $model = Size::class;
+    // protected $model = Size::class;
 
     public function definition(): array
     {
-        return [
-            'name' => $this->faker->randomElement(['XS', 'S', 'M', 'L', 'XL']),
-            'slug' => Str::slug($this->faker->randomElement(['XS', 'S', 'M', 'L', 'XL'])),
-        ];
+
+        // $name = $this->faker->randomElement(['XS', 'S', 'M', 'L', 'XL']);
+        // // $name = $this->faker->sizeName;
+
+        // return [
+        //     'name' => $name,
+        //     'slug' => Str::slug($name),
+        // ];
     }
 }

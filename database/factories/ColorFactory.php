@@ -3,8 +3,8 @@
 namespace Database\Factories;
 
 use Illuminate\Database\Eloquent\Factories\Factory;
-use Illuminate\Support\Str;
-use App\Models\Color;
+// use Illuminate\Support\Str;
+// use App\Models\Color;
 
 /**
  * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Color>
@@ -17,13 +17,15 @@ class ColorFactory extends Factory
      * @return array<string, mixed>
      */
 
-    protected $model = Color::class;
+    // protected $model = Color::class;
 
     public function definition(): array
     {
-        return [
-            'name' => $this->faker->colorName,
-            'slug' => Str::slug($this->faker->colorName),
-        ];
+        // $name = $this->faker->colorName;
+
+        // return [
+        //     'name' => $name,
+        //     'slug' => Str::slug($name),
+        // ];
     }
 }
