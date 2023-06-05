@@ -20,8 +20,8 @@ class Product extends Model
         'featured_image',
         'gallery_images',
         'weight',
-        'color',
-        'product_size',
+        // 'color',
+        // 'product_size',
         'shipping_duration',
         'shipping_charge',
         'is_featured',
@@ -44,6 +44,16 @@ class Product extends Model
     {
         // return $this->belongsTo(ProductCategory::class);
         return $this->belongsTo(ProductCategory::class, 'product_category_id', 'id');
+    }
+
+    // with sizes
+    public function sizes() {
+        return $this->belongsToMany(Size::class);
+    }
+
+    // with colors
+    public function colors() {
+        return $this->belongsToMany(Color::class);
     }
 
     // with tags

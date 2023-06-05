@@ -23,7 +23,7 @@ class FrontendProductController extends Controller
         $featuredProducts = Product::where('is_featured', true)->get();
 
 
-        $latestProducts = Product::get();
+        $latestProducts = Product::latest()->take(9)->get();
 
         $reviewedProducts = Product::has('reviews')->get();
 
@@ -48,10 +48,13 @@ class FrontendProductController extends Controller
     {
         $products = Product::all();
 
-        // get latest product shop sidebar
-        $latestProducts = Product::get();
+        // get latest products
+        $latestProducts = Product::latest()->take(9)->get();
 
-        return view('frontend.shop.index', compact('products'));
+        // get product categories
+        $categories = ProductCategory::all();
+
+        return view('frontend.shop.index', compact('products', 'latestProducts', 'categories'));
     }
 
 }

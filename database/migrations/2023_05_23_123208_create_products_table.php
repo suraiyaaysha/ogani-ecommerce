@@ -23,8 +23,8 @@ return new class extends Migration
             $table->string('featured_image');
             $table->json('gallery_images')->nullable();
             $table->decimal('weight', 8, 2);
-            $table->string('color');
-            $table->string('product_size');
+            // $table->string('color');
+            // $table->string('product_size');
             $table->decimal('shipping_duration', 8, 2);
             $table->decimal('shipping_charge', 8, 2);
             $table->boolean('is_featured')->default(false);
