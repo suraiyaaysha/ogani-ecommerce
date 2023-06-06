@@ -73,7 +73,7 @@
                                 </ul>
                             </div>
                             <div class="featured__item__text">
-                                <h6><a href="#">{{ $product->name }}</a></h6>
+                                <h6><a href="{{ route('frontend.productDetails', $product->slug) }}">{{ $product->name }}</a></h6>
                                 <h5>${{ $product->price }}</h5>
                             </div>
                         </div>
@@ -91,12 +91,12 @@
             <div class="row">
                 <div class="col-lg-6 col-md-6 col-sm-6">
                     <div class="banner__pic">
-                        <img src="frontend/assets/img/banner/banner-1.jpg" alt="">
+                        <img src="{{ url('frontend/assets/img/banner/banner-1.jpg') }}" alt="">
                     </div>
                 </div>
                 <div class="col-lg-6 col-md-6 col-sm-6">
                     <div class="banner__pic">
-                        <img src="frontend/assets/img/banner/banner-2.jpg" alt="">
+                        <img src="{{ url('frontend/assets/img/banner/banner-2.jpg') }}" alt="">
                     </div>
                 </div>
             </div>
@@ -110,13 +110,13 @@
             <div class="row">
                 <div class="col-lg-4 col-md-6">
                     <div class="latest-product__text">
-                        <h4>Latest Products</h4>
+                        <h4>{{ __('Latest Products') }}</h4>
                         <div class="latest-product__slider owl-carousel">
 
                             @foreach ($latestProducts->chunk(3) as $chunk)
                                 <div class="latest-prdouct__slider__item">
                                     @foreach ($chunk as $product)
-                                        <a href="#" class="latest-product__item">
+                                        <a href="{{ route('frontend.productDetails', $product->slug) }}" class="latest-product__item">
                                             <div class="latest-product__item__pic">
                                                 <img src="{{ $product->featured_image }}" alt="{{ $product->name }}">
                                             </div>
@@ -132,9 +132,10 @@
                         </div>
                     </div>
                 </div>
+
                 <div class="col-lg-4 col-md-6">
                     <div class="latest-product__text">
-                        <h4>Top Rated Products</h4>
+                        <h4>{{ __('Top Rated Products') }}</h4>
                         <div class="latest-product__slider owl-carousel">
                             <div class="latest-prdouct__slider__item">
                                 <a href="#" class="latest-product__item">
@@ -197,6 +198,7 @@
                         </div>
                     </div>
                 </div>
+
                 <div class="col-lg-4 col-md-6">
                     <div class="latest-product__text">
                         <h4>{{ __('Review Products') }}</h4>
@@ -204,7 +206,7 @@
                             @foreach ($reviewedProducts->chunk(3) as $chunk)
                                 <div class="latest-prdouct__slider__item">
                                     @foreach ($chunk as $product)
-                                        <a href="#" class="latest-product__item">
+                                        <a href="{{ route('frontend.productDetails', $product->slug) }}" class="latest-product__item">
                                             <div class="latest-product__item__pic">
                                                 <img src="{{ $product->featured_image }}" alt="{{ $product->name }}">
                                             </div>
@@ -247,7 +249,7 @@
                                 </div>
                                 <div class="product__discount__item__text">
                                     <span>{{ $product->productCategory->name }}</span>
-                                    <h5><a href="#">{{ $product->name }}</a></h5>
+                                    <h5><a href="{{ route('frontend.productDetails', $product->slug) }}">{{ $product->name }}</a></h5>
                                     <div class="product__item__price">${{ $product->discounted_price }} <span>${{ $product->price }}</span></div>
                                 </div>
                             </div>

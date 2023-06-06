@@ -3578,4 +3578,11 @@ span.icon_cart.dashboard-item-icon {
 }
 /* User dashboard page */
 
+/* product details */
+.product__details__price--original {
+    text-decoration: line-through;
+    color: rgb(148, 148, 148);
+}
+/* product details */
+
 /* Custom css for frontend */

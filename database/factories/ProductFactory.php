@@ -26,6 +26,25 @@ class ProductFactory extends Factory
         $colors = Color::inRandomOrder()->limit(rand(1, 3))->pluck('id')->toArray();
         $sizes = Size::inRandomOrder()->limit(rand(1, 3))->pluck('id')->toArray();
 
+        // For adding images on gallery images
+        $hasGalleryImages = $this->faker->boolean;
+
+        $galleryImages = [];
+        if ($hasGalleryImages) {
+            $galleryImages = [
+                $this->faker->imageUrl(),
+                $this->faker->imageUrl(),
+                $this->faker->imageUrl(),
+            ];
+        }
+
+        $price = $this->faker->numberBetween(1, 1000);
+        $discount = $this->faker->numberBetween(1, min($price, 100));
+
+        // Convert price and discount to integers
+        $price = intval($price);
+        $discount = intval($discount);
+
         return [
             'user_id' => User::where('email', 'admin@gmail.com')->first()->id,
             'product_category_id' => $productCategory->id,
@@ -33,14 +52,16 @@ class ProductFactory extends Factory
             'slug' => Str::slug($name),
             'description' => $this->faker->sentence,
             'information' => $this->faker->sentence,
-            'price' => $this->faker->randomFloat(2, 1, 1000),
-            'discount' => $this->faker->randomFloat(2, 1, 1000),
+            // 'price' => $this->faker->randomFloat(2, 1, 1000),
+            'price' => $price,
+            // 'discount' => $this->faker->randomFloat(2, 1, 1000),
+            'discount' => $discount,
             'quantity' => $this->faker->numberBetween(1, 100),
             'featured_image' => $this->faker->imageUrl(),
-            'gallery_images' => json_encode([]),
+            // 'gallery_images' => json_encode([]),
+             'gallery_images' => json_encode($galleryImages),
+
             'weight' => $this->faker->randomFloat(2, 0.1, 100),
-            // 'color' => $this->faker->colorName,
-            // 'product_size' => $this->faker->randomElement(['XS', 'S', 'M', 'L', 'XL']),
             'shipping_duration' => $this->faker->numberBetween(1, 10),
             'shipping_charge' => $this->faker->randomFloat(2, 0, 50),
             'is_featured' => rand(0, 1),

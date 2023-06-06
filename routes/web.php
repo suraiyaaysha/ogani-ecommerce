@@ -87,6 +87,7 @@ Route::get('/blog/tag/{slug}', [FrontendBlogController::class, 'blogsByTag'])->n
 
 // Shop|Products Pages route
 Route::get('/shop',[FrontendProductController::class,'getAllProducts'])->name('frontend.shop');
+Route::get('/product/{slug}',[FrontendProductController::class,'productDetails'])->name('frontend.productDetails');
 
 
 
@@ -94,6 +95,7 @@ Route::get('/shop',[FrontendProductController::class,'getAllProducts'])->name('f
 Route::get('/contact', function () {
     return view('frontend.contact.index');
 })->name('frontend.contact');
+
 
 /*--------------------------------------------------------------------------
 | Admin Routes start

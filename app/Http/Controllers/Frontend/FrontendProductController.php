@@ -51,7 +51,8 @@ class FrontendProductController extends Controller
 
     public function getAllProducts()
     {
-        $products = Product::all();
+        // $products = Product::all();
+        $products = Product::latest()->paginate(9);
 
         // get latest products
         $latestProducts = Product::latest()->take(9)->get();
@@ -64,5 +65,36 @@ class FrontendProductController extends Controller
 
         return view('frontend.shop.index', compact('products', 'latestProducts', 'categories', 'colors', 'sizes'));
     }
+
+
+    public function productDetails($slug)
+    {
+        $product = Product::where('slug', $slug)->first();
+
+
+        if (!$product) {
+            // product not found, handle the situation (e.g., redirect or show error message)
+            // For example:
+            return redirect()->route('frontend.blog')->with('error', 'Blog not found.');
+        }
+
+        // Get related blogs from the same category
+        $relatedProducts = $product->productCategory->products()
+            ->where('id', '!=', $product->id)
+            ->take(4)
+            ->get();
+
+        // If there are no related products from the same category, get three products from any other category
+        if ($relatedProducts->count() < 1) {
+            $relatedProductsFromOtherCategories = Product::where('product_category_id', '!=', $product->product_category_id)
+                ->take(4 - $relatedProducts->count())
+                ->get();
+            $relatedProducts = $relatedProducts->merge($relatedProductsFromOtherCategories);
+        }
+
+
+        return view('frontend.shop.product-details', compact('product', 'relatedProducts'));
+    }
+
 
 }

@@ -34,7 +34,7 @@
                         <div class="row">
                             <div class="col-lg-4 col-md-5">
                                 <div class="filter__sort">
-                                    <span>Sort By</span>
+                                    <span>{{ __('Sort By') }}</span>
                                     <select>
                                         <option value="0">Default</option>
                                         <option value="0">Default</option>
@@ -43,7 +43,7 @@
                             </div>
                             <div class="col-lg-4 col-md-4">
                                 <div class="filter__found">
-                                    <h6><span>16</span> Products found</h6>
+                                    <h6><span>{{ $products->count() }}</span> {{ __('Products found') }}</h6>
                                 </div>
                             </div>
                             <div class="col-lg-4 col-md-3">
@@ -67,20 +67,20 @@
                                         </ul>
                                     </div>
                                     <div class="featured__item__text">
-                                        <h6><a href="#">{{ $product->name }}</a></h6>
+                                        <h6><a href="{{ route('frontend.productDetails', $product->slug) }}">{{ $product->name }}</a></h6>
+
                                         <h5>${{ $product->price }}</h5>
                                     </div>
                                 </div>
                             </div>
                         @endforeach
-                        
+
                     </div>
 
-                    <div class="product__pagination">
-                        <a href="#">1</a>
-                        <a href="#">2</a>
-                        <a href="#">3</a>
-                        <a href="#"><i class="fa fa-long-arrow-right"></i></a>
+                    <div class="col-lg-12">
+                        <div class="product__pagination">
+                            {{  $products->links('frontend.partials.custom-pagination') }}
+                        </div>
                     </div>
 
                 </div>

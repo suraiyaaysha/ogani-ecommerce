@@ -82,4 +82,21 @@ class Product extends Model
         return $this->hasMany(Review::class)->whereNull('parent_id')->latest();
     }
 
+    // a new accessor method to retrieve the gallery images as an array:
+    public function getGalleryImagesAttribute($value)
+    {
+        return json_decode($value, true) ?? [];
+    }
+
+    // To calculate the discounted price for a product, you can add a new accessor method
+    public function getDiscountedPriceAttribute()
+    {
+        if ($this->discount > 0) {
+            return $this->price - (($this->price * $this->discount) / 100);
+        }
+
+        return $this->price;
+    }
+
+
 }
