@@ -48,9 +48,12 @@ class FrontendProductController extends Controller
             ));
     }
 
-
-    public function getAllProducts()
+    // public function getAllProducts()
+    public function getAllProducts(Request $request)
     {
+
+
+
         // $products = Product::all();
         $products = Product::latest()->paginate(9);
 
@@ -63,9 +66,42 @@ class FrontendProductController extends Controller
         $colors = Color::all();
         $sizes = Size::all();
 
-        return view('frontend.shop.index', compact('products', 'latestProducts', 'categories', 'colors', 'sizes'));
-    }
 
+        // Filter By Color Start
+        // if($selectedColors = $request->input('colors')){
+        //     $selectedColors = $request->input('colors');
+
+        //     // Retrieve the products that have at least one selected color
+        //     $products = Product::whereHas('colors', function ($query) use ($selectedColors) {
+        //         $query->whereIn('color_id', $selectedColors);
+        //     })->latest()->paginate(9);
+        // }
+
+
+        $selectedColors = $request->input('colors', []);
+        if (!empty($selectedColors)) {
+            // Retrieve the products that have at least one selected color
+            $products = Product::whereHas('colors', function ($query) use ($selectedColors) {
+                $query->whereIn('color_id', $selectedColors);
+            })->latest()->paginate(9);
+        }
+        // Filter By Color End
+
+        // Filter By Size Start
+        $selectedSize = $request->input('size');
+
+        if (!empty($selectedSize)) {
+            // Retrieve the products with the selected size
+            $products = Product::whereHas('sizes', function ($query) use ($selectedSize) {
+                $query->where('size_id', $selectedSize);
+            })->latest()->paginate(9);
+        }
+        // Filter By Size End
+
+
+        return view('frontend.shop.index', compact('products', 'latestProducts', 'categories', 'colors', 'sizes', 'selectedColors', 'selectedSize'));
+        // return view('frontend.shop.index', compact('products'));
+    }
 
     public function productDetails($slug)
     {
@@ -92,9 +128,32 @@ class FrontendProductController extends Controller
             $relatedProducts = $relatedProducts->merge($relatedProductsFromOtherCategories);
         }
 
-
         return view('frontend.shop.product-details', compact('product', 'relatedProducts'));
     }
+
+    public function productsByCategory($slug)
+    {
+        $productsByCategory = ProductCategory::where('slug', $slug)->first();
+
+        $products = $productsByCategory->products()->paginate(6); // Retrieve all products from $productsByCategory
+
+        return view('frontend.shop.products-by-category', compact('productsByCategory', 'products'));
+    }
+
+
+    // public function filterByColor(Request $request)
+    // {
+    //     $selectedColors = $request->input('colors');
+
+    //     // Retrieve the products that have at least one selected color
+    //     $products = Product::whereHas('colors', function ($query) use ($selectedColors) {
+    //         $query->whereIn('color_id', $selectedColors);
+    //     })->get();
+
+    //     // Pass the filtered products to the view
+    //     return view('frontend.shop.index', ['products' => $products]);
+    // }
+
 
 
 }

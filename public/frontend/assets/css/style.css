@@ -1248,6 +1248,7 @@ ol {
 	background: #222;
 	content: "";
 	border-radius: 50%;
+    border: 1px solid #222;
 }
 
 .sidebar__item__size {
@@ -3584,5 +3585,28 @@ span.icon_cart.dashboard-item-icon {
     color: rgb(148, 148, 148);
 }
 /* product details */
+
+/* Filter by color */
+/* #color-filter-form input[type="checkbox"]:checked + label::after {
+    border: 5px solid red;
+} */
+/* .filter-color-item input[type=checkbox]:checked + label::after {
+    border: 5px solid red!important;
+}
+.filter-color-item input[type=checkbox]:checked + .filter-color-item label::after {
+    border: 5px solid red!important;
+} */
+
+.sidebar__item__color.active label::after{
+    border: 2px solid #7fad39;
+    /* outline: #7fad39 solid 1px; */
+}
+/* Filter by color */
+
+/* Filter by size */
+.sidebar__item__size label.active {
+    border: 1px solid #7fad39;
+}
+/* Filter by size */
 
 /* Custom css for frontend */

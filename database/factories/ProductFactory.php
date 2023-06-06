@@ -8,8 +8,8 @@ use Illuminate\Support\Str;
 use App\Models\Product;
 use App\Models\User;
 use App\Models\ProductCategory;
-use App\Models\Color;
-use App\Models\Size;
+// use App\Models\Color;
+// use App\Models\Size;
 
 class ProductFactory extends Factory
 {
@@ -23,8 +23,8 @@ class ProductFactory extends Factory
         $productCategory = ProductCategory::inRandomOrder()->first();
 
         // Get random colors and sizes
-        $colors = Color::inRandomOrder()->limit(rand(1, 3))->pluck('id')->toArray();
-        $sizes = Size::inRandomOrder()->limit(rand(1, 3))->pluck('id')->toArray();
+        // $colors = Color::inRandomOrder()->limit(rand(1, 3))->pluck('id')->toArray();
+        // $sizes = Size::inRandomOrder()->limit(rand(1, 3))->pluck('id')->toArray();
 
         // For adding images on gallery images
         $hasGalleryImages = $this->faker->boolean;
@@ -66,6 +66,7 @@ class ProductFactory extends Factory
             'shipping_charge' => $this->faker->randomFloat(2, 0, 50),
             'is_featured' => rand(0, 1),
             'status' => $this->faker->randomElement(['active', 'inactive']),
+            // 'sizes' => $sizes, // Attach random sizes to the product
         ];
     }
 }

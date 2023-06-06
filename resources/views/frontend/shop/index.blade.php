@@ -56,7 +56,7 @@
                     </div>
 
                     <div class="row">
-                        @foreach ($products as $product)
+                        {{-- @foreach ($products as $product)
                             <div class="col-lg-4 col-md-6 col-sm-6 {{ $product->productCategory->slug }}">
                                 <div class="featured__item">
                                     <div class="featured__item__pic set-bg" data-setbg="{{ $product->featured_image }}">
@@ -73,13 +73,37 @@
                                     </div>
                                 </div>
                             </div>
-                        @endforeach
+                        @endforeach --}}
+
+                         @forelse ($products as $product)
+                            <div class="col-lg-4 col-md-6 col-sm-6 {{ $product->productCategory->slug }}">
+                                <div class="featured__item">
+                                    <div class="featured__item__pic set-bg" data-setbg="{{ $product->featured_image }}">
+                                        <ul class="featured__item__pic__hover">
+                                            <li><a href="#"><i class="fa fa-heart"></i></a></li>
+                                            <li><a href="#"><i class="fa fa-retweet"></i></a></li>
+                                            <li><a href="#"><i class="fa fa-shopping-cart"></i></a></li>
+                                        </ul>
+                                    </div>
+                                    <div class="featured__item__text">
+                                        <h6><a href="{{ route('frontend.productDetails', $product->slug) }}">{{ $product->name }}</a></h6>
+                                        <h5>${{ $product->price }}</h5>
+                                        <h3>{{ $product->colors->pluck('name') }}</h3>
+                                        <h4>{{ $product->sizes->pluck('name') }}</h4>
+                                    </div>
+                                </div>
+                            </div>
+                        @empty
+                            <div class="col-lg-12">
+                                <p>{{ __('No products found.') }}</p>
+                            </div>
+                        @endforelse
 
                     </div>
 
                     <div class="col-lg-12">
                         <div class="product__pagination">
-                            {{  $products->links('frontend.partials.custom-pagination') }}
+                            {{ $products->links('frontend.partials.custom-pagination') }}
                         </div>
                     </div>
 
@@ -90,4 +114,19 @@
     <!-- Product Section End -->
 
 @endsection
+
+{{-- <script>
+    // jQuery code to handle checkbox change event
+    $(document).ready(function() {
+        $('input[name="colors[]"]').change(function() {
+            $('#color-filter-form').submit();
+        });
+
+        // jQuery code to handle clear filter button click event
+        $('#clear-filter-btn').click(function() {
+            $('input[name="colors[]"]').prop('checked', false);
+            $('#color-filter-form').submit();
+        });
+    });
+</script> --}}
 

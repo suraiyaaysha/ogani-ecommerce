@@ -11,6 +11,9 @@ use App\Models\ProductCategory;
 use App\Models\Blog;
 use App\Models\BlogCategory;
 use App\Models\Tag;
+use App\Models\Product;
+use App\Models\Color;
+use App\Models\Size;
 use Illuminate\Support\Facades\View;
 
 // Add pagination
@@ -46,6 +49,13 @@ class AppServiceProvider extends ServiceProvider
             $view->with('blogCategories', BlogCategory::all());
             $view->with('latestAllBlog', Blog::latest()->take(3)->get());
             $view->with('tags', Tag::all());
+        });
+
+        View::composer('frontend.partials.shop-aside', function ($view) {
+            $view->with('categories', ProductCategory::all());
+            $view->with('colors', Color::all());
+            $view->with('sizes', Size::all());
+            $view->with('latestProducts', Product::latest()->take(9)->get());
         });
 
         // Add pagination

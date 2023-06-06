@@ -87,7 +87,9 @@ Route::get('/blog/tag/{slug}', [FrontendBlogController::class, 'blogsByTag'])->n
 
 // Shop|Products Pages route
 Route::get('/shop',[FrontendProductController::class,'getAllProducts'])->name('frontend.shop');
+Route::get('/category/{slug}',[FrontendProductController::class,'productsByCategory'])->name('frontend.productsByCategory');
 Route::get('/product/{slug}',[FrontendProductController::class,'productDetails'])->name('frontend.productDetails');
+// Route::get('/filter-by-color', [FrontendProductController::class,'filterByColor'])->name('filterByColor');
 
 
 
