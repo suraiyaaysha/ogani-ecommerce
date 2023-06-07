@@ -48,9 +48,9 @@
                     </label>
                 </div>
             @endforeach
-            <button type="submit" class="border-0 site-btn btn-sm">Filter</button>
+            <button type="submit" class="border-0 site-btn filter-btn-sm">Filter</button>
             @if(!empty($selectedColors))
-                <a href="{{ route('frontend.shop') }}" class="border-0 site-btn btn-sm">Clear Filter</a>
+                <a href="{{ route('frontend.shop') }}" class="border-0 site-btn filter-btn-sm">Clear Filter</a>
             @endif
         </form>
 
@@ -96,9 +96,9 @@
                     </label>
                 </div>
             @endforeach
-            <button type="submit" class="border-0 site-btn btn-sm">Filter</button>
+            <button type="submit" class="border-0 site-btn filter-btn-sm">Filter</button>
             @if(!empty($selectedSize))
-                <a href="{{ route('frontend.shop') }}" class="border-0 site-btn btn-sm">Clear Filter</a>
+                <a href="{{ route('frontend.shop') }}" class="border-0 site-btn filter-btn-sm">Clear Filter</a>
             @endif
         </form>
 
