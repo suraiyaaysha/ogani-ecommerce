@@ -26,6 +26,9 @@
                     @endisset
 
                         @csrf
+                        {{-- This hidden field is for redirect user's where he was before log in --}}
+                        <input type="hidden" name="previous_url" value="{{ url()->previous() }}">
+                        {{-- This hidden field is for redirect user's where he was before log in --}}
 
                         <div class="mb-3">
                             <label for="email" class="col-md-4 col-form-label">{{ __('Email Address') }}</label>

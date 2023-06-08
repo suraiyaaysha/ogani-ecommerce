@@ -58,22 +58,7 @@ class AppServiceProvider extends ServiceProvider
             $view->with('colors', Color::all());
             $view->with('sizes', Size::all());
             $view->with('latestProducts', Product::latest()->take(9)->get());
-
-
-            // $view->with('selectedColors', $request->get('colors', []));
-            // $view->with('selectedSize', $request->get('sizes', []));
-
-            // $view->with('selectedColors', $selectedColors);
-            // $view->with('selectedSize', $selectedSize);
         });
-
-        // View::composer('products-by-category', function ($view) {
-        //     $view->with('selectedColors', $request->get('colors', []));
-        //     $view->with('selectedSize', $request->get('sizes', []));
-
-        //     $view->with('selectedColors', $selectedColors);
-        //     $view->with('selectedSize', $selectedSize);
-        // });
 
         // Add pagination
         Paginator::useBootstrap();

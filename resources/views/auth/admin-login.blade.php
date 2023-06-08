@@ -95,6 +95,11 @@
                     <h3 class="card-title text-left mb-3">{{ __('Admin Login') }}</h3>
                     <form method="POST" action="{{ route('login') }}">
                         @csrf
+                        
+                        {{-- This hidden field is for redirect user's where he was before log in --}}
+                        <input type="hidden" name="previous_url" value="{{ url()->previous() }}">
+                        {{-- This hidden field is for redirect user's where he was before log in --}}
+
                         <div class="form-group">
                             <label for="email">{{ __('Username or email *') }}</label>
                             <input id="email" type="email" class="form-control p_input @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email" autofocus>
