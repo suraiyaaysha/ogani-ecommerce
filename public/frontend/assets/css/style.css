@@ -919,7 +919,7 @@ ol {
 	transform: rotate(360deg);
 }
 
-.featured__item__pic__hover li a {
+.featured__item__pic__hover li a, .featured__item__pic__hover li button, .add-to-cart-btn button {
 	font-size: 16px;
 	color: #1c1c1c;
 	height: 40px;
@@ -937,7 +937,7 @@ ol {
 	transition: all, 0.5s;
 }
 
-.featured__item__pic__hover li a i {
+.featured__item__pic__hover li a i, .featured__item__pic__hover li button i, .add-to-cart-btn button i {
 	position: relative;
 	transform: rotate(0);
 	-webkit-transition: all, 0.3s;
@@ -3611,5 +3611,11 @@ span.icon_cart.dashboard-item-icon {
     padding: 7px 18px 7px;
 }
 /* Filter by size */
+
+/* Add to cart */
+.shoping__cart__table table tbody tr td.shoping__cart__item img {
+    max-height: 95px;
+}
+/* Add to cart */
 
 /* Custom css for frontend */

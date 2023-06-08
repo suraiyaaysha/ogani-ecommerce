@@ -170,8 +170,9 @@ return [
         App\Providers\RouteServiceProvider::class,
 
         // For profile picture Laravolt
-        // $app->register(Laravolt\Avatar\LumenServiceProvider),
         Laravolt\Avatar\ServiceProvider::class,
+        // For add to cart
+        Darryldecode\Cart\CartServiceProvider::class
 
     ])->toArray(),
 
@@ -188,6 +189,8 @@ return [
 
     'aliases' => Facade::defaultAliases()->merge([
         // 'Example' => App\Facades\Example::class,
+        // Add to cart
+        'Cart' => Darryldecode\Cart\Facades\CartFacade::class
     ])->toArray(),
 
 ];

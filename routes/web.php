@@ -13,6 +13,7 @@ use App\Http\Controllers\Frontend\FrontendProfileController;
 use App\Http\Controllers\Frontend\FrontendProductController;
 
 use App\Http\Controllers\Frontend\FrontendBlogController;
+use App\Http\Controllers\Frontend\CartController;
 
 /*
 |--------------------------------------------------------------------------
@@ -90,6 +91,13 @@ Route::get('/shop',[FrontendProductController::class,'getAllProducts'])->name('f
 Route::get('/category/{slug}',[FrontendProductController::class,'productsByCategory'])->name('frontend.productsByCategory');
 Route::get('/product/{slug}',[FrontendProductController::class,'productDetails'])->name('frontend.productDetails');
 // Route::get('/filter-by-color', [FrontendProductController::class,'filterByColor'])->name('filterByColor');
+
+// cart routes
+Route::get('cart', [CartController::class, 'cartList'])->name('cart.list');
+Route::post('cart', [CartController::class, 'addToCart'])->name('cart.store');
+Route::post('update-cart', [CartController::class, 'updateCart'])->name('cart.update');
+Route::post('remove', [CartController::class, 'removeCart'])->name('cart.remove');
+Route::post('clear', [CartController::class, 'clearAllCart'])->name('cart.clear');
 
 
 

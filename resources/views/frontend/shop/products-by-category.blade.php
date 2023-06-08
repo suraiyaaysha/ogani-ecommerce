@@ -65,7 +65,17 @@
                                             <ul class="featured__item__pic__hover">
                                                 <li><a href="#"><i class="fa fa-heart"></i></a></li>
                                                 <li><a href="#"><i class="fa fa-retweet"></i></a></li>
-                                                <li><a href="#"><i class="fa fa-shopping-cart"></i></a></li>
+                                                <li class="add-to-cart-btn">
+                                                    <form action="{{ route('cart.store') }}" method="POST" enctype="multipart/form-data">
+                                                        @csrf
+                                                        <input type="hidden" value="{{ $product->id }}" name="id">
+                                                        <input type="hidden" value="{{ $product->name }}" name="name">
+                                                        <input type="hidden" value="{{ $product->price }}" name="price">
+                                                        <input type="hidden" value="{{ $product->featured_image }}" name="featured_image">
+                                                        <input type="hidden" value="1" name="quantity">
+                                                        <button class="border-0"><i class="fa fa-shopping-cart"></i></button>
+                                                    </form>
+                                                </li>
                                             </ul>
                                         </div>
                                         <div class="featured__item__text">

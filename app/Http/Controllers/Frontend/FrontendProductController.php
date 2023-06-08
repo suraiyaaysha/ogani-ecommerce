@@ -51,9 +51,6 @@ class FrontendProductController extends Controller
     // public function getAllProducts()
     public function getAllProducts(Request $request)
     {
-
-
-
         // $products = Product::all();
         $products = Product::latest()->paginate(9);
 
@@ -68,16 +65,6 @@ class FrontendProductController extends Controller
 
 
         // Filter By Color Start
-        // if($selectedColors = $request->input('colors')){
-        //     $selectedColors = $request->input('colors');
-
-        //     // Retrieve the products that have at least one selected color
-        //     $products = Product::whereHas('colors', function ($query) use ($selectedColors) {
-        //         $query->whereIn('color_id', $selectedColors);
-        //     })->latest()->paginate(9);
-        // }
-
-
         $selectedColors = $request->input('colors', []);
         if (!empty($selectedColors)) {
             // Retrieve the products that have at least one selected color
