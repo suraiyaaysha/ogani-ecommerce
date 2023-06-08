@@ -38,6 +38,13 @@
                     @endif
                 </div>
 
+                {{-- <form action="{{ route('cart.update') }}" method="POST">
+                    @csrf
+                    <input type="hidden" name="id" value="{{ $item->id}}">
+                    <div class="pro-qty">
+                        <input type="text" name="quantity" value="{{ $item->quantity }}">
+                    </div> --}}
+
                     <div class="col-lg-12">
                         <div class="shoping__cart__table">
                             <table>
@@ -97,8 +104,16 @@
                     <div class="col-lg-12">
                         <div class="shoping__cart__btns text-right">
                             <a href="{{ url('shop/') }}" class="primary-btn cart-btn">CONTINUE SHOPPING</a>
+                            {{-- <a href="#" class="primary-btn cart-btn cart-btn-right"><span class="icon_loading"></span>
+                                Upadate Cart</a> --}}
+                                {{-- <form action="{{ route('cart.update') }}" method="POST">
+                                    @csrf
+                                    <button class="primary-btn cart-btn cart-btn-right border-0"><span class="icon_loading"></span> Upadate Cart</button>
+                                </form> --}}
                         </div>
                     </div>
+
+                {{-- </form> --}}
 
             </div>
             <div class="row">
@@ -112,34 +127,21 @@
                                 <button type="submit" class="site-btn">APPLY COUPON</button>
                             </form>
                         </div>
-
                     </div>
                 </div>
-
                 <div class="col-lg-6">
-
                     <div class="shoping__checkout">
                         <h5>Cart Total</h5>
-                        @if (isset($subtotal) || session()->has('discount'))
                         <ul>
-                            <li>Subtotal: ${{ isset($subtotal) ? $subtotal : \Cart::session(auth()->id())->getSubTotal() }}</li>
-
-                            <li>
-                            @if (session()->has('discount'))
-                                Discount Amount: - ${{ isset($subtotal) ? $subtotal - session('total') : \Cart::session(auth()->id())->getSubTotal() - session('total') }}
+                            {{-- <li>Subtotal: ${{ isset($subtotal) ? $subtotal : \Cart::session(auth()->id())->getSubTotal() }}</li> --}}
+                            <li>Subtotal:  {{ \Cart::session(auth()->id())->getSubTotal() }}</li>
+                            @if (isset($discount))
+                                <li>Discount: ${{ $discount }}</li>
                             @endif
-
-                                @if (session()->has('discountAmount'))
-                                    <span>{{ session('discountAmount') }}% based on coupon code</span>
-                                @endif
-                            </li>
-
-                            <li>Total: ${{ session('total', \Cart::session(auth()->id())->getTotal()) }}</li>
+                            <li>Total: ${{ isset($total) ? $total : \Cart::session(auth()->id())->getTotal() }}</li>
                         </ul>
-                        @endif
                         <a href="#" class="primary-btn">{{ __('PROCEED TO CHECKOUT') }}</a>
                     </div>
-
                 </div>
             </div>
         </div>

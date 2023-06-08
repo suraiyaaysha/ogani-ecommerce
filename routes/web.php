@@ -98,6 +98,8 @@ Route::post('cart', [CartController::class, 'addToCart'])->name('cart.store');
 Route::post('update-cart', [CartController::class, 'updateCart'])->name('cart.update');
 Route::post('remove', [CartController::class, 'removeCart'])->name('cart.remove');
 Route::post('clear', [CartController::class, 'clearAllCart'])->name('cart.clear');
+Route::post('apply-coupon', [CartController::class, 'applyCoupon'])->name('cart.applyCoupon');
+
 
 
 

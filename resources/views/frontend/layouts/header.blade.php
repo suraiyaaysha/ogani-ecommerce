@@ -39,6 +39,11 @@
         <div class="humberger__menu__cart">
             <ul>
                 <li><a href="#"><i class="fa fa-heart"></i> <span>1</span></a></li>
+                @php
+                    $sessionKey = auth()->id();
+                    session()->setId($sessionKey);
+                    $cartCount = \Cart::session($sessionKey)->getContent()->count();
+                @endphp
                 <li><a href="{{ route('cart.list') }}"><i class="fa fa-shopping-bag"></i> <span>{{ Cart::getTotalQuantity()}}</span></a></li>
 
             </ul>
@@ -217,6 +222,11 @@
                     <div class="header__cart">
                         <ul>
                             <li><a href="#"><i class="fa fa-heart"></i> <span>1</span></a></li>
+                            @php
+                                $sessionKey = auth()->id();
+                                session()->setId($sessionKey);
+                                $cartCount = \Cart::session($sessionKey)->getContent()->count();
+                            @endphp
                             <li><a href="{{ route('cart.list') }}"><i class="fa fa-shopping-bag"></i> <span>{{ Cart::getTotalQuantity()}}</span></a></li>
                         </ul>
                         <div class="header__cart__price">{{ __('item:') }} <span>$150.00</span></div>

@@ -95,36 +95,45 @@ class CartController extends Controller
         return redirect()->route('cart.list');
     }
 
-    public function applyCoupon(Request $request)
-    {
-        $sessionKey = auth()->id();
-        session()->setId($sessionKey);
-        Cart::session($sessionKey);
+public function applyCoupon(Request $request)
+{
+    $sessionKey = auth()->id();
+    session()->setId($sessionKey);
+    Cart::session($sessionKey);
 
-        $couponCode = $request->input('coupon_code');
-        $coupon = Coupon::where('coupon_code', $couponCode)->first();
+    $couponCode = $request->input('coupon_code');
+    $coupon = Coupon::where('coupon_code', $couponCode)->first();
 
-        if ($coupon) {
-            $cartItems = Cart::getContent();
+    if ($coupon) {
+        $cartItems = Cart::getContent();
 
-            $subtotal = Cart::getSubTotal();
-            $discountAmount = $coupon->discount;
-            // $discount = $subtotal * ($coupon->discount / 100);
-            $discount = $subtotal * ($discountAmount / 100);
-            $total = $subtotal - $discount;
+        foreach ($cartItems as $item) {
+            $discount = $item->price * ($coupon->discount / 100);
+            $updatedPrice = $item->price - $discount;
 
-            // Update the total price in the cart session
-            session()->put('total', $total);
-
-            return redirect()->route('cart.list')->with([
-                'success' => 'Coupon applied successfully.',
-                'total' => $total,
-                'discount' => $discount,
-                'discountAmount' => $discountAmount,
+            Cart::session(auth()->id())->update($item->id, [
+                'coupon' => [
+                    'coupon_code' => $coupon->coupon_code,
+                    'discount' => $coupon->discount,
+                    'apply_discount_to_subtotal' => true,
+                ],
+                'price' => $updatedPrice,
             ]);
         }
 
-        return redirect()->route('cart.list')->with('error', 'Invalid coupon code.')->with('coupon_error', true);
+        $subtotal = Cart::getSubTotal();
+        $total = Cart::getTotal();
+
+        return redirect()->route('cart.list')->with([
+            'success' => 'Coupon applied successfully.',
+            // 'subtotal' => $subtotal,
+            'discount' => $discount,
+            'total' => $total,
+        ]);
     }
+    return redirect()->route('cart.list')->with('error', 'Invalid coupon code.')->with('coupon_error', true);
+}
+
+
 
 }

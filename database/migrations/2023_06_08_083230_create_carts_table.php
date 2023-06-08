@@ -11,13 +11,10 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('coupons', function (Blueprint $table) {
+        Schema::create('carts', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
-            $table->string('coupon_code')->unique();
-            $table->decimal('discount', 8, 2);
-            $table->dateTime('expiry_date');
-            $table->unsignedInteger('usage_limit')->default(0);
+            $table->string('identifier');
+            $table->longText('content');
             $table->timestamps();
         });
     }
@@ -27,6 +24,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('coupons');
+        Schema::dropIfExists('carts');
     }
 };
