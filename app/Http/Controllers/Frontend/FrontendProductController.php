@@ -9,6 +9,8 @@ use App\Models\Blog;
 use App\Models\Color;
 use App\Models\Size;
 use Illuminate\Http\Request;
+// use Illuminate\Support\Facades\View;
+use Illuminate\Support\Facades\View;
 
 class FrontendProductController extends Controller
 {
@@ -86,7 +88,15 @@ class FrontendProductController extends Controller
         // Filter By Size End
 
 
-        return view('frontend.shop.index', compact('products', 'latestProducts', 'categories', 'colors', 'sizes', 'selectedColors', 'selectedSize'));
+        // Share $selectedColors with the AppServiceProvider
+        View::share('selectedColors', $selectedColors);
+
+        // Share $selectedSize with the AppServiceProvider
+        View::share('selectedSize', $selectedSize);
+
+
+        return view('frontend.shop.index', compact('products', 'latestProducts', 'categories', 'colors', 'sizes'));
+        // return view('frontend.shop.index', compact('products', 'latestProducts', 'categories', 'colors', 'sizes', 'selectedColors', 'selectedSize'));
         // return view('frontend.shop.index', compact('products'));
     }
 
@@ -118,13 +128,18 @@ class FrontendProductController extends Controller
         return view('frontend.shop.product-details', compact('product', 'relatedProducts'));
     }
 
-    public function productsByCategory($slug)
+    public function productsByCategory($slug, Request $request)
     {
         $productsByCategory = ProductCategory::where('slug', $slug)->first();
 
         $products = $productsByCategory->products()->paginate(6); // Retrieve all products from $productsByCategory
 
-        return view('frontend.shop.products-by-category', compact('productsByCategory', 'products'));
+
+        $selectedColors = $request->input('colors', []);
+        $selectedSize = $request->input('size');
+
+
+        return view('frontend.shop.products-by-category', compact('productsByCategory', 'products', 'selectedColors', 'selectedSize'));
     }
 
 

@@ -39,15 +39,18 @@
         <div class="humberger__menu__cart">
             <ul>
                 <li><a href="#"><i class="fa fa-heart"></i> <span>1</span></a></li>
-                @php
-                    $sessionKey = auth()->id();
-                    session()->setId($sessionKey);
-                    $cartCount = \Cart::session($sessionKey)->getContent()->count();
-                @endphp
-                <li><a href="{{ route('cart.list') }}"><i class="fa fa-shopping-bag"></i> <span>{{ Cart::getTotalQuantity()}}</span></a></li>
-
-            </ul>
-            <div class="header__cart__price">item: <span>$150.00</span></div>
+                @if (Auth::check())
+                    @php
+                        $sessionKey = auth()->id();
+                        session()->setId($sessionKey);
+                        $cartCount = \Cart::session($sessionKey)->getContent()->count();
+                    @endphp
+                        <li><a href="{{ route('cart.list') }}"><i class="fa fa-shopping-bag"></i> <span>{{ Cart::getTotalQuantity()}}</span></a></li>
+                    </ul>
+                    <div class="header__cart__price">{{ __('item:') }} <span>$150.00</span></div>
+                @else
+                    <li><a href="{{ route('login') }}"><i class="fa fa-shopping-bag"></i> <span>0</span></a></li>
+                @endif
         </div>
         <div class="humberger__menu__widget">
             <div class="header__top__right__language">
@@ -95,14 +98,14 @@
             <ul>
                 <li class="active"><a href="{{ url('/') }}">Home</a></li>
                 <li><a href="{{ url('shop') }}">Shop</a></li>
-                <li><a href="#">Pages</a>
+                {{-- <li><a href="#">Pages</a>
                     <ul class="header__menu__dropdown">
                         <li><a href="./shop-details.html">Shop Details</a></li>
                         <li><a href="./shoping-cart.html">Shoping Cart</a></li>
                         <li><a href="./checkout.html">Check Out</a></li>
                         <li><a href="./blog-details.html">Blog Details</a></li>
                     </ul>
-                </li>
+                </li> --}}
                 <li><a href="{{ url('/blog') }}">Blog</a></li>
                 <li><a href="{{ url('/contact') }}">Contact</a></li>
             </ul>
@@ -205,14 +208,14 @@
                         <ul>
                             <li><a href="{{ url('/') }}" class="{{ Request::is('/') ? 'active' : '' }}">Home</a></li>
                             <li><a href="{{ url('shop') }}" class="{{ Request::is('/shop') ? 'active' : '' }}">Shop</a></li>
-                            <li><a href="#">Pages</a>
+                            {{-- <li><a href="#">Pages</a>
                                 <ul class="header__menu__dropdown">
                                     <li><a href="./shop-details.html">Shop Details</a></li>
-                                    <li><a href="./shoping-cart.html">Shoping Cart</a></li>
+                                    <li><a href="{{ route('cart.list') }}">Shoping Cart</a></li>
                                     <li><a href="./checkout.html">Check Out</a></li>
                                     <li><a href="./blog-details.html">Blog Details</a></li>
                                 </ul>
-                            </li>
+                            </li> --}}
                             <li><a href="{{ url('/blog') }}" class="{{ Request::is('/blog') ? 'active' : '' }}">Blog</a></li>
                             <li><a href="{{ url('/contact') }}" class="{{ Request::is('/contact') ? 'active' : '' }}">Contact</a></li>
                         </ul>
@@ -222,14 +225,20 @@
                     <div class="header__cart">
                         <ul>
                             <li><a href="#"><i class="fa fa-heart"></i> <span>1</span></a></li>
-                            @php
-                                $sessionKey = auth()->id();
-                                session()->setId($sessionKey);
-                                $cartCount = \Cart::session($sessionKey)->getContent()->count();
-                            @endphp
-                            <li><a href="{{ route('cart.list') }}"><i class="fa fa-shopping-bag"></i> <span>{{ Cart::getTotalQuantity()}}</span></a></li>
+
+                            @if (Auth::check())
+                                @php
+                                    $sessionKey = auth()->id();
+                                    session()->setId($sessionKey);
+                                    $cartCount = \Cart::session($sessionKey)->getContent()->count();
+                                @endphp
+                                <li><a href="{{ route('cart.list') }}"><i class="fa fa-shopping-bag"></i> <span>{{ Cart::getTotalQuantity()}}</span></a></li>
                         </ul>
-                        <div class="header__cart__price">{{ __('item:') }} <span>$150.00</span></div>
+                            <div class="header__cart__price">{{ __('item:') }} <span>$150.00</span></div>
+                        @else
+                            <li><a href="{{ route('login') }}"><i class="fa fa-shopping-bag"></i> <span>0</span></a></li>
+                        @endif
+
                     </div>
                 </div>
             </div>
@@ -253,7 +262,7 @@
                         <ul style="@if (!request()->is('/')) display: none; @endif">
 
                             @foreach ($categories as $category)
-                                <li><a href="#">{{ $category->name }}</a></li>
+                                <li><a href="{{ route('frontend.productsByCategory', $category->slug) }}">{{ $category->name }}</a></li>
                             @endforeach
 
                         </ul>
