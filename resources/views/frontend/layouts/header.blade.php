@@ -38,19 +38,34 @@
         </div>
         <div class="humberger__menu__cart">
             <ul>
-                <li><a href="#"><i class="fa fa-heart"></i> <span>1</span></a></li>
-                @if (Auth::check())
-                    @php
-                        $sessionKey = auth()->id();
-                        session()->setId($sessionKey);
-                        $cartCount = \Cart::session($sessionKey)->getContent()->count();
-                    @endphp
-                        <li><a href="{{ route('cart.list') }}"><i class="fa fa-shopping-bag"></i> <span>{{ Cart::getTotalQuantity()}}</span></a></li>
-                    </ul>
-                    <div class="header__cart__price">{{ __('item:') }} <span>$150.00</span></div>
+                <li>
+                    <a href="#">
+                        <i class="fa fa-heart"></i>
+                        @if(auth()->check())
+                            <span>show wishlist item quantity</span>
+                        @else
+                            <span>0</span>
+                        @endif
+                    </a>
+                </li>
+                <li>
+                    <a href="{{ route('cart.list') }}">
+                        <i class="fa fa-shopping-bag"></i>
+                        @if(auth()->check())
+                            <span>{{ Cart::getTotalQuantity()}}</span>
+                        @else
+                            <span>0</span>
+                        @endif
+                    </a>
+                </li>
+            </ul>
+            <div class="header__cart__price">{{ __('item:') }}
+                @if(auth()->check())
+                    <span>${{ session('total', \Cart::session(auth()->id())->getTotal()) }}</span>
                 @else
-                    <li><a href="{{ route('login') }}"><i class="fa fa-shopping-bag"></i> <span>0</span></a></li>
+                    <span>0</span>
                 @endif
+            </div>
         </div>
         <div class="humberger__menu__widget">
             <div class="header__top__right__language">
@@ -222,24 +237,39 @@
                     </nav>
                 </div>
                 <div class="col-lg-3">
+
                     <div class="header__cart">
                         <ul>
-                            <li><a href="#"><i class="fa fa-heart"></i> <span>1</span></a></li>
-
-                            @if (Auth::check())
-                                @php
-                                    $sessionKey = auth()->id();
-                                    session()->setId($sessionKey);
-                                    $cartCount = \Cart::session($sessionKey)->getContent()->count();
-                                @endphp
-                                <li><a href="{{ route('cart.list') }}"><i class="fa fa-shopping-bag"></i> <span>{{ Cart::getTotalQuantity()}}</span></a></li>
+                            <li>
+                                <a href="#">
+                                    <i class="fa fa-heart"></i>
+                                    @if(auth()->check())
+                                        <span>show wishlist item quantity</span>
+                                    @else
+                                        <span>0</span>
+                                    @endif
+                                </a>
+                            </li>
+                            <li>
+                                <a href="{{ route('cart.list') }}">
+                                    <i class="fa fa-shopping-bag"></i>
+                                    @if(auth()->check())
+                                        <span>{{ Cart::getTotalQuantity()}}</span>
+                                    @else
+                                        <span>0</span>
+                                    @endif
+                                </a>
+                            </li>
                         </ul>
-                            <div class="header__cart__price">{{ __('item:') }} <span>$150.00</span></div>
-                        @else
-                            <li><a href="{{ route('login') }}"><i class="fa fa-shopping-bag"></i> <span>0</span></a></li>
-                        @endif
-
+                        <div class="header__cart__price">{{ __('item:') }}
+                            @if(auth()->check())
+                                <span>${{ session('total', \Cart::session(auth()->id())->getTotal()) }}</span>
+                            @else
+                                <span>0</span>
+                            @endif
+                        </div>
                     </div>
+
                 </div>
             </div>
             <div class="humberger__open">
