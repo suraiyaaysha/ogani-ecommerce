@@ -22,7 +22,8 @@ class CouponFactory extends Factory
         return [
             'name' => $this->faker->word,
             'coupon_code' => Str::upper($this->faker->unique()->bothify('??###??###')),
-            'discount' => $this->faker->randomFloat(2, 5, 50),
+            // 'discount' => $this->faker->randomFloat(2, 5, 50),
+            'discount' => $this->faker->numberBetween(5, 50), // Generate random integers between 5 and 50
             'expiry_date' => $this->faker->dateTimeBetween('+1 week', '+3 months'),
             'usage_limit' => $this->faker->numberBetween(0, 100),
             'created_at' => Carbon::now(),

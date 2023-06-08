@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->string('name');
             $table->string('coupon_code')->unique();
-            $table->decimal('discount', 8, 2);
+            $table->unsignedInteger('discount');
             $table->dateTime('expiry_date');
             $table->unsignedInteger('usage_limit')->default(0);
             $table->timestamps();
