@@ -14,6 +14,11 @@ use App\Http\Controllers\Frontend\FrontendProductController;
 
 use App\Http\Controllers\Frontend\FrontendBlogController;
 use App\Http\Controllers\Frontend\CartController;
+use App\Http\Controllers\Frontend\CheckoutController;
+use App\Http\Controllers\Frontend\OrderController;
+
+    use Illuminate\Http\Request;
+use Stripe\Stripe;
 
 /*
 |--------------------------------------------------------------------------
@@ -70,10 +75,6 @@ Route::middleware('auth')->group(function () {
     Route::delete('profile',[FrontendProfileController::class,'destroy'])->name('frontend.profile.destroy');
 });
 
-
-
-
-
 // Blog Pages route
 Route::get('/blog',[FrontendBlogController::class,'index'])->name('frontend.blog');
 // Route::get('/blog',[FrontendBlogController::class,'getBlogCategories'])->name('frontend.blog');
@@ -92,19 +93,26 @@ Route::get('/category/{slug}',[FrontendProductController::class,'productsByCateg
 Route::get('/product/{slug}',[FrontendProductController::class,'productDetails'])->name('frontend.productDetails');
 // Route::get('/filter-by-color', [FrontendProductController::class,'filterByColor'])->name('filterByColor');
 
-// cart routes
+// Product add to cart, order, payment related routes
 Route::middleware('auth')->group(function () {
-
+    // cart routes
     Route::get('cart', [CartController::class, 'cartList'])->name('cart.list');
     Route::post('cart', [CartController::class, 'addToCart'])->name('cart.store');
     Route::post('update-cart', [CartController::class, 'updateCart'])->name('cart.update');
     Route::post('remove', [CartController::class, 'removeCart'])->name('cart.remove');
     Route::post('clear', [CartController::class, 'clearAllCart'])->name('cart.clear');
     Route::post('apply-coupon', [CartController::class, 'applyCoupon'])->name('cart.applyCoupon');
-    
+
+    // checkout
+    Route::get('/checkout', [CheckoutController::class, 'index'])->name('checkout.index');
+    Route::post('/checkout', [CheckoutController::class, 'store'])->name('checkout.store');
+    Route::post('/checkout/apply-coupon', [CheckoutController::class, 'applyCoupon'])->name('checkout.apply-coupon');
+
+    // order routes
+    Route::get('/orders', [OrderController::class, 'index'])->name('orders.index');
+    Route::get('/orders/{order}', [OrderController::class, 'show'])->name('orders.show');
+
 });
-
-
 
 
 // Contact Page Route
@@ -119,7 +127,6 @@ Route::get('/contact', function () {
 // Route::get('/admin/profile', function () {
 //     return view('admin.profile.edit');
 // });
-
 
 Route::middleware(['auth','admin'])->group(function () {
     Route::get('admin/profile',[ProfileController::class,'index'])->name('admin.index');

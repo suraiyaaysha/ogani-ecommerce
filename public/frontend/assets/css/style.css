@@ -3616,6 +3616,9 @@ span.icon_cart.dashboard-item-icon {
 .shoping__cart__table table tbody tr td.shoping__cart__item img {
     max-height: 95px;
 }
+.product-sm-img {
+    max-height: 60px;
+}
 /* Add to cart */
 
 /* Custom css for frontend */

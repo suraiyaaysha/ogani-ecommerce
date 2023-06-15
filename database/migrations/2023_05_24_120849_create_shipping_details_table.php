@@ -14,14 +14,18 @@ return new class extends Migration
         Schema::create('shipping_details', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('user_id');
-            $table->string('address');
+             $table->unsignedBigInteger('order_id')->nullable(); // Add the order_id column
+            $table->string('address_1');
+            $table->string('address_2');
             $table->string('city');
             $table->string('state');
             $table->string('zip');
+            $table->string('phone');
             $table->timestamps();
 
             // Define foreign key constraint
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
+            $table->foreign('order_id')->references('id')->on('orders')->onDelete('cascade');
         });
     }
 

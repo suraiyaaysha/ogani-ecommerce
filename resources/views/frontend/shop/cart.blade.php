@@ -121,7 +121,8 @@
                     <div class="shoping__checkout">
                         <h5>Cart Total</h5>
                         @if (isset($subtotal) || session()->has('discount'))
-                        <ul>
+
+                        {{-- <ul>
                             <li>Subtotal: ${{ isset($subtotal) ? $subtotal : \Cart::session(auth()->id())->getSubTotal() }}</li>
 
                             <li>
@@ -135,9 +136,19 @@
                             </li>
 
                             <li>Total: ${{ session('total', \Cart::session(auth()->id())->getTotal()) }}</li>
+                        </ul> --}}
+
+                        <ul>
+                            <li>Subtotal: ${{ isset($subtotal) ? $subtotal : \Cart::session(auth()->id())->getSubTotal() }}</li>
+                            @if (session()->has('discount'))
+                                <li>Discount Amount: - ${{ isset($subtotal) ? $subtotal - session('total') : \Cart::session(auth()->id())->getSubTotal() - session('total') }}</li>
+                            @endif
+                            <li>Total: ${{ session('total', \Cart::session(auth()->id())->getTotal()) }}</li>
+
                         </ul>
+
                         @endif
-                        <a href="#" class="primary-btn">{{ __('PROCEED TO CHECKOUT') }}</a>
+                        <a href="{{ route('checkout.index') }}" class="primary-btn">{{ __('PROCEED TO CHECKOUT') }}</a>
                     </div>
 
                 </div>

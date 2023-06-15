@@ -22,8 +22,6 @@ class Product extends Model
         'featured_image',
         'gallery_images',
         'weight',
-        // 'color',
-        // 'product_size',
         'shipping_duration',
         'shipping_charge',
         'is_featured',
@@ -99,6 +97,5 @@ class Product extends Model
 
         return $this->price;
     }
-
 
 }

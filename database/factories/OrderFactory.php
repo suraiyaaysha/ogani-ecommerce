@@ -24,17 +24,27 @@ class OrderFactory extends Factory
     public function definition(): array
     {
 
-        $product = Product::inRandomOrder()->first(); //Get a random category
+        // $product = Product::inRandomOrder()->first(); //Get a random category
         $user = User::inRandomOrder()->first(); //Get a random user_id
 
-        return [
+         return [
+            'order_number' => $this->faker->unique()->randomNumber(6),
             'user_id' => $user->id,
-            'product_id' => $product->id,
-
-            // 'user_id' => $this->faker->numberBetween(1, 10),
-            // 'product_id' => $this->faker->numberBetween(1, 10),
-            'quantity' => $this->faker->numberBetween(1, 10),
-            'total_price' => $this->faker->randomFloat(2, 100, 1000),
+            'status' => $this->faker->randomElement(['pending', 'processing', 'completed']),
+            'grand_total' => $this->faker->randomFloat(2, 100, 1000),
+            'item_count' => $this->faker->numberBetween(1, 10),
+            'payment_status' => $this->faker->randomElement(['paid', 'unpaid']),
+            'payment_method' => $this->faker->randomElement(['credit_card', 'paypal']),
+            'first_name' => $this->faker->firstName,
+            'last_name' => $this->faker->lastName,
+            'phone' => $this->faker->phoneNumber,
+            'country' => $this->faker->country,
+            'address_1' => $this->faker->streetAddress,
+            'address_2' => $this->faker->secondaryAddress,
+            'city' => $this->faker->city,
+            'state' => $this->faker->state,
+            'zip' => $this->faker->postcode,
+            'notes' => $this->faker->text,
         ];
     }
 }

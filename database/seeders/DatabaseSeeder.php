@@ -31,14 +31,14 @@ class DatabaseSeeder extends Seeder
             SubscriberSeeder::class,
             CouponSeeder::class,
             CompareSeeder::class,
-            OrderSeeder::class,
+            // OrderSeeder::class,
             ReviewSeeder::class,
             CommentSeeder::class,
             TagSeeder::class,
             ContactSeeder::class,
             WishlistSeeder::class,
-            BillingDetailsSeeder::class,
-            ShippingDetailsSeeder::class,
+            // BillingDetailsSeeder::class,
+            // ShippingDetailsSeeder::class,
         ]);
 
     }

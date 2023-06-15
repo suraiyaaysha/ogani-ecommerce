@@ -96,6 +96,8 @@ class CartController extends Controller
 
     public function applyCoupon(Request $request)
     {
+        // dd(session());
+
         $sessionKey = auth()->id();
         session()->setId($sessionKey);
         Cart::session($sessionKey);
@@ -113,7 +115,9 @@ class CartController extends Controller
             $total = $subtotal - $discount;
 
             // Update the total price in the cart session
-            session()->put('total', $total);
+            // session()->put('total', $total);
+            session()->pull('total');
+            session()->push('total', $total);
 
             return redirect()->route('cart.list')->with([
                 'success' => 'Coupon applied successfully.',
