@@ -14,11 +14,14 @@ use App\Models\ShippingDetails;
 use Darryldecode\Cart\Facades\CartFacade as Cart;
 use Illuminate\Support\Facades\Auth;
 use App\Models\User;
-use Stripe\Stripe;
-use Illuminate\Support\Facades\Session;
+// use Stripe\Stripe;
+// use Illuminate\Support\Facades\Session;
 // use Stripe\Charge;
 // use Stripe\Customer;
 // use Stripe\Exception\CardException;
+
+
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 class CheckoutController extends Controller
 {
@@ -69,195 +72,360 @@ class CheckoutController extends Controller
         // Get the selected payment method
         $paymentMethod = $request->payment_method;
 
-        // Create a new order
-        $order = Order::create([
-            'user_id' => Auth::id(),
-            'first_name' => $userInfo->first_name,
-            'last_name' => $userInfo->last_name,
-            'address_1' => $request->address_1,
-            'address_2' => $request->address_2,
-            'city' => $request->city,
-            'state' => $request->state,
-            'zip' => $request->zip,
-            'country' => $request->country,
-            'phone' => $request->phone,
-            'payment_method' => $paymentMethod,
-            'order_number' => Str::uuid()->toString(),
-            'payment_status' => 'pending',
-            'grand_total' => Cart::getTotal(),
-            'item_count' => Cart::getContent()->count(),
-        ]);
-
-
-        // Move cart items to order items
-        $cartItems = Cart::getContent();
-
-        foreach ($cartItems as $cartItem) {
-
-            OrderItem::create([
-                'order_id' => $order->id,
-                'product_id' => $cartItem->id,
-                'quantity' => $cartItem->quantity,
-                'price' => $cartItem->price,
-            ]);
-        }
-
-        // Clear the user's cart
-        Cart::clear();
-
-
-        // Update the user's details
-        $userInfo->userDetails()->update([
-            'address_1' => $request->address_1,
-            'address_2' => $request->address_2,
-            'city' => $request->city,
-            'state' => $request->state,
-            'zip' => $request->zip,
-        ]);
-
-        // Retrieve the user's billing details
-        $billingDetails = BillingDetails::where('user_id', Auth::id())->first();
-
-        if ($billingDetails) {
-            // Billing details exist, update them
-            $billingDetails->update([
-                'order_id' => $order->id,
-                'address_1' => $request->address_1,
-                'address_2' => $request->address_2,
-                'city' => $request->city,
-                'state' => $request->state,
-                'zip' => $request->zip,
-            ]);
-        } else {
-            // Billing details don't exist, create a new record
-            $billingDetails = BillingDetails::create([
-                'user_id' => Auth::id(),
-                'order_id' => $order->id,
-                'address_1' => $request->address_1,
-                'address_2' => $request->address_2,
-                'city' => $request->city,
-                'state' => $request->state,
-                'zip' => $request->zip,
-                'phone' => $request->phone,
-            ]);
-        }
-
-        // Check if the "Ship to a different address?" checkbox is checked
-        $shipToDifferentAddress = $request->has('ship_to_different_address');
-
-        // Retrieve the user's billing details
-        $billingDetails = BillingDetails::where('user_id', Auth::id())->first();
-
-        if ($shipToDifferentAddress) {
-            // Ship to a different address
-            // Update or create shipping details
-            $shippingDetails = ShippingDetails::updateOrCreate(
-                ['user_id' => Auth::id()],
-                [
-                    'order_id' => $order->id,
-                    'address_1' => $request->shipping_address_1,
-                    'address_2' => $request->shipping_address_2,
-                    'city' => $request->shipping_city,
-                    'state' => $request->shipping_state,
-                    'zip' => $request->shipping_zip,
-                    // 'country' => $request->shipping_country,
-                    'phone' => $request->shipping_phone,
-                ]
-            );
-        } else {
-            // Use billing details as shipping details
-            $shippingDetails = ShippingDetails::updateOrCreate(
-                ['user_id' => Auth::id()],
-                [
-                    'order_id' => $order->id,
-                    'address_1' => $billingDetails->address_1,
-                    'address_2' => $billingDetails->address_2,
-                    'city' => $billingDetails->city,
-                    'state' => $billingDetails->state,
-                    'zip' => $billingDetails->zip,
-                    // 'country' => $billingDetails->country,
-                    'phone' => $billingDetails->phone,
-                ]
-            );
-        }
-
+        $stripe = new \Stripe\StripeClient(env('STRIPE_SECRET'));
 
         // Redirect to the order confirmation page
         if ($paymentMethod === 'cash_on_delivery') {
 
-            // Update the order with shipping details
-            // $order->update([
-            //     'shipping_details_id' => $shippingDetails->id,
-            // ]);
-
-            // Process the payment (you'll need to implement this logic)
-            // $paymentStatus = processPayment($order); // Implement your payment processing logic here
-
-            // Update the order payment status
-            $order->update([
-                'payment_status' => 'Pending',
+            // Create a new order
+            $order = Order::create([
+                'user_id' => Auth::id(),
+                'first_name' => $userInfo->first_name,
+                'last_name' => $userInfo->last_name,
+                'address_1' => $request->address_1,
+                'address_2' => $request->address_2,
+                'city' => $request->city,
+                'state' => $request->state,
+                'zip' => $request->zip,
+                'country' => $request->country,
+                'phone' => $request->phone,
+                'payment_method' => $paymentMethod,
+                'order_number' => Str::uuid()->toString(),
+                'payment_status' => 'pending',
+                'grand_total' => Cart::getTotal(),
+                'item_count' => Cart::getContent()->count(),
             ]);
+
+            // Move cart items to order items
+            $cartItems = Cart::getContent();
+
+            foreach ($cartItems as $cartItem) {
+                OrderItem::create([
+                    'order_id' => $order->id,
+                    'product_id' => $cartItem->id,
+                    'quantity' => $cartItem->quantity,
+                    'price' => $cartItem->price,
+                ]);
+            }
+
+            // Clear the user's cart
+            Cart::clear();
+
+            /*--------------------------------------------------------------------------
+            | User Billing and Shipping details Form Information Start
+            |--------------------------------------------------------------------------*/
+
+            // Update the user's details
+            $userInfo->userDetails()->update([
+                'address_1' => $request->address_1,
+                'address_2' => $request->address_2,
+                'city' => $request->city,
+                'state' => $request->state,
+                'zip' => $request->zip,
+            ]);
+
+            // Retrieve the user's billing details
+            $billingDetails = BillingDetails::where('user_id', Auth::id())->first();
+
+            if ($billingDetails) {
+                // Billing details exist, update them
+                $billingDetails->update([
+                    'order_id' => $order->id,
+                    'address_1' => $request->address_1,
+                    'address_2' => $request->address_2,
+                    'city' => $request->city,
+                    'state' => $request->state,
+                    'zip' => $request->zip,
+                ]);
+            } else {
+                // Billing details don't exist, create a new record
+                $billingDetails = BillingDetails::create([
+                    'user_id' => Auth::id(),
+                    'order_id' => $order->id,
+                    'address_1' => $request->address_1,
+                    'address_2' => $request->address_2,
+                    'city' => $request->city,
+                    'state' => $request->state,
+                    'zip' => $request->zip,
+                    'phone' => $request->phone,
+                ]);
+            }
+
+            // Check if the "Ship to a different address?" checkbox is checked
+            $shipToDifferentAddress = $request->has('ship_to_different_address');
+
+            // Retrieve the user's billing details
+            $billingDetails = BillingDetails::where('user_id', Auth::id())->first();
+
+            if ($shipToDifferentAddress) {
+                // Ship to a different address
+                // Update or create shipping details
+                $shippingDetails = ShippingDetails::updateOrCreate(
+                    ['user_id' => Auth::id()],
+                    [
+                        'order_id' => $order->id,
+                        'address_1' => $request->shipping_address_1,
+                        'address_2' => $request->shipping_address_2,
+                        'city' => $request->shipping_city,
+                        'state' => $request->shipping_state,
+                        'zip' => $request->shipping_zip,
+                        // 'country' => $request->shipping_country,
+                        'phone' => $request->shipping_phone,
+                    ]
+                );
+            } else {
+                // Use billing details as shipping details
+                $shippingDetails = ShippingDetails::updateOrCreate(
+                    ['user_id' => Auth::id()],
+                    [
+                        'order_id' => $order->id,
+                        'address_1' => $billingDetails->address_1,
+                        'address_2' => $billingDetails->address_2,
+                        'city' => $billingDetails->city,
+                        'state' => $billingDetails->state,
+                        'zip' => $billingDetails->zip,
+                        // 'country' => $billingDetails->country,
+                        'phone' => $billingDetails->phone,
+                    ]
+                );
+            }
+
+            /*--------------------------------------------------------------------------
+            | User Billing and Shipping details Form Information End
+            |--------------------------------------------------------------------------*/
 
             // Redirect or show a success message to the user
             // return redirect()->route('order.success', $order->order_number);
             return redirect()->route('orders.show', $order);
 
         } elseif ($paymentMethod === 'stripe') {
-            // Stripe payment
 
-            return redirect()->route('orders.show', $order);
+            // $stripe = new \Stripe\StripeClient(env('STRIPE_SECRET'));
+
+            // Move cart items to order items
+            $cartItems = Cart::getContent();
+
+            $lineItems = [];
+
+            foreach ($cartItems as $cartItem) {
+                $lineItems[] = [
+                    'price_data' => [
+                        'currency' => 'usd',
+                        'product_data' => [
+                            'name' => $cartItem->name,
+                            // 'images' => [$cartItem->featured_image],
+                        ],
+                        'unit_amount' => $cartItem->price * 100,
+                    ],
+                    // 'quantity' => 1,
+                    'quantity' => $cartItem->quantity,
+                ];
+            }
+
+            $checkout_session = $stripe->checkout->sessions->create([
+                'line_items' => $lineItems,
+                'mode' => 'payment',
+                'success_url' => route('checkout.success', [], true),
+                'cancel_url' => route('checkout.cancel', [], true),
+            ]);
+
+            // Create a new order
+            $order = new Order();
+            $order->user_id = Auth::id();
+            $order->first_name = $request->first_name;
+            $order->last_name = $request->last_name;
+            $order->address_1 = $request->address_1;
+            $order->address_2 = $request->address_2;
+            $order->city = $request->city;
+            $order->state = $request->state;
+            $order->zip = $request->zip;
+            $order->country = $request->country;
+            $order->phone = $request->phone;
+            $order->payment_method = $paymentMethod;
+            $order->order_number = Str::uuid()->toString();
+            $order->payment_status = 'unpaid';
+            $order->grand_total = Cart::getTotal();
+            $order->item_count = Cart::getContent()->count();
+            $order->session_id = $checkout_session->id;
+            $order->save();
+
+            foreach ($cartItems as $cartItem) {
+                OrderItem::create([
+                    'order_id' => $order->id,
+                    'product_id' => $cartItem->id,
+                    'quantity' => $cartItem->quantity,
+                    'price' => $cartItem->price,
+                ]);
+            }
+
+            // Clear the user's cart
+            Cart::clear();
+
+            /*--------------------------------------------------------------------------
+            | User Billing and Shipping details Form Information Start
+            |--------------------------------------------------------------------------*/
+
+            // Update the user's details
+            $userInfo->userDetails()->update([
+                'address_1' => $request->address_1,
+                'address_2' => $request->address_2,
+                'city' => $request->city,
+                'state' => $request->state,
+                'zip' => $request->zip,
+            ]);
+
+            // Retrieve the user's billing details
+            $billingDetails = BillingDetails::where('user_id', Auth::id())->first();
+
+            if ($billingDetails) {
+                // Billing details exist, update them
+                $billingDetails->update([
+                    'order_id' => $order->id,
+                    'address_1' => $request->address_1,
+                    'address_2' => $request->address_2,
+                    'city' => $request->city,
+                    'state' => $request->state,
+                    'zip' => $request->zip,
+                ]);
+            } else {
+                // Billing details don't exist, create a new record
+                $billingDetails = BillingDetails::create([
+                    'user_id' => Auth::id(),
+                    'order_id' => $order->id,
+                    'address_1' => $request->address_1,
+                    'address_2' => $request->address_2,
+                    'city' => $request->city,
+                    'state' => $request->state,
+                    'zip' => $request->zip,
+                    'phone' => $request->phone,
+                ]);
+            }
+
+            // Check if the "Ship to a different address?" checkbox is checked
+            $shipToDifferentAddress = $request->has('ship_to_different_address');
+
+            // Retrieve the user's billing details
+            $billingDetails = BillingDetails::where('user_id', Auth::id())->first();
+
+            if ($shipToDifferentAddress) {
+                // Ship to a different address
+                // Update or create shipping details
+                $shippingDetails = ShippingDetails::updateOrCreate(
+                    ['user_id' => Auth::id()],
+                    [
+                        'order_id' => $order->id,
+                        'address_1' => $request->shipping_address_1,
+                        'address_2' => $request->shipping_address_2,
+                        'city' => $request->shipping_city,
+                        'state' => $request->shipping_state,
+                        'zip' => $request->shipping_zip,
+                        // 'country' => $request->shipping_country,
+                        'phone' => $request->shipping_phone,
+                    ]
+                );
+            } else {
+                // Use billing details as shipping details
+                $shippingDetails = ShippingDetails::updateOrCreate(
+                    ['user_id' => Auth::id()],
+                    [
+                        'order_id' => $order->id,
+                        'address_1' => $billingDetails->address_1,
+                        'address_2' => $billingDetails->address_2,
+                        'city' => $billingDetails->city,
+                        'state' => $billingDetails->state,
+                        'zip' => $billingDetails->zip,
+                        // 'country' => $billingDetails->country,
+                        'phone' => $billingDetails->phone,
+                    ]
+                );
+            }
+
+            /*--------------------------------------------------------------------------
+            | User Billing and Shipping details Form Information End
+            |--------------------------------------------------------------------------*/
+
+            return redirect($checkout_session->url);
         }
+
+        // return back();
 
     }
 
-    // public function createSession()
-    // {
-    //     // Set the session ID for the cart
-    //     $sessionKey = auth()->id();
-    //     session()->setId($sessionKey);
-    //     Cart::session($sessionKey);
+    public function success()
+    {
+        return view('frontend.checkout.checkout-success');
+    }
 
-    //     // Set the Stripe API key
-    //     Stripe::setApiKey(env('STRIPE_SECRET'));
+    public function cancel()
+    {
+        return view('frontend.checkout.checkout-cancel');
+    }
 
-    //     // Retrieve cart items
-    //     $cartItems = Cart::getContent();
+    public function webhook()
+    {
+        $stripe = new \Stripe\StripeClient(env('STRIPE_SECRET'));
 
-    //     // Prepare line items for Stripe session
-    //     $lineItems = [];
+        // This is your Stripe CLI webhook secret for testing your endpoint locally.
+        $endpoint_secret = env('STRIPE_WEBHOOK_SECRET');
 
-    //     foreach ($cartItems as $item) {
-    //         $lineItems[] = [
-    //             'price_data' => [
-    //                 'currency' => 'usd',
-    //                 'unit_amount' => $item->price * 100, // Stripe expects the amount in cents
-    //                 'product_data' => [
-    //                     'name' => $item->name,
-    //                     'description' => $item->description,
-    //                     'images' => [$item->image_url],
-    //                 ],
-    //             ],
-    //             'quantity' => $item->quantity,
-    //         ];
-    //     }
+        $payload = @file_get_contents('php://input');
+        $sig_header = $_SERVER['HTTP_STRIPE_SIGNATURE'];
+        $event = null;
 
-    //     try {
-    //         // Create a new Stripe session
-    //         $session = \Stripe\Checkout\Session::create([
-    //             'payment_method_types' => ['card'],
-    //             'line_items' => $lineItems,
-    //             'mode' => 'payment',
-    //             'success_url' => route('orders.show', ['order' => 'ORDER_ID']), // Replace 'ORDER_ID' with the actual order ID in the URL
-    //             'cancel_url' => route('checkout.index'),
-    //         ]);
+        try {
+        $event = \Stripe\Webhook::constructEvent(
+            $payload, $sig_header, $endpoint_secret
+        );
+        } catch(\UnexpectedValueException $e) {
+            // Invalid payload
 
-    //         // Return the session ID to the client
-    //         return response()->json(['sessionId' => $session->id]);
-    //     } catch (\Exception $e) {
-    //         // Handle errors that occur during session creation
-    //         return response()->json(['error' => 'Failed to create session'], 500);
-    //     }
-    // }
+            // http_response_code(400);
+            // exit();
+            return response('', 400);
+
+        } catch(\Stripe\Exception\SignatureVerificationException $e) {
+            // Invalid signature
+
+            // http_response_code(400);
+            // exit();
+
+            return response('', 400);
+        }
+
+        // Handle the event
+        switch ($event->type) {
+
+            // case 'payment_intent.succeeded':
+            //     $paymentIntent = $event->data->object;
+            // // ... handle other event types
+
+            case 'checkout.session.completed':
+                $checkoutSession = $event->data->object;
+                $checkoutSessionId = $checkoutSession->id;
+
+                $order = Order::where('session_id', $checkoutSessionId)->first();
+                if(!$order) {
+                    'No Order found';
+                    // throw new NotFoundHttpException();
+                }
+                // $order->status = 'paid';
+                // $order->save();
+
+
+                if( $order && $order->status ==='unpaid'){
+                    $order->status = 'paid';
+                    $order->save();
+                    // Send Email to Customer
+                }
+
+            // ... handle other event types
+            default:
+                echo 'Received unknown event type ' . $event->type;
+        }
+
+        // http_response_code(200);
+        return response('');
+    }
 
     public function applyCoupon(Request $request)
     {

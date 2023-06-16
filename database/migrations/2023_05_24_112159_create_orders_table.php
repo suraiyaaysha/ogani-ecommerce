@@ -27,8 +27,7 @@ return new class extends Migration
 
             $table->string('payment_status')->default(1);
             $table->string('payment_method')->nullable();
-            $table->string('stripe_payment_intent_id')->nullable();
-            $table->string('payment_intent_id')->nullable();
+            $table->string('session_id')->nullable();
 
             $table->string('first_name');
             $table->string('last_name');

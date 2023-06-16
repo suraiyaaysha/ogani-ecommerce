@@ -193,30 +193,30 @@
 
                                 <div class="form-group">
                                     <div class="form-group">
-                                    <div class="checkout__input__checkbox">
-                                        <label class="form-check-label" for="cash_on_delivery">
-                                            Cash on delivery
-                                            <input class="form-check-input" type="radio" name="payment_method" required
-                                                id="cash_on_delivery" value="cash_on_delivery">
+                                        <div class="checkout__input__checkbox">
+                                            <label class="form-check-label" for="cash_on_delivery">
+                                                Cash on delivery
+                                                <input class="form-check-input" type="radio" name="payment_method" required
+                                                    id="cash_on_delivery" value="cash_on_delivery">
 
-                                            <span class="checkmark"></span>
-                                        </label>
+                                                <span class="checkmark"></span>
+                                            </label>
+                                        </div>
+                                        <div class="checkout__input__checkbox">
+                                            <label class="form-check-label" for="stripe">
+                                                Stripe
+                                                <input class="form-check-input" type="radio" name="payment_method" required
+                                                    id="stripe" value="stripe">
+
+                                                <span class="checkmark"></span>
+                                            </label>
+                                        </div>
+
+                                        @error('payment_method')
+                                            <span>{{ $message }}</span>
+                                        @enderror
+
                                     </div>
-                                     <div class="checkout__input__checkbox">
-                                        <label class="form-check-label" for="stripe">
-                                            Stripe
-                                            <input class="form-check-input" type="radio" name="payment_method" required
-                                                id="stripe" value="stripe">
-
-                                            <span class="checkmark"></span>
-                                        </label>
-                                    </div>
-
-                                    @error('payment_method')
-                                        <span>{{ $message }}</span>
-                                    @enderror
-
-                                </div>
 
                                 <div class="text-center">
                                     <button type="submit" class="site-btn" id="checkout-button">Place Order</button>
