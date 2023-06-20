@@ -16,6 +16,7 @@ use App\Http\Controllers\Frontend\FrontendBlogController;
 use App\Http\Controllers\Frontend\CartController;
 use App\Http\Controllers\Frontend\CheckoutController;
 use App\Http\Controllers\Frontend\OrderController;
+use App\Http\Controllers\Frontend\StripeWebhookController;
 
     use Illuminate\Http\Request;
 use Stripe\Stripe;
@@ -105,10 +106,24 @@ Route::middleware('auth')->group(function () {
 
     // checkout
     Route::get('/checkout', [CheckoutController::class, 'index'])->name('checkout.index');
-    Route::post('/checkout', [CheckoutController::class, 'store'])->name('checkout.store');
+    // Route::post('/checkout', [CheckoutController::class, 'store'])->name('checkout.store');
+
+
+    // Route::post('/stripePayment', [CheckoutController::class, 'stripePayment'])->name('checkout.stripePayment');
+    Route::post('/checkout/cash-on-delivery', [CheckoutController::class, 'cashOnDeliveryPayment'])->name('checkout.cashOnDeliveryPayment');
+
+    Route::post('/checkout/stripe', [CheckoutController::class, 'stripePayment'])->name('checkout.stripePayment');
+
+
     Route::get('/success', [CheckoutController::class, 'success'])->name('checkout.success');
     Route::get('/cancel', [CheckoutController::class, 'cancel'])->name('checkout.cancel');
     Route::post('/webhook', [CheckoutController::class, 'webhook'])->name('checkout.webhook');
+
+    // Route::post('/webhook', [CheckoutController::class, 'webhook']);
+
+    // Route::post('/webhook/stripe', [StripeWebhookController::class, 'handleWebhook']);
+
+
 
 
     Route::post('/checkout/apply-coupon', [CheckoutController::class, 'applyCoupon'])->name('checkout.apply-coupon');

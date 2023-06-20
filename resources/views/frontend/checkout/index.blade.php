@@ -39,9 +39,10 @@
                 </div>
             </div>
 
-            <div class="checkout__form">
+            <div class="checkout__form" id="checkout-form">
                 <h4>Billing Details</h4>
-                <form action="{{ route('checkout.store') }}" method="post">
+                {{-- <form action="{{ route('checkout.store') }}" method="post"> --}}
+                <form action="{{ route('checkout.cashOnDeliveryPayment') }}" method="POST">
                     @csrf
 
                     <div class="row">
@@ -233,6 +234,23 @@
 
 
 @push('script')
+    {{-- Change Form Route depending on payment_method Start --}}
+    <script>
+        const checkoutForm = document.getElementById('checkout-form');
+        const paymentMethodRadios = document.querySelectorAll('input[name="payment_method"]');
+
+        paymentMethodRadios.forEach(radio => {
+            radio.addEventListener('change', function() {
+                if (this.value === 'cash_on_delivery') {
+                    checkoutForm.action = '{{ route('checkout.cashOnDeliveryPayment') }}';
+                } else if (this.value === 'stripe') {
+                    checkoutForm.action = '{{ route('checkout.stripePayment') }}';
+                }
+            });
+        });
+    </script>
+    {{-- Change Form Route depending on payment_method End --}}
+
     <script>
         $(document).ready(function() {
             // Check the checkbox on page load if the shipping address is already different
