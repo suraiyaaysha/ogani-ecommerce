@@ -9,6 +9,11 @@ use App\Models\Blog;
 use App\Models\Color;
 use App\Models\Size;
 use Illuminate\Http\Request;
+use App\Models\Review;
+use Illuminate\Support\Facades\Auth;
+// use App\Models\Purchase;
+use App\Models\Order;
+use App\Models\OrderItem;
 // use Illuminate\Support\Facades\View;
 use Illuminate\Support\Facades\View;
 
@@ -157,5 +162,56 @@ class FrontendProductController extends Controller
     // }
 
 
+    public function submitReview(Request $request, $productId)
+    {
+        // Check if the user is logged in
+        if (Auth::check()) {
+            // Retrieve the logged-in user
+            $user = Auth::user();
+
+            // Find the product by ID
+            $product = Product::findOrFail($productId);
+
+            // $purchasedProduct = OrderItem::findOrFail($productId);
+
+            // Check if the user has purchased the product
+            $purchased = Order::where('user_id', $user->id)
+                ->where('status', 'completed')
+                ->exists();
+
+            // Check if the Product Id present into the OrderITem
+            $purchasedItem = OrderItem::where('product_id', $productId)
+                ->exists();
+
+            if ($purchased && $purchasedItem) {
+                // Create a new review
+                $review = new Review();
+                $review->body = $request->input('review');
+                $review->star_rating = $request->input('rating');
+                $review->user_id = $user->id;
+
+                // Associate the review with the product
+                $product->reviews()->save($review);
+
+                // Optionally, you can redirect the user to the product page
+                // return redirect()->route('frontend.productDetails', $product->id)->with('success', 'Review submitted successfully.');
+
+                return redirect()->back()->with('success', 'Review submitted successfully.');
+
+                 // Set success flash message
+                // $request->session()->flash('success', 'Review submitted successfully.');
+
+            } else {
+                // User has not purchased the product
+                return redirect()->back()->with('error', 'You can only review products you have purchased.');
+
+                 // Set error flash message
+                // $request->session()->flash('error', 'You can only review products you have purchased.');
+            }
+        }
+
+        // Redirect the user to the login page
+        return redirect()->route('login')->with('error', 'Please log in to submit a review.');
+    }
 
 }

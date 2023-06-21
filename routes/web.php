@@ -141,6 +141,9 @@ Route::middleware('auth')->group(function () {
 
 });
 
+// Product Review route
+Route::post('/products/{id}/reviews', [FrontendProductController::class, 'submitReview'])->name('products.reviews.submit');
+
 
 // Contact Page Route
 Route::get('/contact', function () {

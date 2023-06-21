@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Factories\Factory;
 
 use App\Models\User;
 use App\Models\Product;
+use App\Models\Review;
 
 /**
  * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Review>
@@ -17,6 +18,9 @@ class ReviewFactory extends Factory
      *
      * @return array<string, mixed>
      */
+
+    protected $model = Review::class;
+
     public function definition(): array
     {
         $product = Product::inRandomOrder()->first();
@@ -28,6 +32,7 @@ class ReviewFactory extends Factory
             'parent_id' => null,
 
             'body' => $this->faker->sentence,
+            'star_rating' => $this->faker->numberBetween(1, 5),
         ];
     }
 }

@@ -46,6 +46,7 @@ return new class extends Migration
             $table->id();
 
             $table->text('body');
+            $table->integer('star_rating');
             $table->foreignId('user_id')->constrained();
             $table->foreignId('product_id')->constrained();
             $table->integer('parent_id')->unsigned()->nullable();

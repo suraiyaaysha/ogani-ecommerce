@@ -67,8 +67,24 @@
                         <div class="featured__item">
                             <div class="featured__item__pic set-bg" data-setbg="{{ $product->featured_image }}">
                                 <ul class="featured__item__pic__hover">
-                                    <li><a href="#"><i class="fa fa-heart"></i></a></li>
-                                    <li><a href="#"><i class="fa fa-retweet"></i></a></li>
+                                    <!-- Start add to wishlist button -->
+                                    <li>
+                                        <!-- Check if the product is already in the user's wishlist -->
+                                        @if(auth()->check() && auth()->user()->wishlist->contains('product_id', $product->id))
+                                            <form action="{{ route('wishlist.remove', $product->id) }}" method="POST">
+                                                @csrf
+                                                @method('DELETE')
+                                                <button type="submit" class="btn btn-danger wishlist-btn"><i class="fa fa-heart"></i></button>
+                                            </form>
+                                        @else
+                                            <form action="{{ route('wishlist.add', $product->id) }}" method="POST">
+                                                @csrf
+                                                <button type="submit" class="btn wishlist-btn"><i class="fa fa-heart"></i></button>
+                                            </form>
+                                        @endif
+                                    </li>
+                                    <!-- End add to wishlist button -->
+                                    <li><button class="btn compare-btn"><i class="fa fa-retweet"></i></button></li>
                                     <li class="add-to-cart-btn">
                                         <form action="{{ route('cart.store') }}" method="POST" enctype="multipart/form-data">
                                             @csrf
@@ -252,8 +268,24 @@
                                     data-setbg="{{ $product->featured_image }}">
                                     <div class="product__discount__percent">-{{ $product->discount }}%</div>
                                     <ul class="product__item__pic__hover">
-                                        <li><a href="#"><i class="fa fa-heart"></i></a></li>
-                                        <li><a href="#"><i class="fa fa-retweet"></i></a></li>
+                                        <!-- Start add to wishlist button -->
+                                        <li>
+                                            <!-- Check if the product is already in the user's wishlist -->
+                                            @if(auth()->check() && auth()->user()->wishlist->contains('product_id', $product->id))
+                                                <form action="{{ route('wishlist.remove', $product->id) }}" method="POST">
+                                                    @csrf
+                                                    @method('DELETE')
+                                                    <button type="submit" class="btn btn-danger wishlist-btn"><i class="fa fa-heart"></i></button>
+                                                </form>
+                                            @else
+                                                <form action="{{ route('wishlist.add', $product->id) }}" method="POST">
+                                                    @csrf
+                                                    <button type="submit" class="btn wishlist-btn"><i class="fa fa-heart"></i></button>
+                                                </form>
+                                            @endif
+                                        </li>
+                                        <!-- End add to wishlist button -->
+                                        <li><button class="btn compare-btn"><i class="fa fa-retweet"></i></button></li>
                                         <li class="add-to-cart-btn">
                                             <form action="{{ route('cart.store') }}" method="POST" enctype="multipart/form-data">
                                                 @csrf

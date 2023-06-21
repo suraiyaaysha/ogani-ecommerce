@@ -25,6 +25,25 @@
     <!-- Product Details Section Begin -->
     <section class="product-details spad">
         <div class="container">
+
+            <div class="row">
+                <div class="col-md-12">
+
+                    @if (session('success'))
+                        <div class="alert alert-success">
+                            {{ session('success') }}
+                        </div>
+                    @endif
+
+                    @if (session('error'))
+                        <div class="alert alert-danger">
+                            {{ session('error') }}
+                        </div>
+                    @endif
+
+                </div>
+            </div>
+
             <div class="row">
                 <div class="col-lg-6 col-md-6">
                     <div class="product__details__pic">
@@ -75,8 +94,34 @@
                                 </div>
                             </div>
                         </div>
-                        <a href="#" class="primary-btn">{{ __('ADD TO CARD') }}</a>
-                        <a href="#" class="heart-icon"><span class="icon_heart_alt"></span></a>
+                        <div class="d-inline-block">
+                            {{-- <a href="#" class="primary-btn">{{ __('ADD TO CARD') }}</a> --}}
+                            <form action="{{ route('cart.store') }}" method="POST" enctype="multipart/form-data" class="d-inline">
+                                @csrf
+                                <input type="hidden" value="{{ $product->id }}" name="id">
+                                <input type="hidden" value="{{ $product->name }}" name="name">
+                                <input type="hidden" value="{{ $product->price }}" name="price">
+                                <input type="hidden" value="{{ $product->featured_image }}" name="featured_image">
+                                <input type="hidden" value="1" name="quantity">
+                                <button class="border-0 primary-btn">{{ __('ADD TO CARD') }}</button>
+                            </form>
+                            {{-- <a href="#" class="heart-icon"><span class="icon_heart_alt"></span></a> --}}
+                            <!-- Start add to wishlist button -->
+                            <!-- Check if the product is already in the user's wishlist -->
+                            @if(auth()->check() && auth()->user()->wishlist->contains('product_id', $product->id))
+                                <form action="{{ route('wishlist.remove', $product->id) }}" method="POST" class="d-inline">
+                                    @csrf
+                                    @method('DELETE')
+                                    <button type="submit" class="btn heart-icon"><span class="icon_heart_alt"></span></button>
+                                </form>
+                            @else
+                                <form action="{{ route('wishlist.add', $product->id) }}" method="POST" class="d-inline">
+                                    @csrf
+                                    <button type="submit" class="btn heart-icon"><span class="icon_heart_alt"></span></button>
+                                </form>
+                            @endif
+                            <!-- End add to wishlist button -->
+                        </div>
                         <ul>
                             <li><b>{{ __('Availability') }}</b> <span> @if($product->quantity > 0) {{ __('In Stock') }} @else {{ __('Out of stock') }} @endif</span> </li>
                             <li><b>{{ __('Shipping') }}</b> <span>01 {{ __('day shipping') }}. <samp>{{ __('Free pickup today') }}</samp></span></li>
@@ -105,7 +150,7 @@
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link" data-toggle="tab" href="#tabs-3" role="tab"
-                                    aria-selected="false">{{ __('Reviews') }} <span>(1)</span></a>
+                                    aria-selected="false">{{ __('Reviews') }} <span>({{ $product->reviews->count() }})</span></a>
                             </li>
                         </ul>
                         <div class="tab-content">
@@ -115,6 +160,7 @@
                                     <p>{{ $product->description }}</p>
                                 </div>
                             </div>
+
                             <div class="tab-pane" id="tabs-2" role="tabpanel">
                                 <div class="product__details__tab__desc">
                                     <h6>{{ __('Products Infomation') }}</h6>
@@ -123,10 +169,78 @@
 
                                 </div>
                             </div>
+
                             <div class="tab-pane" id="tabs-3" role="tabpanel">
                                 <div class="product__details__tab__desc">
                                     <h6>{{ __('Products Reviews') }}</h6>
-                                    <p>Write here reviews code</p>
+
+                                    <div class="container">
+                                        <div class="row">
+                                            <div class="col mt-4">
+                                                <form class="py-2 px-4" action="{{ route('products.reviews.submit', $product->id) }}" style="box-shadow: 0 0 10px 0 #ddd;" method="POST" autocomplete="off">
+                                                    @csrf
+                                                    <p class="font-weight-bold">{{ __('Write Review') }}</p>
+                                                    <div class="form-group row">
+                                                        <input type="hidden" name="product_id" value="{{ $product->id }}">
+                                                        <div class="col">
+                                                            <div class="rate">
+                                                                <input type="radio" id="star5" class="rate" name="rating" value="5"/>
+                                                                <label for="star5" title="text">{{ __('5 stars') }}</label>
+                                                                <input type="radio" checked id="star4" class="rate" name="rating" value="4"/>
+                                                                <label for="star4" title="text">{{ __('4 stars') }}</label>
+                                                                <input type="radio" id="star3" class="rate" name="rating" value="3"/>
+                                                                <label for="star3" title="text">{{ __('3 stars') }}</label>
+                                                                <input type="radio" id="star2" class="rate" name="rating" value="2">
+                                                                <label for="star2" title="text">{{ __('2 stars') }}</label>
+                                                                <input type="radio" id="star1" class="rate" name="rating" value="1"/>
+                                                                <label for="star1" title="text">{{ __('1 star') }}</label>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-group row mt-4">
+                                                        <div class="col">
+                                                            <textarea class="form-control" name="review" rows="6" placeholder="Review" maxlength="200"></textarea>
+                                                        </div>
+                                                    </div>
+                                                    <div class="mt-3 text-right">
+                                                        @auth
+                                                            <button class="btn btn-sm py-2 px-3 site-btn">{{ __('Submit') }}</button>
+                                                        @else
+                                                            <a href="{{ route('login') }}" class="btn btn-sm py-2 px-3 site-btn">{{ __('Log in to Submit') }}</a>
+                                                        @endauth
+                                                    </div>
+                                                </form>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    @if(!empty($product->reviews))
+                                        <div class="container">
+                                            <div class="row">
+                                                <div class="col mt-4">
+                                                    <p class="font-weight-bold">{{ __('Review From Buyer\'s') }}</p>
+                                                    @foreach($product->reviews as $review)
+                                                        <div class="form-group row">
+                                                            <input type="hidden" name="product_id" value="{{ $product->id }}">
+                                                            <div class="col">
+                                                            <div class="rated">
+                                                                @for($i=1; $i<=$review->star_rating; $i++)
+                                                                <label class="star-rating-complete" title="text">{{$i}} {{ __('stars') }}</label>
+                                                                @endfor
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="form-group row mt-4">
+                                                            <div class="col">
+                                                                <p>{{ $review->body }}</p>
+                                                            </div>
+                                                        </div>
+                                                    @endforeach
+                                                </div>
+                                            </div>
+                                        </div>
+                                    @endif
+
                                 </div>
                             </div>
                         </div>

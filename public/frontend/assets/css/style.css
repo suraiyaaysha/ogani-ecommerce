@@ -919,12 +919,14 @@ ol {
 	transform: rotate(360deg);
 }
 
-.featured__item__pic__hover li a, .featured__item__pic__hover li button, .add-to-cart-btn button {
+.featured__item__pic__hover li a, .featured__item__pic__hover li button, .add-to-cart-btn button,
+ .btn-danger.wishlist-btn,
+ .btn.btn-outline-danger.wishlist-btn, .btn.wishlist-btn , .compare-btn{
 	font-size: 16px;
 	color: #1c1c1c;
 	height: 40px;
 	width: 40px;
-	line-height: 40px;
+	line-height: 30px;
 	text-align: center;
 	border: 1px solid #ebebeb;
 	background: #ffffff;
@@ -938,6 +940,19 @@ ol {
 }
 .featured__item__pic__hover li button.wishlist-btn {
 	line-height: 30px!important;
+    border-radius: 50%!important;
+}
+.btn-outline-danger.wishlist-btn:hover {
+    border-radius: 50%!important;
+}
+.btn.btn-outline-danger.wishlist-btn {
+    border-radius: 50%!important;
+}
+.btn-danger.wishlist-btn {
+    border-radius: 50%!important;
+    border: 1px solid #ebebeb!important;
+    background: #ffffff!important;
+    color: #212529!important;
 }
 
 .featured__item__pic__hover li a i, .featured__item__pic__hover li button i, .add-to-cart-btn button i {
@@ -3632,6 +3647,117 @@ span.icon_cart.dashboard-item-icon {
     margin-top: 100px;
 }
 /* payment */
+
+/* review rating css */
+.rate {
+    float: left;
+    height: 46px;
+    padding: 0 10px;
+}
+
+.rate:not(:checked)>input {
+    position: absolute;
+    display: none;
+}
+
+.rate:not(:checked)>label {
+    float: right;
+    width: 1em;
+    overflow: hidden;
+    white-space: nowrap;
+    cursor: pointer;
+    font-size: 30px;
+    color: #ccc;
+}
+
+.rated:not(:checked)>label {
+    float: right;
+    width: 1em;
+    overflow: hidden;
+    white-space: nowrap;
+    cursor: pointer;
+    font-size: 30px;
+    color: #ccc;
+}
+
+.rate:not(:checked)>label:before {
+    content: '★ ';
+}
+
+.rate>input:checked~label {
+    color: #ffc700;
+}
+
+.rate:not(:checked)>label:hover,
+.rate:not(:checked)>label:hover~label {
+    color: #deb217;
+}
+
+.rate>input:checked+label:hover,
+.rate>input:checked+label:hover~label,
+.rate>input:checked~label:hover,
+.rate>input:checked~label:hover~label,
+.rate>label:hover~input:checked~label {
+    color: #c59b08;
+}
+
+.star-rating-complete {
+    color: #c59b08;
+}
+
+.rating-container .form-control:hover,
+.rating-container .form-control:focus {
+    background: #fff;
+    border: 1px solid #ced4da;
+}
+
+.rating-container textarea:focus,
+.rating-container input:focus {
+    color: #000;
+}
+
+.rated {
+    float: left;
+    height: 46px;
+    padding: 0 10px;
+}
+
+.rated:not(:checked)>input {
+    position: absolute;
+    display: none;
+}
+
+.rated:not(:checked)>label {
+    float: right;
+    width: 1em;
+    overflow: hidden;
+    white-space: nowrap;
+    cursor: pointer;
+    font-size: 30px;
+    color: #ffc700;
+}
+
+.rated:not(:checked)>label:before {
+    content: '★ ';
+}
+
+.rated>input:checked~label {
+    color: #ffc700;
+}
+
+.rated:not(:checked)>label:hover,
+.rated:not(:checked)>label:hover~label {
+    color: #deb217;
+}
+
+.rated>input:checked+label:hover,
+.rated>input:checked+label:hover~label,
+.rated>input:checked~label:hover,
+.rated>input:checked~label:hover~label,
+.rated>label:hover~input:checked~label {
+    color: #c59b08;
+}
+/* review rating css */
 
 
 /* Custom css for frontend */

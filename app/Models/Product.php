@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use App\Models\Color;
 use App\Models\Size;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class Product extends Model
 {

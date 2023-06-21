@@ -62,7 +62,6 @@
                                 <div class="featured__item">
                                     <div class="featured__item__pic set-bg" data-setbg="{{ $product->featured_image }}">
                                         <ul class="featured__item__pic__hover">
-                                            {{-- <li><a href="#"><i class="fa fa-heart"></i></a></li> --}}
 
                                             <!-- Start add to wishlist button -->
                                             <li>
@@ -82,7 +81,7 @@
                                             </li>
                                             <!-- End add to wishlist button -->
 
-                                            <li><a href="#"><i class="fa fa-retweet"></i></a></li>
+                                            <li><button class="btn compare-btn"><i class="fa fa-retweet"></i></button></li>
                                             <li class="add-to-cart-btn">
                                                 <form action="{{ route('cart.store') }}" method="POST" enctype="multipart/form-data">
                                                     @csrf
