@@ -36,7 +36,7 @@ class DatabaseSeeder extends Seeder
             CommentSeeder::class,
             TagSeeder::class,
             ContactSeeder::class,
-            WishlistSeeder::class,
+            // WishlistSeeder::class,
             // BillingDetailsSeeder::class,
             // ShippingDetailsSeeder::class,
         ]);

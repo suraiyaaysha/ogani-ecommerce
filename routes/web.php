@@ -17,8 +17,9 @@ use App\Http\Controllers\Frontend\CartController;
 use App\Http\Controllers\Frontend\CheckoutController;
 use App\Http\Controllers\Frontend\OrderController;
 use App\Http\Controllers\Frontend\StripeWebhookController;
+use App\Http\Controllers\Frontend\WishlistController;
 
-    use Illuminate\Http\Request;
+use Illuminate\Http\Request;
 use Stripe\Stripe;
 
 /*
@@ -123,14 +124,20 @@ Route::middleware('auth')->group(function () {
 
     // Route::post('/webhook/stripe', [StripeWebhookController::class, 'handleWebhook']);
 
-
-
-
     Route::post('/checkout/apply-coupon', [CheckoutController::class, 'applyCoupon'])->name('checkout.apply-coupon');
 
     // order routes
     Route::get('/orders', [OrderController::class, 'index'])->name('orders.index');
     Route::get('/orders/{order}', [OrderController::class, 'show'])->name('orders.show');
+
+    // Wishlist routes
+    Route::get('/wishlist/', [WishlistController::class, 'index'])->name('wishlist');
+
+    // Add product to wishlist
+    Route::post('/wishlist/add/{product}', [WishlistController::class, 'add'])->name('wishlist.add');
+
+    // Remove product from wishlist
+    Route::delete('/wishlist/remove/{product}', [WishlistController::class, 'remove'])->name('wishlist.remove');
 
 });
 

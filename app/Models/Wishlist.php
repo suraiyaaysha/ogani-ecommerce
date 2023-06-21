@@ -11,16 +11,26 @@ class Wishlist extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['name'];
+    protected $fillable = ['user_id', 'product_id'];
 
-    public function user(): BelongsTo
+    // public function user(): BelongsTo
+    // {
+    //     return $this->belongsTo(User::class);
+    // }
+
+    // public function products(): BelongsToMany
+    // {
+    //     return $this->belongsToMany(Product::class, 'wishlist_product')->withTimestamps();
+    // }
+
+    public function user()
     {
         return $this->belongsTo(User::class);
     }
 
-    public function products(): BelongsToMany
+    public function product()
     {
-        return $this->belongsToMany(Product::class, 'wishlist_product')->withTimestamps();
+        return $this->belongsTo(Product::class);
     }
 
 }

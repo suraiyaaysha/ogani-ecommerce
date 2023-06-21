@@ -936,6 +936,9 @@ ol {
 	-o-transition: all, 0.5s;
 	transition: all, 0.5s;
 }
+.featured__item__pic__hover li button.wishlist-btn {
+	line-height: 30px!important;
+}
 
 .featured__item__pic__hover li a i, .featured__item__pic__hover li button i, .add-to-cart-btn button i {
 	position: relative;
@@ -3629,5 +3632,6 @@ span.icon_cart.dashboard-item-icon {
     margin-top: 100px;
 }
 /* payment */
+
 
 /* Custom css for frontend */

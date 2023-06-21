@@ -93,10 +93,15 @@ class User extends Authenticatable
     }
 
     // with Wishlists
-    public function wishlists(): HasMany
+    public function wishlist()
     {
         return $this->hasMany(Wishlist::class);
     }
+    // public function wishlist()
+    // {
+    //     return $this->hasMany(Wishlist::class)->withDefault();
+    // }
+
 
 
     // Relation between User and Blog
