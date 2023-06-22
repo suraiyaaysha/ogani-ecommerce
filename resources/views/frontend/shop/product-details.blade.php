@@ -132,12 +132,13 @@
                             <li><b>{{ __('Shipping') }}</b> <span>01 {{ __('day shipping') }}. <samp>{{ __('Free pickup today') }}</samp></span></li>
                             <li><b>{{ __('Weight') }}</b> <span>{{ $product->weight }} kg</span></li>
                             <li><b>{{ __('Share on') }}</b>
-                                <div class="share">
-                                    <a href="#"><i class="fa fa-facebook"></i></a>
-                                    <a href="#"><i class="fa fa-twitter"></i></a>
-                                    <a href="#"><i class="fa fa-instagram"></i></a>
-                                    <a href="#"><i class="fa fa-pinterest"></i></a>
-                                </div>
+                            <div class="share">
+                                <a href="#"><i class="fa fa-facebook"></i></a>
+                                <a href="#"><i class="fa fa-twitter"></i></a>
+                                <a href="#"><i class="fa fa-instagram"></i></a>
+                                <a href="#"><i class="fa fa-pinterest"></i></a>
+                                    {!! Share::page(url('frontend.productDetails', $product->slug))->facebook()->twitter()->linkedin()!!}
+                            </div>
                             </li>
                         </ul>
                     </div>

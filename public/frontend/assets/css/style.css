@@ -1800,18 +1800,19 @@ ol {
 	color: #dd2222;
 }
 
-.product__details__text ul li .share {
+.product__details__text ul li .share, .share #social-links ul li {
 	display: inline-block;
+    margin-right: 10px;
 }
 
-.product__details__text ul li .share a {
+.product__details__text ul li .share a, .share #social-links ul a {
 	display: inline-block;
 	font-size: 15px;
 	color: #1c1c1c;
 	margin-right: 25px;
 }
 
-.product__details__text ul li .share a:last-child {
+.product__details__text ul li .share a:last-child, .share #social-links ul li a:last-child {
 	margin-right: 0;
 }
 

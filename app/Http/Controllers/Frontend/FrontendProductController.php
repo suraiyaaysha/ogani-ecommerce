@@ -144,7 +144,13 @@ class FrontendProductController extends Controller
 
         // To display the average rating and the number of reviews end
 
-        return view('frontend.shop.product-details', compact('product', 'relatedProducts', 'averageRating', 'reviewCount'));
+        // Social Share start
+        $buttons = \Share::page('https://www.vegeshop.ayshatech.com', 'Your share text enter here',)->facebook()->telegram()-> twitter()->linkedin()->whatsapp()->reddit();
+         $products = Product::get();
+        // Social Share end
+
+
+        return view('frontend.shop.product-details', compact('product', 'relatedProducts', 'averageRating', 'reviewCount', 'buttons', 'products'));
     }
 
     public function productsByCategory($slug, Request $request)

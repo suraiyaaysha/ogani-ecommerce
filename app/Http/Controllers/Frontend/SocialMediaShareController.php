@@ -11,8 +11,9 @@ class SocialMediaShareController extends Controller
 {
     public function index()
     {
-        $buttons = \Share::page('https://www.vegeshop.ayshatech.com', 'Your share text enter here',)->facebook()->telegram()-> twitter()->linkedin()->whatsapp()->reddit();
+        $buttons = \Share::page('https://www.vegeshop.ayshatech.com', 'Your share text enter here',)->facebook()->telegram()-> twitter()->linkedin()->whatsapp()->reddit()->instagram()->pinterest();
         $blogs = Blog::get();
+
         return view('frontend.blog.index', compact('buttons', 'blogs'));
     }
 }
