@@ -130,7 +130,17 @@ class FrontendProductController extends Controller
             $relatedProducts = $relatedProducts->merge($relatedProductsFromOtherCategories);
         }
 
-        return view('frontend.shop.product-details', compact('product', 'relatedProducts'));
+        // To display the average rating and the number of reviews start
+
+        // Calculate the average rating
+        $averageRating = $product->reviews()->avg('star_rating');
+
+        // Count the number of reviews
+        $reviewCount = $product->reviews()->count();
+
+        // To display the average rating and the number of reviews end
+
+        return view('frontend.shop.product-details', compact('product', 'relatedProducts', 'averageRating', 'reviewCount'));
     }
 
     public function productsByCategory($slug, Request $request)

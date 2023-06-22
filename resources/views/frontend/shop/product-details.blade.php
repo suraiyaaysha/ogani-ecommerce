@@ -65,12 +65,18 @@
 
                         <h3>{{ $product->name }}</h3>
                         <div class="product__details__rating">
-                            <i class="fa fa-star"></i>
-                            <i class="fa fa-star"></i>
-                            <i class="fa fa-star"></i>
-                            <i class="fa fa-star"></i>
-                            <i class="fa fa-star-half-o"></i>
-                            <span>(18 {{ __('reviews') }})</span>
+
+                            @for ($i = 1; $i <= 5; $i++)
+                                @if ($i <= floor($averageRating))
+                                    <i class="fa fa-star"></i>
+                                @elseif ($i <= ceil($averageRating))
+                                    <i class="fa fa-star-half-o"></i>
+                                @else
+                                    <i class="fa fa-star-o"></i>
+                                @endif
+                            @endfor
+
+                            <span>({{ $reviewCount }} {{ __('reviews') }})</span>
                         </div>
 
                         <div class="">
@@ -105,7 +111,6 @@
                                 <input type="hidden" value="1" name="quantity">
                                 <button class="border-0 primary-btn">{{ __('ADD TO CARD') }}</button>
                             </form>
-                            {{-- <a href="#" class="heart-icon"><span class="icon_heart_alt"></span></a> --}}
                             <!-- Start add to wishlist button -->
                             <!-- Check if the product is already in the user's wishlist -->
                             @if(auth()->check() && auth()->user()->wishlist->contains('product_id', $product->id))
