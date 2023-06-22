@@ -13,6 +13,7 @@ use App\Http\Controllers\Frontend\FrontendProfileController;
 use App\Http\Controllers\Frontend\FrontendProductController;
 
 use App\Http\Controllers\Frontend\FrontendBlogController;
+use App\Http\Controllers\Frontend\CommentController;
 use App\Http\Controllers\Frontend\CartController;
 use App\Http\Controllers\Frontend\CheckoutController;
 use App\Http\Controllers\Frontend\OrderController;
@@ -87,6 +88,9 @@ Route::get('/blog/{blog_slug}',[FrontendBlogController::class,'blogDetails'])->n
 Route::get('/blog/category/{category_slug}', [FrontendBlogController::class, 'blogsByCategory'])->name('frontend.blogsByCategory');
 // Blog tags
 Route::get('/blog/tag/{slug}', [FrontendBlogController::class, 'blogsByTag'])->name('frontend.blogsByTag');
+
+// Blog Comment
+Route::post('comments/store', [CommentController::class, 'store'])->name('comments.store');
 
 
 // Shop|Products Pages route

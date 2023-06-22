@@ -55,8 +55,6 @@ class FrontendBlogController extends Controller
 
         return view('frontend.blog.blog-details', compact('blog', 'relatedBlogs'));
     }
-
-
     // Blog Details page End
 
     // Show Posts under a single category

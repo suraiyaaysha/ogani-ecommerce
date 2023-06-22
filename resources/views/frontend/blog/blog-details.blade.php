@@ -95,6 +95,52 @@
     </section>
     <!-- Blog Section End -->
 
+    <!-- Comments Area Starts Here -->
+    <section class="comments-area spad">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-md-8 mx-auto">
+                    <div class="comment-box-wrap">
+                        <h2>Leave a Comment</h2>
+
+                        <form method="post" action="{{ route('comments.store') }}">
+                            @csrf
+                            <div class="form-group">
+                                <textarea class="form-control" name="body"></textarea>
+                                <input type="hidden" name="blog_id" value="{{ $blog->id }}">
+                            </div>
+                            <div class="form-group">
+                                @guest
+                                <div class="d-flex justify-content-lg-end">
+                                    <a href="{{ route('login') }}" class="btn-default">Login</a>
+                                </div>
+                                @endguest
+                                @auth
+                                <div class="d-flex justify-content-lg-end">
+                                    <button type="submit" class="site-btn">{{ __('Post Comment') }}</button>
+                                </div>
+                                @endauth
+                            </div>
+                        </form>
+
+                        {{-- Comment Part Start --}}
+                        <h5>{{ __('Comments') }} <span>({{ $blog->comments->count() }})</span></h5>
+                        <div class="comments-area-content">
+                            <div class="comments">
+                                @include('frontend.blog.commentsDisplay', [
+                                    'comments' => $blog->comments,
+                                    'blog_id' => $blog->id,
+                                ])
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Comments Area Ends Here -->
+
     <!-- Related Blog Section Begin -->
     <section class="related-blog spad">
         <div class="container">

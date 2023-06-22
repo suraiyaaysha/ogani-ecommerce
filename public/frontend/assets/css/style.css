@@ -3759,5 +3759,124 @@ span.icon_cart.dashboard-item-icon {
 }
 /* review rating css */
 
+/* Comment Reply CSS Start */
+.comments-area {
+  padding-bottom: 100px;
+}
+
+.comments-area h5 {
+  margin-bottom: 20px;
+}
+
+.comments-area input {
+  height: 56px;
+  border-radius: 0px;
+  background: #F5F5F5;
+  font-family: "Poppins", sans-serif;
+  border-color: transparent;
+  -webkit-transition: 0.3s all linear;
+  transition: 0.3s all linear;
+}
+
+.comments-area input:focus {
+  border-color: #7fad39;
+  -webkit-box-shadow: none;
+          box-shadow: none;
+}
+
+.comments-area textarea {
+  height: 160px;
+  margin: 24px 0px;
+  resize: none;
+  border-radius: 0px;
+  background: #F5F5F5;
+  font-family: "Poppins", sans-serif;
+  border-color: transparent;
+  -webkit-transition: 0.3s all linear;
+  transition: 0.3s all linear;
+}
+
+.comments-area textarea:focus {
+  border-color: #7fad39;
+  -webkit-box-shadow: none;
+          box-shadow: none;
+}
+
+.comments-area button {
+  border-color: transparent;
+}
+
+.comments-area .btn-default {
+  height: 48px;
+}
+
+.comments-area-content {
+  margin-top: 70px;
+}
+
+.comments-area-content h5 {
+  margin-bottom: 20px;
+}
+
+.comments-area-content h5 span {
+  color: #6D7280;
+  font-weight: 400 !important;
+}
+
+.comments-area-content .comments {
+  margin-bottom: 24px;
+  /* padding-bottom: 24px;
+  border-bottom: 1px solid rgba(109, 114, 128, 0.2); */
+}
+
+.comments-area-content .comments-owner {
+  margin-bottom: 12px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+.comments-area-content .comments-owner-image {
+  margin-right: 12px;
+  width: 40px;
+  height: 40px;
+}
+
+.comments-area-content .comments-owner-image img {
+  border-radius: 50%;
+  -o-object-fit: cover;
+     object-fit: cover;
+  max-width: 100%;
+}
+
+.comments-area-content .comments-owner-text p {
+  margin-bottom: 0;
+}
+
+.comments-area-content .comments-owner-text p a {
+  font-weight: 500;
+  color: #272343;
+}
+
+.comments-area-content .comments-owner-text span {
+  font-size: 15px;
+  color: #6D7280;
+  font-family: "Poppins", sans-serif;
+}
+
+.comments-area-content .comments p {
+  font-size: 17px;
+  color: #6D7280;
+  margin-bottom: 0;
+}
+
+.display-comment {
+    border: 1px solid #d7d7d7;
+    padding: 15px;
+}
+/* Comment Reply CSS End */
 
 /* Custom css for frontend */
