@@ -2635,23 +2635,23 @@ ol {
 	color: #6f6f6f;
 }
 
-.blog__details__widget ul {
+.blog__details__widget ul, .social-links ul {
 	margin-bottom: 5px;
 }
 
-.blog__details__widget ul li {
+.blog__details__widget ul li, .social-links ul li {
 	font-size: 16px;
 	color: #6f6f6f;
 	list-style: none;
 	line-height: 30px;
 }
 
-.blog__details__widget ul li span {
+.blog__details__widget ul li span, .social-links ul li span {
 	color: #1c1c1c;
 	font-weight: 700;
 }
 
-.blog__details__widget .blog__details__social a {
+.blog__details__widget .blog__details__social a, .social-links ul li a {
 	display: inline-block;
 	font-size: 20px;
 	color: #6f6f6f;
@@ -2663,12 +2663,19 @@ ol {
 	transition: all, 0.3s;
 }
 
-.blog__details__widget .blog__details__social a:hover {
+.blog__details__widget .blog__details__social a:hover, .social-links ul li a:hover {
 	color: #7fad39;
 }
 
-.blog__details__widget .blog__details__social a:last-child {
+.blog__details__widget .blog__details__social a:last-child, .social-links ul li a:last-child  {
 	margin-right: 0;
+}
+.blog__details__widget ul, .social-links ul {
+    display: flex;
+    margin-right: 5px;
+}
+.blog__details__widget ul li, .social-links ul li {
+    margin-right: 10px;
 }
 
 /*---------------------

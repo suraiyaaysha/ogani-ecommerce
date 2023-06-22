@@ -14,6 +14,7 @@ use App\Http\Controllers\Frontend\FrontendProductController;
 
 use App\Http\Controllers\Frontend\FrontendBlogController;
 use App\Http\Controllers\Frontend\CommentController;
+use App\Http\Controllers\Frontend\SocialMediaShareController;
 use App\Http\Controllers\Frontend\CartController;
 use App\Http\Controllers\Frontend\CheckoutController;
 use App\Http\Controllers\Frontend\OrderController;
@@ -92,6 +93,8 @@ Route::get('/blog/tag/{slug}', [FrontendBlogController::class, 'blogsByTag'])->n
 // Blog Comment
 Route::post('comments/store', [CommentController::class, 'store'])->name('comments.store');
 
+// Social Share route
+Route::get('social-share', [SocialMediaShareController::class, 'index']);
 
 // Shop|Products Pages route
 Route::get('/shop',[FrontendProductController::class,'getAllProducts'])->name('frontend.shop');
