@@ -47,6 +47,7 @@ return new class extends Migration
 
             $table->text('body');
             $table->unsignedDecimal('star_rating', 3, 1);
+            $table->boolean('approved')->default(false);
             $table->foreignId('user_id')->constrained();
             $table->foreignId('product_id')->constrained();
             $table->integer('parent_id')->unsigned()->nullable();

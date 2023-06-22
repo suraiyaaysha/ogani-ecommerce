@@ -14,6 +14,7 @@ use Illuminate\Support\Facades\Auth;
 // use App\Models\Purchase;
 use App\Models\Order;
 use App\Models\OrderItem;
+use Illuminate\Database\Eloquent\Builder;
 // use Illuminate\Support\Facades\View;
 use Illuminate\Support\Facades\View;
 
@@ -47,11 +48,14 @@ class FrontendProductController extends Controller
         $colors = Color::all();
         $sizes = Size::all();
 
+        $reviewedProducts = Product::whereHas('reviews', function (Builder $query) {
+        $query->where('approved', true);
+        })->get();
 
         return view('frontend.index',
             compact(
                 'categories','featuredProducts', 'categoriesHasFeaturedProducts', 'latestProducts', 'reviewedProducts', 'discountedProducts',
-                'latestAllBlog', 'colors', 'sizes'
+                'latestAllBlog', 'colors', 'sizes', 'reviewedProducts'
             ));
     }
 

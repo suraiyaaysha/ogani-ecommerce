@@ -33,6 +33,7 @@ class ReviewFactory extends Factory
 
             'body' => $this->faker->sentence,
             'star_rating' => $this->faker->numberBetween(1, 5),
+            'approved' => true, // Set the 'approved' column to true by default
         ];
     }
 }
