@@ -122,3 +122,50 @@
     <!-- Product Section End -->
 
 @endsection
+
+@push('script')
+
+    <!-- Add this script to initialize the price range slider -->
+    <script>
+    var rangeSlider = $(".price-range"),
+        minamount = $("#minamount"),
+        maxamount = $("#maxamount"),
+        minPrice = rangeSlider.data('min'),
+        maxPrice = rangeSlider.data('max'),
+        initialMinPrice = parseInt("{{ $minPrice }}"), // Set the initial minimum price value from the backend
+        initialMaxPrice = parseInt("{{ $maxPrice }}"); // Set the initial maximum price value from the backend
+
+    rangeSlider.slider({
+        range: true,
+        min: minPrice,
+        max: maxPrice,
+        values: [initialMinPrice, initialMaxPrice],
+        slide: function (event, ui) {
+            minamount.val(ui.values[0]);
+            maxamount.val(ui.values[1]);
+        }
+    });
+
+    minamount.val(rangeSlider.slider("values", 0));
+    maxamount.val(rangeSlider.slider("values", 1));
+
+    $("#price-filter-btn").click(function() {
+        applyPriceFilter();
+    });
+
+    function applyPriceFilter() {
+        var minPriceVal = parseInt(minamount.val());
+        var maxPriceVal = parseInt(maxamount.val());
+
+        // Perform the necessary action with the selected price range
+        // You can submit a form, make an AJAX request, or reload the page with the updated URL parameters
+        // Example:
+        var url = "{{ route('frontend.shop') }}?min_price=" + minPriceVal + "&max_price=" + maxPriceVal;
+        window.location.href = url;
+    }
+
+    </script>
+
+@endpush
+
+

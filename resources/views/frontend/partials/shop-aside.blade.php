@@ -7,11 +7,12 @@
             @endforeach
         </ul>
     </div>
+
     <div class="sidebar__item">
-        <h4>Price</h4>
+        <h4>{{ __('Price') }}</h4>
         <div class="price-range-wrap">
             <div class="price-range ui-slider ui-corner-all ui-slider-horizontal ui-widget ui-widget-content"
-                data-min="10" data-max="540">
+                data-min="10" data-max="1000">
                 <div class="ui-slider-range ui-corner-all ui-widget-header"></div>
                 <span tabindex="0" class="ui-slider-handle ui-corner-all ui-state-default"></span>
                 <span tabindex="0" class="ui-slider-handle ui-corner-all ui-state-default"></span>
@@ -20,6 +21,14 @@
                 <div class="price-input">
                     <input type="text" id="minamount">
                     <input type="text" id="maxamount">
+
+                    <div class="d-flex">
+                        <button id="price-filter-btn" class="border-0 site-btn filter-btn-sm mr-2">{{ __('Filter') }}</button>
+
+                        @if (!empty($minPrice) && !empty($maxPrice))
+                            <a href="{{ route('frontend.shop', ['minPrice' => null, 'maxPrice' => null]) }}" class="border-0 site-btn filter-btn-sm clear-filter">{{ __('Clear Filter') }}</a>
+                        @endif
+                    </div>
                 </div>
             </div>
         </div>
@@ -28,19 +37,13 @@
     <div class="sidebar__item sidebar__item__color--option">
         <h4>{{ __('Colors') }}</h4>
 
-        {{-- <div class="sidebar__item__color sidebar__item__color--white">
-            <label for="white">
-                White
-                <input type="radio" id="white">
-            </label>
-        </div> --}}
         <form action="{{ route('frontend.shop') }}" method="GET">
             @foreach($colors as $color)
-                <div class="filter-color-item sidebar__item__color {{ in_array($color->id, $selectedColors) ? 'active' : '' }}"">
+                <div class="filter-color-item sidebar__item__color {{ in_array($color->id, $selectedColors) ? 'active' : '' }}">
                     <label for="{{ $color->slug }}">
                         {{ $color->name }}
                         <input type="checkbox" id="{{ $color->slug }}" name="colors[]" value="{{ $color->id }}" @if(in_array($color->id, $selectedColors)) checked @endif>
-                         <style>
+                        <style>
                             label[for="{{ $color->slug }}"]::after {
                                 background-color: {{ $color->name }};
                             }
@@ -53,39 +56,10 @@
                 <a href="{{ route('frontend.shop') }}" class="border-0 site-btn filter-btn-sm">Clear Filter</a>
             @endif
         </form>
-
     </div>
 
     <div class="sidebar__item">
-        <h4>Popular Size</h4>
-
-        {{-- <div class="sidebar__item__size">
-            <label for="large">
-                Large
-                <input type="radio" id="large">
-            </label>
-        </div> --}}
-        {{-- {{ dd($sizes) }} --}}
-        {{-- @foreach($sizes as $size)
-            <div class="sidebar__item__size">
-                <label for="{{ $size->slug }}">
-                    {{ $size->name }}
-                    <input type="radio" id="{{ $size->slug }}">
-                </label>
-            </div>
-        @endforeach --}}
-{{--
-        <form action="{{ route('frontend.shop') }}" method="GET">
-            @foreach($sizes as $size)
-                <div class="sidebar__item__size">
-                    <label for="{{ $size->slug }}" class="{{ $selectedSize == $size->id ? 'active' : '' }}">
-                        {{ $size->name }}
-                        <input type="radio" id="{{ $size->slug }}" name="size" value="{{ $size->id }}" @if($selectedSize == $size->id) checked @endif>
-                    </label>
-                </div>
-            @endforeach
-            <button type="submit" class="border-0 site-btn btn-sm">Filter</button>
-        </form> --}}
+        <h4>{{ __('Popular Size') }}</h4>
 
         <form action="{{ route('frontend.shop') }}" method="GET">
             @foreach($sizes as $size)
@@ -101,14 +75,11 @@
                 <a href="{{ route('frontend.shop') }}" class="border-0 site-btn filter-btn-sm">Clear Filter</a>
             @endif
         </form>
-
-
-
     </div>
 
     <div class="sidebar__item">
         <div class="latest-product__text">
-            <h4>Latest Products</h4>
+            <h4>{{ __('Latest Products') }}</h4>
             <div class="latest-product__slider owl-carousel">
 
                 @foreach ($latestProducts->chunk(3) as $chunk)

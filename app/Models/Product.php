@@ -70,11 +70,6 @@ class Product extends Model
         return $this->hasMany(Order::class);
     }
 
-    // With Wishlists
-    // public function wishlists(): BelongsToMany
-    // {
-    //     return $this->belongsToMany(Wishlist::class, 'wishlist_product')->withTimestamps();
-    // }
      public function wishlist()
     {
         return $this->hasMany(Wishlist::class);

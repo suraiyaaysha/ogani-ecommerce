@@ -59,54 +59,54 @@ class FrontendProductController extends Controller
             ));
     }
 
-    // public function getAllProducts()
     public function getAllProducts(Request $request)
     {
-        // $products = Product::all();
-        $products = Product::latest()->paginate(9);
+        // Retrieve the selected colors and size from the request
+        $selectedColors = $request->input('colors', []);
+        $selectedSize = $request->input('size');
 
-        // get latest products
+        // Retrieve the minimum and maximum prices from the request
+        $minPrice = $request->input('min_price', 0);
+        $maxPrice = $request->input('max_price', 1000); // Set a default maximum price
+
+        // Retrieve all products
+        $query = Product::query();
+
+        // Apply color filter if any colors are selected
+        if (!empty($selectedColors)) {
+            $query->whereHas('colors', function ($query) use ($selectedColors) {
+                $query->whereIn('color_id', $selectedColors);
+            });
+        }
+
+        // Apply size filter if a size is selected
+        if (!empty($selectedSize)) {
+            $query->whereHas('sizes', function ($query) use ($selectedSize) {
+                $query->where('size_id', $selectedSize);
+            });
+        }
+
+        // Apply price filter
+        $query->whereBetween('price', [$minPrice, $maxPrice]);
+
+        // Retrieve the filtered products
+        $products = $query->latest()->paginate(9);
+
+        // Retrieve the latest products
         $latestProducts = Product::latest()->take(9)->get();
 
-        // get product categories
+        // Retrieve product categories
         $categories = ProductCategory::all();
 
         $colors = Color::all();
         $sizes = Size::all();
 
 
-        // Filter By Color Start
-        $selectedColors = $request->input('colors', []);
-        if (!empty($selectedColors)) {
-            // Retrieve the products that have at least one selected color
-            $products = Product::whereHas('colors', function ($query) use ($selectedColors) {
-                $query->whereIn('color_id', $selectedColors);
-            })->latest()->paginate(9);
-        }
-        // Filter By Color End
-
-        // Filter By Size Start
-        $selectedSize = $request->input('size');
-
-        if (!empty($selectedSize)) {
-            // Retrieve the products with the selected size
-            $products = Product::whereHas('sizes', function ($query) use ($selectedSize) {
-                $query->where('size_id', $selectedSize);
-            })->latest()->paginate(9);
-        }
-        // Filter By Size End
-
-
-        // Share $selectedColors with the AppServiceProvider
         View::share('selectedColors', $selectedColors);
-
-        // Share $selectedSize with the AppServiceProvider
         View::share('selectedSize', $selectedSize);
 
 
-        return view('frontend.shop.index', compact('products', 'latestProducts', 'categories', 'colors', 'sizes'));
-        // return view('frontend.shop.index', compact('products', 'latestProducts', 'categories', 'colors', 'sizes', 'selectedColors', 'selectedSize'));
-        // return view('frontend.shop.index', compact('products'));
+        return view('frontend.shop.index', compact('products', 'latestProducts', 'categories', 'colors', 'sizes', 'minPrice', 'maxPrice'));
     }
 
     public function productDetails($slug)
@@ -166,21 +166,6 @@ class FrontendProductController extends Controller
 
         return view('frontend.shop.products-by-category', compact('productsByCategory', 'products', 'selectedColors', 'selectedSize'));
     }
-
-
-    // public function filterByColor(Request $request)
-    // {
-    //     $selectedColors = $request->input('colors');
-
-    //     // Retrieve the products that have at least one selected color
-    //     $products = Product::whereHas('colors', function ($query) use ($selectedColors) {
-    //         $query->whereIn('color_id', $selectedColors);
-    //     })->get();
-
-    //     // Pass the filtered products to the view
-    //     return view('frontend.shop.index', ['products' => $products]);
-    // }
-
 
     public function submitReview(Request $request, $productId)
     {

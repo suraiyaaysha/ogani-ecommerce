@@ -14,6 +14,7 @@
 
     <!-- Css Styles -->
     <link rel="stylesheet" href="{{ asset(url('frontend/assets/css/bootstrap.min.css')) }}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"/>
     <link rel="stylesheet" href="{{ asset(url('frontend/assets/css/font-awesome.min.css')) }}">
     <link rel="stylesheet" href="{{ asset(url('frontend/assets/css/elegant-icons.css')) }}">
     <link rel="stylesheet" href="{{ asset(url('frontend/assets/css/nice-select.css')) }}">
@@ -21,8 +22,13 @@
     <link rel="stylesheet" href="{{ asset(url('frontend/assets/css/owl.carousel.min.css')) }}">
     <link rel="stylesheet" href="{{ asset(url('frontend/assets/css/slicknav.min.css')) }}">
     <link rel="stylesheet" href="{{ asset(url('frontend/assets/css/style.css')) }}">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"/>
+
+    {{-- price filter --}}
+    {{-- <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css"> --}}
+    {{-- <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script> --}}
+
     @stack('style')
+
 </head>
 
 <body>
