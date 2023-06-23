@@ -89,8 +89,23 @@ class FrontendProductController extends Controller
         // Apply price filter
         $query->whereBetween('price', [$minPrice, $maxPrice]);
 
+        // Apply sorting
+        $sort = $request->input('sort');
+        if ($sort === 'price_low_high') {
+            $query->orderBy('price', 'asc');
+        } elseif ($sort === 'price_high_low') {
+            $query->orderBy('price', 'desc');
+        } else {
+            // Default sorting
+            $query->orderBy('created_at', 'desc');
+        }
+        // Apply sorting
+
         // Retrieve the filtered products
-        $products = $query->latest()->paginate(9);
+        // $products = $query->latest()->paginate(9);
+
+        // Retrieve the filtered products with pagination
+        $products = $query->latest()->paginate(9)->appends($request->except('page'));
 
         // Retrieve the latest products
         $latestProducts = Product::latest()->take(9)->get();
@@ -101,10 +116,12 @@ class FrontendProductController extends Controller
         $colors = Color::all();
         $sizes = Size::all();
 
+        // Share the selected sort value with the view
+        $selectedSort = $sort;
 
         View::share('selectedColors', $selectedColors);
         View::share('selectedSize', $selectedSize);
-
+        View::share('selectedSort', $selectedSort);
 
         return view('frontend.shop.index', compact('products', 'latestProducts', 'categories', 'colors', 'sizes', 'minPrice', 'maxPrice'));
     }
