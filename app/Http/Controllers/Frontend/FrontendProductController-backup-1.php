@@ -242,54 +242,50 @@ class FrontendProductController extends Controller
      * @param  Request  $request
      * @return \Illuminate\View\View
      */
-    public function search(Request $request)
-    {
+public function search(Request $request)
+{
+    $category = $request->input('category');
+    $keyword = $request->input('search');
 
-        // Perform the search query based on the category and keyword
-        $query = Product::query();
+    // Perform the search query based on the category and keyword
+    $query = Product::query();
 
-        // Apply sorting
-        $sort = $request->input('sort');
-        if ($sort === 'price_low_high') {
-            $query->orderBy('price', 'asc');
-        } elseif ($sort === 'price_high_low') {
-            $query->orderBy('price', 'desc');
-        } else {
-            // Default sorting
-            $query->orderBy('created_at', 'desc');
-        }
-
-
-        // Retrieve product categories
-        $categories = ProductCategory::all();
-
-        $category = $request->input('category');
-        $keyword = $request->input('search');
-
-
-        if (!empty($category)) {
-            $query->where('product_category_id', $category);
-        }
-
-        if (!empty($keyword)) {
-            $query->where('name', 'like', '%' . $keyword . '%');
-        }
-
-        // Retrieve the minimum and maximum prices from the request
-        $minPrice = $request->input('min_price', 0);
-        $maxPrice = $request->input('max_price', 1000); // Set a default maximum price
-
-        $products = $query->paginate();
-
-        // Share the selected sort value with the view
-        $selectedSort = $sort;
-
-        $selectedColors = $request->input('colors', []);
-        $selectedSize = $request->input('size');
-
-        View::share('selectedSort', $selectedSort);
-
-        return view('frontend.shop.search', compact( 'categories', 'category', 'products', 'selectedColors', 'selectedSize', 'minPrice', 'maxPrice'));
+    if (!empty($category)) {
+        $query->where('product_category_id', $category);
     }
+
+    if (!empty($keyword)) {
+        $query->where('name', 'like', '%' . $keyword . '%');
+    }
+
+    // Apply sorting
+    $sort = $request->input('sort');
+    if ($sort === 'price_low_high') {
+        $query->orderBy('price', 'asc');
+    } elseif ($sort === 'price_high_low') {
+        $query->orderBy('price', 'desc');
+    } else {
+        // Default sorting
+        $query->orderBy('created_at', 'desc');
+    }
+
+    // Retrieve the minimum and maximum prices from the request
+    $minPrice = $request->input('min_price', 0);
+    $maxPrice = $request->input('max_price', 1000); // Set a default maximum price
+
+    $products = $query->paginate();
+
+    // Share the selected sort value with the view
+    $selectedSort = $sort;
+
+    $selectedColors = $request->input('colors', []);
+    $selectedSize = $request->input('size');
+
+    View::share('selectedSort', $selectedSort);
+
+    return view('frontend.shop.search', compact('products', 'selectedColors', 'selectedSize', 'minPrice', 'maxPrice'));
+}
+
+
 
 }

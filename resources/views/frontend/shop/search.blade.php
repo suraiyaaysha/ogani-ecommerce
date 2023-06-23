@@ -9,10 +9,10 @@
             <div class="row">
                 <div class="col-lg-12 text-center">
                     <div class="breadcrumb__text">
-                        <h2>{{ __('Organi Shop') }}</h2>
+                        <h2>{{ __('Search Result') }}</h2>
                         <div class="breadcrumb__option">
                             <a href="{{ url('/') }}">{{ __('Home') }}</a>
-                            <span>{{ __('Shop') }}</span>
+                            <span>{{ __('Search') }}</span>
                         </div>
                     </div>
                 </div>

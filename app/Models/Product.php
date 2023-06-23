@@ -63,7 +63,6 @@ class Product extends Model
         return $this->morphToMany(Tag::class, 'taggable');
     }
 
-
     // with orders
     public function orders()
     {

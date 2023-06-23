@@ -146,10 +146,14 @@ Route::middleware('auth')->group(function () {
     // Remove product from wishlist
     Route::delete('/wishlist/remove/{product}', [WishlistController::class, 'remove'])->name('wishlist.remove');
 
+    // Product Review route
+    Route::post('/products/{id}/reviews', [FrontendProductController::class, 'submitReview'])->name('products.reviews.submit');
+
 });
 
-// Product Review route
-Route::post('/products/{id}/reviews', [FrontendProductController::class, 'submitReview'])->name('products.reviews.submit');
+// Product search
+Route::get('/search', [FrontendProductController::class, 'search'])->name('product.search');
+
 
 
 // Contact Page Route

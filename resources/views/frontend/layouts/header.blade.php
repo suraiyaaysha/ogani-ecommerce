@@ -120,14 +120,6 @@
             <ul>
                 <li class="active"><a href="{{ url('/') }}">Home</a></li>
                 <li><a href="{{ url('shop') }}">Shop</a></li>
-                {{-- <li><a href="#">Pages</a>
-                    <ul class="header__menu__dropdown">
-                        <li><a href="./shop-details.html">Shop Details</a></li>
-                        <li><a href="./shoping-cart.html">Shoping Cart</a></li>
-                        <li><a href="./checkout.html">Check Out</a></li>
-                        <li><a href="./blog-details.html">Blog Details</a></li>
-                    </ul>
-                </li> --}}
                 <li><a href="{{ url('/blog') }}">Blog</a></li>
                 <li><a href="{{ url('/contact') }}">Contact</a></li>
             </ul>
@@ -171,11 +163,11 @@
                             </div>
                             <div class="header__top__right__language">
                                 <img src="frontend/assets/img/language.png" alt="">
-                                <div>English</div>
+                                <div>{{ __('English') }}</div>
                                 <span class="arrow_carrot-down"></span>
                                 <ul>
-                                    <li><a href="#">Spanis</a></li>
-                                    <li><a href="#">English</a></li>
+                                    <li><a href="#">{{ __('Spanis') }}</a></li>
+                                    <li><a href="#">{{ __('English') }}</a></li>
                                 </ul>
                             </div>
                             <div class="header__top__right__auth header__top__right__language">
@@ -228,18 +220,10 @@
                 <div class="col-lg-6">
                     <nav class="header__menu">
                         <ul>
-                            <li><a href="{{ url('/') }}" class="{{ Request::is('/') ? 'active' : '' }}">Home</a></li>
-                            <li><a href="{{ url('shop') }}" class="{{ Request::is('/shop') ? 'active' : '' }}">Shop</a></li>
-                            {{-- <li><a href="#">Pages</a>
-                                <ul class="header__menu__dropdown">
-                                    <li><a href="./shop-details.html">Shop Details</a></li>
-                                    <li><a href="{{ route('cart.list') }}">Shoping Cart</a></li>
-                                    <li><a href="./checkout.html">Check Out</a></li>
-                                    <li><a href="./blog-details.html">Blog Details</a></li>
-                                </ul>
-                            </li> --}}
-                            <li><a href="{{ url('/blog') }}" class="{{ Request::is('/blog') ? 'active' : '' }}">Blog</a></li>
-                            <li><a href="{{ url('/contact') }}" class="{{ Request::is('/contact') ? 'active' : '' }}">Contact</a></li>
+                            <li><a href="{{ url('/') }}" class="{{ Request::is('/') ? 'active' : '' }}">{{ __('Home') }}</a></li>
+                            <li><a href="{{ url('shop') }}" class="{{ Request::is('/shop') ? 'active' : '' }}">{{ __('Shop') }}</a></li>
+                            <li><a href="{{ url('/blog') }}" class="{{ Request::is('/blog') ? 'active' : '' }}">{{ __('Blog') }}</a></li>
+                            <li><a href="{{ url('/contact') }}" class="{{ Request::is('/contact') ? 'active' : '' }}">{{ __('Contact') }}</a></li>
                         </ul>
                     </nav>
                 </div>
@@ -304,15 +288,20 @@
                 <div class="col-lg-9">
                     <div class="hero__search">
                         <div class="hero__search__form">
-                            <form action="#">
+                            <form action="{{ route('product.search') }}" method="GET">
                                 <div class="hero__search__categories">
-                                    {{ __('All Categories') }}
-                                    <span class="arrow_carrot-down"></span>
+                                    <select class="hero-search border-0 bg-transparent" name="category">
+                                        <option value="">{{ __('All Categories') }}</option>
+                                        @foreach ($categories as $category)
+                                            <option value="{{ $category->id }}">{{ $category->name }}</option>
+                                        @endforeach
+                                    </select>
                                 </div>
-                                <input type="text" placeholder="What do yo u need?">
+                                <input type="text" name="search" placeholder="What do you need?">
                                 <button type="submit" class="site-btn">{{ __('SEARCH') }}</button>
                             </form>
                         </div>
+
                         <div class="hero__search__phone">
                             <div class="hero__search__phone__icon">
                                 <i class="fa fa-phone"></i>

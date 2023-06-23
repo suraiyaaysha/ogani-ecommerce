@@ -675,7 +675,7 @@ ol {
 	color: #1c1c1c;
 	font-weight: 700;
 	padding-left: 18px;
-	padding-top: 11px;
+	padding-top: 8px;
 	position: relative;
 }
 
@@ -3886,5 +3886,9 @@ span.icon_cart.dashboard-item-icon {
     padding: 15px;
 }
 /* Comment Reply CSS End */
+
+/* Hero Search Start */
+
+/* Hero Search End*/
 
 /* Custom css for frontend */

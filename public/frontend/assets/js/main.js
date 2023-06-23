@@ -183,7 +183,7 @@
     /*--------------------------
         Select
     ----------------------------*/
-    $("select").niceSelect();
+    $(".sort-product").niceSelect();
 
     /*------------------
 		Single Product
