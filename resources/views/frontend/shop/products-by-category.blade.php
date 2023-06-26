@@ -33,13 +33,16 @@
                     <div class="filter__item">
                         <div class="row">
                             <div class="col-lg-4 col-md-5">
+
                                 <div class="filter__sort">
                                     <span>{{ __('Sort By') }}</span>
-                                    <select>
-                                        <option value="0">Default</option>
-                                        <option value="0">Default</option>
+                                    <select id="sort-products" onchange="sortProducts(this)" class="sort-product">
+                                        <option value="default"{{ $selectedSort === 'default' ? ' selected' : '' }}>{{ __('Default') }}</option>
+                                        <option value="price_low_high"{{ $selectedSort === 'price_low_high' ? ' selected' : '' }}>{{ __('Price(Low > High)') }}</option>
+                                        <option value="price_high_low"{{ $selectedSort === 'price_high_low' ? ' selected' : '' }}>{{ __('Price(High > Low)') }}</option>
                                     </select>
                                 </div>
+
                             </div>
                             <div class="col-lg-4 col-md-4">
                                 <div class="filter__found">
@@ -80,6 +83,7 @@
                                         </div>
                                         <div class="featured__item__text">
                                             <h6><a href="{{ route('frontend.productDetails', $product->slug) }}">{{ $product->name }}</a></h6>
+                                            <h6>{{ $product->productCategory->name }}</h6>
 
                                             <h5>${{ $product->price }}</h5>
                                         </div>
@@ -109,3 +113,73 @@
 
 @endsection
 
+@push('script')
+
+    <!-- Add this script to initialize the price range slider -->
+    <script>
+        var rangeSlider = $(".price-range"),
+            minamount = $("#minamount"),
+            maxamount = $("#maxamount"),
+            minPrice = rangeSlider.data('min'),
+            maxPrice = rangeSlider.data('max'),
+            initialMinPrice = parseInt("{{ $minPrice }}"), // Set the initial minimum price value from the backend
+            initialMaxPrice = parseInt("{{ $maxPrice }}"); // Set the initial maximum price value from the backend
+
+        rangeSlider.slider({
+            range: true,
+            min: minPrice,
+            max: maxPrice,
+            values: [initialMinPrice, initialMaxPrice],
+            slide: function (event, ui) {
+                minamount.val(ui.values[0]);
+                maxamount.val(ui.values[1]);
+            }
+        });
+
+        minamount.val(rangeSlider.slider("values", 0));
+        maxamount.val(rangeSlider.slider("values", 1));
+
+        $("#price-filter-btn").click(function() {
+            applyPriceFilter();
+        });
+
+        function applyPriceFilter() {
+            var minPriceVal = parseInt(minamount.val());
+            var maxPriceVal = parseInt(maxamount.val());
+
+            // Perform the necessary action with the selected price range
+            // You can submit a form, make an AJAX request, or reload the page with the updated URL parameters
+            // Example:
+            var url = "{{ route('frontend.shop') }}?min_price=" + minPriceVal + "&max_price=" + maxPriceVal;
+            window.location.href = url;
+        }
+
+    </script>
+
+    {{-- Sort by --}}
+    <script>
+        function sortProducts(selectElement) {
+            var selectedValue = selectElement.value;
+            var currentUrl = window.location.href;
+
+            // Create an anchor element to parse the URL
+            var url = document.createElement('a');
+            url.href = currentUrl;
+
+            // Remove any existing 'sort' parameter from the URL
+            var params = new URLSearchParams(url.search);
+            params.delete('sort');
+
+            if (selectedValue) {
+                params.set('sort', selectedValue);
+            }
+
+            // Set the updated search parameters
+            url.search = params.toString();
+
+            // Navigate to the new URL
+            window.location.href = url.href;
+        }
+    </script>
+
+@endpush

@@ -3,7 +3,12 @@
         <h4>{{ ('Department') }}</h4>
         <ul>
             @foreach ($categories as $category)
-                <li><a href="{{ route('frontend.productsByCategory', $category->slug) }}">{{ $category->name }}</a></li>
+                <li>
+                    <a href="{{ route('frontend.productsByCategory', $category->slug) }}"
+                    class="{{ request()->route()->parameter('slug') === $category->slug ? 'active' : '' }}">
+                        {{ $category->name }}
+                    </a>
+                </li>
             @endforeach
         </ul>
     </div>
@@ -85,7 +90,7 @@
                 @foreach ($latestProducts->chunk(3) as $chunk)
                     <div class="latest-prdouct__slider__item">
                         @foreach ($chunk as $product)
-                            <a href="#" class="latest-product__item">
+                            <a href="{{ route('frontend.productDetails', $product->slug) }}" class="latest-product__item">
                                 <div class="latest-product__item__pic">
                                     <img src="{{ $product->featured_image }}" alt="{{ $product->name }}">
                                 </div>

@@ -112,20 +112,11 @@
 
                     </div>
 
-                    {{-- <div class="col-lg-12">
-                        <div class="product__pagination">
-                            {{ $products->links('frontend.partials.custom-pagination') }}
-                             {{ $products->appends(request()->except('page'))->links('frontend.partials.custom-pagination') }}
-                        </div>
-                    </div> --}}
-
                     <div class="col-lg-12">
                         <div class="product__pagination">
-                            {{-- {{ $products->appends(request()->query())->links('frontend.partials.custom-pagination') }} --}}
                             {{ $products->links('frontend.partials.custom-pagination') }}
                         </div>
                     </div>
-
 
                 </div>
             </div>

@@ -24,7 +24,7 @@ class ProductSeeder extends Seeder
 
         // Create 10 Products
        Product::factory()
-            ->count(100)
+            ->count(10)
             ->create()
             ->each(function ($product) use ($colors, $sizes, $faker) {
                 // Attach random colors to the product

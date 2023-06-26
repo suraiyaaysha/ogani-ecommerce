@@ -1143,6 +1143,9 @@ ol {
 	line-height: 39px;
 	display: block;
 }
+.sidebar__item ul li a.active {
+    color: #3CC032;
+}
 
 .sidebar__item .latest-product__text {
 	position: relative;

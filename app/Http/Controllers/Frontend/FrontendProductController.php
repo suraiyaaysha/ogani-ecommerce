@@ -172,17 +172,58 @@ class FrontendProductController extends Controller
         return view('frontend.shop.product-details', compact('product', 'relatedProducts', 'averageRating', 'reviewCount', 'buttons', 'products'));
     }
 
+    // public function productsByCategory($slug, Request $request)
+    // {
+    //     $productsByCategory = ProductCategory::where('slug', $slug)->first();
+
+    //     $products = $productsByCategory->products()->paginate(6); // Retrieve all products from $productsByCategory
+
+    //     $selectedColors = $request->input('colors', []);
+    //     $selectedSize = $request->input('size');
+
+    //     return view('frontend.shop.products-by-category', compact('productsByCategory', 'products', 'selectedColors', 'selectedSize'));
+    // }
+
+//     public function productsByCategory($slug, Request $request)
+// {
+//     $productsByCategory = ProductCategory::where('slug', $slug)->first();
+
+//     $products = $productsByCategory->products()->paginate(6); // Retrieve all products from $productsByCategory
+
+//     $selectedColors = $request->input('colors', []);
+//     $selectedSize = $request->input('size');
+//     $selectedSort = $request->input('sort'); // Add this line to retrieve the selected sort value
+
+//     return view('frontend.shop.products-by-category', compact('productsByCategory', 'products', 'selectedColors', 'selectedSize', 'selectedSort'));
+// }
+
     public function productsByCategory($slug, Request $request)
     {
+        // Retrieve the minimum and maximum prices from the request
+        $minPrice = $request->input('min_price', 0);
+        $maxPrice = $request->input('max_price', 1000); // Set a default maximum price
+
+        // Retrieve all products
+        $query = Product::query();
+
+        // Apply price filter
+        $query->whereBetween('price', [$minPrice, $maxPrice]);
+
         $productsByCategory = ProductCategory::where('slug', $slug)->first();
 
-        $products = $productsByCategory->products()->paginate(6); // Retrieve all products from $productsByCategory
+        // Apply the category filter
+        $query->where('product_category_id', $productsByCategory->id);
 
         $selectedColors = $request->input('colors', []);
         $selectedSize = $request->input('size');
+        $selectedSort = $request->input('sort'); // Add this line to retrieve the selected sort value
 
-        return view('frontend.shop.products-by-category', compact('productsByCategory', 'products', 'selectedColors', 'selectedSize'));
+        // Retrieve the filtered products with pagination
+        $products = $query->latest()->paginate(6)->appends($request->except('page'));
+
+        return view('frontend.shop.products-by-category', compact('productsByCategory', 'products', 'selectedColors', 'selectedSize', 'selectedSort', 'minPrice', 'maxPrice'));
     }
+
 
     public function submitReview(Request $request, $productId)
     {
