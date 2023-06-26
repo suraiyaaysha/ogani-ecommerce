@@ -61,7 +61,7 @@
                     <div class="row">
 
                          @forelse ($products as $product)
-                            <div class="col-lg-4 col-md-6 col-sm-6 {{ $product->productCategory->slug }}">
+                            <div class="col-lg-4 col-md-6 col-sm-6">
                                 <div class="featured__item">
                                     <div class="featured__item__pic set-bg" data-setbg="{{ $product->featured_image }}">
                                         <ul class="featured__item__pic__hover">
@@ -112,11 +112,20 @@
 
                     </div>
 
+                    {{-- <div class="col-lg-12">
+                        <div class="product__pagination">
+                            {{ $products->links('frontend.partials.custom-pagination') }}
+                             {{ $products->appends(request()->except('page'))->links('frontend.partials.custom-pagination') }}
+                        </div>
+                    </div> --}}
+
                     <div class="col-lg-12">
                         <div class="product__pagination">
+                            {{-- {{ $products->appends(request()->query())->links('frontend.partials.custom-pagination') }} --}}
                             {{ $products->links('frontend.partials.custom-pagination') }}
                         </div>
                     </div>
+
 
                 </div>
             </div>

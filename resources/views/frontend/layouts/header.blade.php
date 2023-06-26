@@ -285,15 +285,19 @@
                         </ul>
                     </div>
                 </div>
+
                 <div class="col-lg-9">
                     <div class="hero__search">
+
                         <div class="hero__search__form">
                             <form action="{{ route('product.search') }}" method="GET">
                                 <div class="hero__search__categories">
                                     <select class="hero-search border-0 bg-transparent" name="category">
                                         <option value="">{{ __('All Categories') }}</option>
                                         @foreach ($categories as $category)
-                                            <option value="{{ $category->id }}">{{ $category->name }}</option>
+                                            <option value="{{ $category->id }}" {{ $categoryID == $category->id ? 'selected' : '' }}>
+                                                {{ $category->name }}
+                                            </option>
                                         @endforeach
                                     </select>
                                 </div>

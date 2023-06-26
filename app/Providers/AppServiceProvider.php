@@ -44,7 +44,9 @@ class AppServiceProvider extends ServiceProvider
 
         // Share categories variable with header view
         View::composer('frontend.layouts.header', function ($view) {
-            $view->with('categories', ProductCategory::all());
+            $categoryID = Request::input('category');
+            $view->with('categories', ProductCategory::all())
+                ->with('categoryID', $categoryID);
         });
 
         // });
@@ -61,59 +63,8 @@ class AppServiceProvider extends ServiceProvider
             $view->with('latestProducts', Product::latest()->take(9)->get());
         });
 
-        // Share colors variable with all views
-        // View::composer('*', function ($view) {
-        //     $view->with('selectedColors', $this->getSelectedColors());
-        //     $view->with('selectedSize', $this->getSelectedSize());
-        //     $view->with('selectedSort', $this->getSelectedSort());
-        //     $view->with('minPrice', Request::input('minPrice'));
-        //     $view->with('maxPrice', Request::input('maxPrice'));
-        // });
-
         // Add pagination
         Paginator::useBootstrap();
     }
-
-    // /**
-    //  * Get the selected colors based on the current request.
-    //  *
-    //  * @return array
-    //  */
-    // private function getSelectedColors()
-    // {
-    //     // Retrieve the selected colors based on your logic
-    //     // For example, you can fetch it from the current request or any other source
-    //     $selectedColors = []; // Your logic to retrieve the selected colors
-
-    //     return $selectedColors;
-    // }
-
-    // /**
-    //  * Get the selected size based on the current request.
-    //  *
-    //  * @return mixed|null
-    //  */
-    // private function getSelectedSize()
-    // {
-    //     // Retrieve the selected size based on your logic
-    //     // For example, you can fetch it from the current request or any other source
-    //     $selectedSize = null; // Your logic to retrieve the selected size
-
-    //     return $selectedSize;
-    // }
-
-    // /**
-    //  * Get the selected sort option based on the current request.
-    //  *
-    //  * @return mixed|null
-    //  */
-    // private function getSelectedSort()
-    // {
-    //     // Retrieve the selected sort option based on your logic
-    //     // For example, you can fetch it from the current request or any other source
-    //     $selectedSort = null; // Your logic to retrieve the selected sort option
-
-    //     return $selectedSort;
-    // }
 
 }

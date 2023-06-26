@@ -18,6 +18,8 @@ use Illuminate\Database\Eloquent\Builder;
 // use Illuminate\Support\Facades\View;
 use Illuminate\Support\Facades\View;
 
+use Illuminate\Support\Facades\DB;
+
 class FrontendProductController extends Controller
 {
 
@@ -176,10 +178,8 @@ class FrontendProductController extends Controller
 
         $products = $productsByCategory->products()->paginate(6); // Retrieve all products from $productsByCategory
 
-
         $selectedColors = $request->input('colors', []);
         $selectedSize = $request->input('size');
-
 
         return view('frontend.shop.products-by-category', compact('productsByCategory', 'products', 'selectedColors', 'selectedSize'));
     }
@@ -242,11 +242,19 @@ class FrontendProductController extends Controller
      * @param  Request  $request
      * @return \Illuminate\View\View
      */
+
     public function search(Request $request)
     {
 
-        // Perform the search query based on the category and keyword
+        // Retrieve the minimum and maximum prices from the request
+        $minPrice = $request->input('min_price', 0);
+        $maxPrice = $request->input('max_price', 1000); // Set a default maximum price
+
+        // Retrieve all products
         $query = Product::query();
+
+        // Apply price filter
+        $query->whereBetween('price', [$minPrice, $maxPrice]);
 
         // Apply sorting
         $sort = $request->input('sort');
@@ -258,38 +266,31 @@ class FrontendProductController extends Controller
             // Default sorting
             $query->orderBy('created_at', 'desc');
         }
-
-
-        // Retrieve product categories
-        $categories = ProductCategory::all();
-
-        $category = $request->input('category');
-        $keyword = $request->input('search');
-
-
-        if (!empty($category)) {
-            $query->where('product_category_id', $category);
-        }
-
-        if (!empty($keyword)) {
-            $query->where('name', 'like', '%' . $keyword . '%');
-        }
-
-        // Retrieve the minimum and maximum prices from the request
-        $minPrice = $request->input('min_price', 0);
-        $maxPrice = $request->input('max_price', 1000); // Set a default maximum price
-
-        $products = $query->paginate();
+        // Apply sorting
 
         // Share the selected sort value with the view
         $selectedSort = $sort;
 
         $selectedColors = $request->input('colors', []);
         $selectedSize = $request->input('size');
-
         View::share('selectedSort', $selectedSort);
 
-        return view('frontend.shop.search', compact( 'categories', 'category', 'products', 'selectedColors', 'selectedSize', 'minPrice', 'maxPrice'));
+        // For search
+        $categoryID = $request->input('category');
+        $keyword = $request->input('search');
+
+         $products = DB::table('products')
+            ->join('product_categories', 'products.product_category_id', '=', 'product_categories.id')
+            ->where('products.name', 'like', "%{$keyword}%")
+            ->when($categoryID, function ($query, $categoryID) {
+                return $query->where('product_categories.id', $categoryID);
+            })
+            ->select('products.*')
+            // ->get();
+            ->paginate(9)
+            ->appends(request()->query()); // Preserve search query parameters during pagination
+
+        return view('frontend.shop.search', compact('products', 'categoryID' ,'selectedColors', 'selectedSize', 'minPrice', 'maxPrice'));
     }
 
 }
