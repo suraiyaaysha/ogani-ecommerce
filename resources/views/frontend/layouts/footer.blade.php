@@ -1,7 +1,7 @@
     <!-- Footer Section Begin -->
     <footer class="footer spad">
         <div class="container">
-            <div>
+            {{-- <div>
                 @if (session('success'))
                     <div class="alert alert-success">
                         {{ session('success') }}
@@ -12,7 +12,7 @@
                         {{ session('error') }}
                     </div>
                 @endif
-            </div>
+            </div> --}}
             <div class="row">
                 <div class="col-lg-3 col-md-6 col-sm-6">
                     <div class="footer__about">
@@ -95,11 +95,39 @@
     <script src="{{ asset(url('frontend/assets/js/jquery.slicknav.js')) }}"></script>
     <script src="{{ asset(url('frontend/assets/js/mixitup.min.js')) }}"></script>
     <script src="{{ asset(url('frontend/assets/js/owl.carousel.min.js')) }}"></script>
+
+    <script src="
+    https://cdn.jsdelivr.net/npm/toastr@2.1.4/build/toastr.min.js
+    "></script>
+
     <script src="{{ asset(url('frontend/assets/js/main.js')) }}"></script>
 
+
+    <script>
+        toastr.options = {
+            "progressBar" : true,
+            "closeButton" : true,
+        }
+
+        @if(Session::has('success'))
+                // toastr.success("{{ Session::get('success') }}", 'Success!', {timeOut:1200} );
+                toastr.success("{{ Session::get('success') }}", 'Success!');
+        @endif
+
+        @if(Session::has('info'))
+                toastr.info("{{ Session::get('info') }}", 'Info!' );
+        @endif
+
+        @if(Session::has('warning'))
+                toastr.warning("{{ Session::get('warning') }}", 'Warning!');
+        @endif
+
+        @if(Session::has('error'))
+                toastr.error("{{ Session::get('error') }}", 'Error!');
+        @endif
+    </script>
+
     @stack('script')
-
-
 
 </body>
 

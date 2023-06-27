@@ -16,16 +16,20 @@
     <link rel="stylesheet" href="{{ asset(url('frontend/assets/css/bootstrap.min.css')) }}">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"/>
     <link rel="stylesheet" href="{{ asset(url('frontend/assets/css/font-awesome.min.css')) }}">
+
+{{-- <script src="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.js"></script>
+<link rel="stylesheet" type="text/css" href="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/css/toastr.css"> --}}
+
+    <link href="
+    https://cdn.jsdelivr.net/npm/toastr@2.1.4/build/toastr.min.css
+    " rel="stylesheet">
+
     <link rel="stylesheet" href="{{ asset(url('frontend/assets/css/elegant-icons.css')) }}">
     <link rel="stylesheet" href="{{ asset(url('frontend/assets/css/nice-select.css')) }}">
     <link rel="stylesheet" href="{{ asset(url('frontend/assets/css/jquery-ui.min.css')) }}">
     <link rel="stylesheet" href="{{ asset(url('frontend/assets/css/owl.carousel.min.css')) }}">
     <link rel="stylesheet" href="{{ asset(url('frontend/assets/css/slicknav.min.css')) }}">
     <link rel="stylesheet" href="{{ asset(url('frontend/assets/css/style.css')) }}">
-
-    {{-- price filter --}}
-    {{-- <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css"> --}}
-    {{-- <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script> --}}
 
     @stack('style')
 
