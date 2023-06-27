@@ -18,9 +18,11 @@ class NewsletterController extends Controller
         try {
             if(Newsletter::isSubscribed($request->subscriber_email)) {
                 return redirect()->back()->with('error', 'Email already subscribed');
+                // return redirect()->back()->with('error', 'Email already subscribed');
             } else {
                 Newsletter::subscribe($request->subscriber_email);
                 return redirect()->back()->with('success', 'Email subscribed successfully!');
+                // return redirect()->back()->session()->flash('success', 'Email subscribed successfully!');
             }
         } catch (\Exception $e) {
             return redirect()->back()->with('error', $e->getMessage());
