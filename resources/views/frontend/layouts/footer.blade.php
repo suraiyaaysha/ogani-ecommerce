@@ -1,6 +1,18 @@
     <!-- Footer Section Begin -->
     <footer class="footer spad">
         <div class="container">
+            <div>
+                @if (session('success'))
+                    <div class="alert alert-success">
+                        {{ session('success') }}
+                    </div>
+                @endif
+                @if (session('error'))
+                    <div class="alert alert-danger">
+                        {{ session('error') }}
+                    </div>
+                @endif
+            </div>
             <div class="row">
                 <div class="col-lg-3 col-md-6 col-sm-6">
                     <div class="footer__about">
@@ -37,12 +49,21 @@
                 </div>
                 <div class="col-lg-4 col-md-12">
                     <div class="footer__widget">
+
                         <h6>Join Our Newsletter Now</h6>
                         <p>Get E-mail updates about our latest shop and special offers.</p>
-                        <form action="#">
-                            <input type="text" placeholder="Enter your mail">
-                            <button type="submit" class="site-btn">Subscribe</button>
+                        <form action="{{ route('subscribe') }}" method="POST">
+                            @csrf
+                           <div>
+                                {{-- <input type="email" name="subscriber_email" placeholder="Enter your mail"> --}}
+                                <input type="email" name="subscriber_email" placeholder="Enter your mail">
+                                <button type="submit" class="site-btn">Subscribe</button>
+                           </div>
+                            @if($errors->any('subscriber_email'))
+                                <div class="text-danger">{{ $errors->first('subscriber_email') }}</div>
+                            @endif
                         </form>
+
                         <div class="footer__widget__social">
                             <a href="#"><i class="fa fa-facebook"></i></a>
                             <a href="#"><i class="fa fa-instagram"></i></a>
@@ -78,7 +99,7 @@
 
     @stack('script')
 
-    
+
 
 </body>
 

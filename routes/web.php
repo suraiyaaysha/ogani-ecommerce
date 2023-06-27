@@ -20,6 +20,7 @@ use App\Http\Controllers\Frontend\CheckoutController;
 use App\Http\Controllers\Frontend\OrderController;
 use App\Http\Controllers\Frontend\StripeWebhookController;
 use App\Http\Controllers\Frontend\WishlistController;
+use App\Http\Controllers\Frontend\NewsletterController;
 
 use Illuminate\Http\Request;
 use Stripe\Stripe;
@@ -153,6 +154,9 @@ Route::middleware('auth')->group(function () {
 
 // Product search
 Route::get('/search', [FrontendProductController::class, 'search'])->name('product.search');
+
+// newsletter subscribe
+Route::post('/subscribe', [NewsletterController::class, 'subscribe'])->name('subscribe');
 
 
 
