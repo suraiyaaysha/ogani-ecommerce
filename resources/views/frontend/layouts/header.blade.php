@@ -45,7 +45,7 @@
     <div class="humberger__menu__overlay"></div>
     <div class="humberger__menu__wrapper">
         <div class="humberger__menu__logo">
-            <a href="{{ url('/') }}"><img src="{{ url('frontend/assets/img/logo.png') }}" alt=""></a>
+            <a href="{{ url('/') }}"><img src="{{ $cms->site_logo }}" alt=""></a>
         </div>
         <div class="humberger__menu__cart">
             <ul>
@@ -81,7 +81,7 @@
         <div class="humberger__menu__widget">
             <div class="header__top__right__language">
                 <img src="frontend/assets/img/language.png" alt="">
-                <div>English</div>
+                <div>{{ __('English') }}</div>
                 <span class="arrow_carrot-down"></span>
                 <ul>
                     <li><a href="#">{{ __('Spanis') }}</a></li>
@@ -122,23 +122,23 @@
         </div>
         <nav class="humberger__menu__nav mobile-menu">
             <ul>
-                <li class="active"><a href="{{ url('/') }}">Home</a></li>
-                <li><a href="{{ url('shop') }}">Shop</a></li>
-                <li><a href="{{ url('/blog') }}">Blog</a></li>
-                <li><a href="{{ url('/contact') }}">Contact</a></li>
+                <li class="active"><a href="{{ url('/') }}">{{ __('Home') }}</a></li>
+                <li><a href="{{ url('shop') }}">{{ __('Shop') }}</a></li>
+                <li><a href="{{ url('/blog') }}">{{ __('Blog') }}</a></li>
+                <li><a href="{{ url('/contact') }}">{{ __('Contact') }}</a></li>
             </ul>
         </nav>
         <div id="mobile-menu-wrap"></div>
         <div class="header__top__right__social">
-            <a href="#"><i class="fa fa-facebook"></i></a>
-            <a href="#"><i class="fa fa-twitter"></i></a>
-            <a href="#"><i class="fa fa-linkedin"></i></a>
-            <a href="#"><i class="fa fa-pinterest-p"></i></a>
+            <a href="{{ $cms->facebook_url }}"><i class="fa fa-facebook"></i></a>
+            <a href="{{ $cms->twitter_url }}"><i class="fa fa-twitter"></i></a>
+            <a href="{{ $cms->linkedin_url }}"><i class="fa fa-linkedin"></i></a>
+            <a href="{{ $cms->pinterest_url }}"><i class="fa fa-pinterest-p"></i></a>
         </div>
         <div class="humberger__menu__contact">
             <ul>
-                <li><i class="fa fa-envelope"></i> {{ __('hello@colorlib.com') }}</li>
-                <li>{{ __('Free Shipping for all Order of $99') }}</li>
+                <li><i class="fa fa-envelope"></i> {{ $cms->site_email }}</li>
+                <li>{{ $cms->free_shipping_text }}</li>
             </ul>
         </div>
     </div>
@@ -152,18 +152,18 @@
                     <div class="col-lg-6">
                         <div class="header__top__left">
                             <ul>
-                                <li><i class="fa fa-envelope"></i> {{ __('hello@colorlib.com') }}</li>
-                                <li>{{ __('Free Shipping for all Order of $99') }}</li>
+                                <li><i class="fa fa-envelope"></i> {{ $cms->site_email }}</li>
+                                <li>{{ $cms->free_shipping_text }}</li>
                             </ul>
                         </div>
                     </div>
                     <div class="col-lg-6">
                         <div class="header__top__right">
                             <div class="header__top__right__social">
-                                <a href="#"><i class="fa fa-facebook"></i></a>
-                                <a href="#"><i class="fa fa-twitter"></i></a>
-                                <a href="#"><i class="fa fa-linkedin"></i></a>
-                                <a href="#"><i class="fa fa-pinterest-p"></i></a>
+                                <a href="{{ $cms->facebook_url }}"><i class="fa fa-facebook"></i></a>
+                                <a href="{{ $cms->twitter_url }}"><i class="fa fa-twitter"></i></a>
+                                <a href="{{ $cms->linkedin_url }}"><i class="fa fa-linkedin"></i></a>
+                                <a href="{{ $cms->pinterest_url }}"><i class="fa fa-pinterest-p"></i></a>
                             </div>
                             <div class="header__top__right__language">
                                 <img src="frontend/assets/img/language.png" alt="">
@@ -218,7 +218,7 @@
             <div class="row">
                 <div class="col-lg-3">
                     <div class="header__logo">
-                        <a href="{{ url('/') }}"><img src="frontend/assets/img/logo.png" alt=""></a>
+                        <a href="{{ url('/') }}"><img src="{{ $cms->site_logo }}" alt=""></a>
                     </div>
                 </div>
                 <div class="col-lg-6">
@@ -315,8 +315,8 @@
                                 <i class="fa fa-phone"></i>
                             </div>
                             <div class="hero__search__phone__text">
-                                <h5>{{ __('+65 11.188.888') }}</h5>
-                                <span>{{ __('support 24/7 time') }}</span>
+                                <h5>{{ $cms->site_mobile }}</h5>
+                                <span>{{ $cms->site_support_text }}</span>
                             </div>
                         </div>
                     </div>

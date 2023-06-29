@@ -20,6 +20,8 @@ use Illuminate\Support\Facades\View;
 
 use Illuminate\Support\Facades\DB;
 
+use App\Models\Cms;
+
 class FrontendProductController extends Controller
 {
 
@@ -54,10 +56,14 @@ class FrontendProductController extends Controller
         $query->where('approved', true);
         })->get();
 
+
+        // For CMS Related
+        $cms = Cms::first();
+
         return view('frontend.index',
             compact(
                 'categories','featuredProducts', 'categoriesHasFeaturedProducts', 'latestProducts', 'reviewedProducts', 'discountedProducts',
-                'latestAllBlog', 'colors', 'sizes', 'reviewedProducts'
+                'latestAllBlog', 'colors', 'sizes', 'reviewedProducts', 'cms'
             ));
     }
 

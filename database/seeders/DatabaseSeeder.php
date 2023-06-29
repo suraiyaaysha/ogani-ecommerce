@@ -20,6 +20,7 @@ class DatabaseSeeder extends Seeder
         // ]);
 
         $this->call([
+            CmsSeeder::class,
             UserSeeder::class,
             UserDetailsSeeder::class,
             ProductCategorySeeder::class,

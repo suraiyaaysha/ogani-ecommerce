@@ -110,6 +110,15 @@
             </a>
           </li>
 
+          <li class="nav-item menu-items">
+            <a class="nav-link" href="{{ url('admin/settings/') }}">
+              <span class="menu-icon">
+                <i class="mdi mdi-speedometer"></i>
+              </span>
+              <span class="menu-title">{{ __('Settings') }}</span>
+            </a>
+          </li>
+
         </ul>
       </nav>
       <!-- partial -->

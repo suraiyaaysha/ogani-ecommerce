@@ -14,6 +14,7 @@ use App\Models\Tag;
 use App\Models\Product;
 use App\Models\Color;
 use App\Models\Size;
+use App\Models\Cms;
 
 // use Illuminate\Http\Request;
 use Illuminate\Support\Facades\View;
@@ -47,6 +48,12 @@ class AppServiceProvider extends ServiceProvider
             $categoryID = Request::input('category');
             $view->with('categories', ProductCategory::all())
                 ->with('categoryID', $categoryID);
+
+            $view->with('cms', Cms::first());
+        });
+
+        View::composer('frontend.layouts.footer', function ($view) {
+            $view->with('cms', Cms::first());
         });
 
         // });

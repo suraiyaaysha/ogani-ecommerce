@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\Auth\LoginController;
 
+use App\Http\Controllers\Admin\CmsController;
 use App\Http\Controllers\Admin\ProfileController;
 use App\Http\Controllers\Frontend\FrontendProfileController;
 
@@ -21,6 +22,7 @@ use App\Http\Controllers\Frontend\OrderController;
 use App\Http\Controllers\Frontend\StripeWebhookController;
 use App\Http\Controllers\Frontend\WishlistController;
 use App\Http\Controllers\Frontend\NewsletterController;
+use App\Http\Controllers\Frontend\FrontendController;
 
 use Illuminate\Http\Request;
 use Stripe\Stripe;
@@ -158,6 +160,8 @@ Route::get('/search', [FrontendProductController::class, 'search'])->name('produ
 // newsletter subscribe
 Route::post('/subscribe', [NewsletterController::class, 'subscribe'])->name('subscribe');
 
+// CMS Realted route
+// Route::get('/', [FrontendController::class, 'frontendCms'])->name('frontendCms');
 
 
 // Contact Page Route
@@ -178,5 +182,9 @@ Route::middleware(['auth','admin'])->group(function () {
     Route::post('admin/profile/{user}',[ProfileController::class,'update'])->name('admin.update');
 
     Route::post('admin/profile',[ProfileController::class,'updatePassword'])->name('admin.change_password');
+
+    // CMS routes
+    Route::get('admin/settings',[CmsController::class,'cmsShow'])->name('admin.cmsShow');
+    Route::put('admin/cms',[CmsController::class,'cmsUpdate'])->name('admin.cmsUpdate');
 
 });

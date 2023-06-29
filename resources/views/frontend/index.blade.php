@@ -10,12 +10,12 @@
                 <div class="col-lg-3">
                 </div>
                 <div class="col-lg-9">
-                    <div class="hero__item set-bg" data-setbg="frontend/assets/img/hero/banner.jpg">
+                    <div class="hero__item set-bg" data-setbg="{{ $cms->banner_img }}">
                         <div class="hero__text">
-                            <span>FRUIT FRESH</span>
-                            <h2>Vegetable <br />100% Organic</h2>
-                            <p>Free Pickup and Delivery Available</p>
-                            <a href="#" class="primary-btn">SHOP NOW</a>
+                            <span>{{ $cms->banner_category_name }}</span>
+                            <h2>{{ $cms->banner_title }}</h2>
+                            <p>{{ $cms->banner_text }}</p>
+                            <a href="{{ route('frontend.shop') }}" class="primary-btn">{{ __('SHOP NOW') }}</a>
                         </div>
                     </div>
                 </div>
