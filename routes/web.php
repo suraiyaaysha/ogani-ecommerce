@@ -167,6 +167,7 @@ Route::post('/subscribe', [NewsletterController::class, 'subscribe'])->name('sub
 
 // Contact Page Route
 Route::get('/contact', [ContactController::class, 'contactCms'])->name('frontend.contact');
+Route::post('/contact/store', [ContactController::class, 'storeContactForm'])->name('frontend.storeContactForm');
 
 
 /*--------------------------------------------------------------------------

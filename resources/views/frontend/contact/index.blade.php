@@ -86,16 +86,18 @@
                     </div>
                 </div>
             </div>
-            <form action="#">
+            <form action="{{ route('frontend.storeContactForm') }}" method="POST">
+                @csrf
                 <div class="row">
                     <div class="col-lg-6 col-md-6">
-                        <input type="text" placeholder="Your name">
+                        {{-- <input type="text" placeholder="Your name" name="name" value="{{ auth()->check() ? auth()->user()->name : old('name') }}"> --}}
+                        <input type="text" placeholder="Your name" name="name" value="{{ auth()->check() ? auth()->user()->first_name . ' ' . auth()->user()->last_name : old('name') }}">
                     </div>
                     <div class="col-lg-6 col-md-6">
-                        <input type="text" placeholder="Your Email">
+                        <input type="email" placeholder="Your Email" name="email" value="{{ auth()->check() ? auth()->user()->email : old('email') }}">
                     </div>
                     <div class="col-lg-12 text-center">
-                        <textarea placeholder="Your message"></textarea>
+                        <textarea placeholder="Your message" name="message"></textarea>
                         <button type="submit" class="site-btn">{{ __('SEND MESSAGE') }}</button>
                     </div>
                 </div>

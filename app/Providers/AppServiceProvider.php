@@ -56,7 +56,11 @@ class AppServiceProvider extends ServiceProvider
             $view->with('cms', Cms::first());
         });
 
-        // });
+        // Share $cms variable with all views
+        View::composer('*', function ($view) {
+            $view->with('cms', Cms::first());
+        });
+
         View::composer('frontend.partials.blog-aside', function ($view) {
             $view->with('blogCategories', BlogCategory::all());
             $view->with('latestAllBlog', Blog::latest()->take(3)->get());
