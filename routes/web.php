@@ -6,6 +6,7 @@ use App\Http\Controllers\HomeController;
 use App\Http\Controllers\Auth\LoginController;
 
 use App\Http\Controllers\Admin\CmsController;
+use App\Http\Controllers\Frontend\ContactController;
 use App\Http\Controllers\Admin\ProfileController;
 use App\Http\Controllers\Frontend\FrontendProfileController;
 
@@ -165,9 +166,7 @@ Route::post('/subscribe', [NewsletterController::class, 'subscribe'])->name('sub
 
 
 // Contact Page Route
-Route::get('/contact', function () {
-    return view('frontend.contact.index');
-})->name('frontend.contact');
+Route::get('/contact', [ContactController::class, 'contactCms'])->name('frontend.contact');
 
 
 /*--------------------------------------------------------------------------

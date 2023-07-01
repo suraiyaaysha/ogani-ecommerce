@@ -23,6 +23,7 @@ class CmsController extends Controller
             'site_mobile'=> 'required',
             'site_support_text'=> 'required',
             'site_address'=> 'required',
+            'site_country'=> 'required',
             'free_shipping_text'=> 'required',
             'facebook_url'=> 'required|url',
             'twitter_url'=> 'required|url',
@@ -37,6 +38,7 @@ class CmsController extends Controller
             'banner_title'=> 'required',
             'banner_text'=> 'required',
             'banner_img'=> 'nullable|mimes:jpeg,jpg,png,svg|max:15000',
+            'page_banner_img'=> 'nullable|mimes:jpeg,jpg,png,svg|max:15000',
         ]);
 
         $cms = Cms::first();
@@ -94,12 +96,30 @@ class CmsController extends Controller
             $cms->banner_img = 'uploads/cms/' . $filename3; // Set the new profile photo URL
         }
 
+        // Page banner photo
+        if ($request->hasFile('page_banner_img')) {
+            $file4 = $request->file('page_banner_img');
+            $filename4 = $file4->hashName();
+            $file4->move('uploads/cms', $filename4);
+
+            // Delete previous photo
+            if ($cms->page_banner_img !== 'frontend/assets/img/breadcrumb.jpg') {
+                $previousPhotoPath4 = public_path($cms->page_banner_img);
+                if (file_exists($previousPhotoPath4)) {
+                    File::delete($previousPhotoPath4);
+                }
+            }
+
+            $cms->page_banner_img = 'uploads/cms/' . $filename4; // Set the new profile photo URL
+        }
+
         $cms->update([
             // 'home_banner_img'=> $request->home_banner_img,
             'site_email'=> $request->site_email,
             'site_mobile'=> $request->site_mobile,
             'site_support_text'=> $request->site_support_text,
             'site_address'=> $request->site_address,
+            'site_country'=> $request->site_country,
             'free_shipping_text'=> $request->free_shipping_text,
             'facebook_url'=> $request->facebook_url,
             'twitter_url'=> $request->twitter_url,

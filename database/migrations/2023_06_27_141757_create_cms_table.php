@@ -19,6 +19,7 @@ return new class extends Migration
             $table->string('site_mobile');
             $table->text('site_support_text');
             $table->longText('site_address');
+            $table->text('site_country');
             $table->text('free_shipping_text');
             $table->string('facebook_url');
             $table->string('twitter_url');
@@ -34,6 +35,7 @@ return new class extends Migration
             $table->text('banner_text');
             // $table->string('banner_shop_url')->nullable();
             $table->string('banner_img')->nullable();
+            $table->string('page_banner_img')->nullable();
 
             $table->timestamps();
         });

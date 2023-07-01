@@ -13,7 +13,7 @@
                     <div class="hero__item set-bg" data-setbg="{{ $cms->banner_img }}">
                         <div class="hero__text">
                             <span>{{ $cms->banner_category_name }}</span>
-                            <h2>{{ $cms->banner_title }}</h2>
+                            <h2>{!! $cms->banner_title !!}</h2>
                             <p>{{ $cms->banner_text }}</p>
                             <a href="{{ route('frontend.shop') }}" class="primary-btn">{{ __('SHOP NOW') }}</a>
                         </div>

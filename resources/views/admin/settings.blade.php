@@ -159,30 +159,6 @@
                                 <div class="card-inner mb-3 p-3">
 
                                     <h4 class="mb-3">Footer Settings</h4>
-                                    <div class="row">
-                                        <div class="col-md-6">
-                                            <div class="form-group">
-                                                <label>{{ __('Site Address') }}</label>
-                                                <input type="text" class="form-control" name="site_address" placeholder="Site Address"
-                                                    value="{{ old('site_address', $cms->site_address) }}" autocomplete="site_address">
-
-                                                @if ($errors->has('site_address'))
-                                                    <span class="text-danger">{{ $errors->first('site_address') }}</span>
-                                                @endif
-                                            </div>
-                                        </div>
-                                        <div class="col-md-6">
-                                            <div class="form-group">
-                                                <label>{{ __('Newsletter Text') }}</label>
-                                                <input type="text" class="form-control" name="newsletter_text" placeholder="Newsletter Text"
-                                                    value="{{ old('newsletter_text', $cms->newsletter_text) }}" autocomplete="newsletter_text">
-
-                                                @if ($errors->has('newsletter_text'))
-                                                    <span class="text-danger">{{ $errors->first('newsletter_text') }}</span>
-                                                @endif
-                                            </div>
-                                        </div>
-                                    </div>
 
                                     <div class="row">
                                         <div class="col-md-6">
@@ -219,11 +195,50 @@
                                         </div>
                                     </div>
 
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label>{{ __('Newsletter Text') }}</label>
+                                                <input type="text" class="form-control" name="newsletter_text" placeholder="Newsletter Text"
+                                                    value="{{ old('newsletter_text', $cms->newsletter_text) }}" autocomplete="newsletter_text">
+
+                                                @if ($errors->has('newsletter_text'))
+                                                    <span class="text-danger">{{ $errors->first('newsletter_text') }}</span>
+                                                @endif
+                                            </div>
+                                        </div>
+                                    </div>
+
                                 </div>
 
                                 <div class="card-inner mb-3 p-3">
 
                                     <h4 class="mb-3">Contact Page Settings</h4>
+
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label>{{ __('Site Address') }}</label>
+                                                <input type="text" class="form-control" name="site_address" placeholder="Site Address"
+                                                    value="{{ old('site_address', $cms->site_address) }}" autocomplete="site_address">
+
+                                                @if ($errors->has('site_address'))
+                                                    <span class="text-danger">{{ $errors->first('site_address') }}</span>
+                                                @endif
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label>{{ __('Site Country') }}</label>
+                                                <input type="text" class="form-control" name="site_country" placeholder="Site Country"
+                                                    value="{{ old('site_country', $cms->site_country) }}" autocomplete="site_country">
+
+                                                @if ($errors->has('site_country'))
+                                                    <span class="text-danger">{{ $errors->first('site_country') }}</span>
+                                                @endif
+                                            </div>
+                                        </div>
+                                    </div>
 
                                     <div class="row">
                                         <div class="col-md-6">
@@ -240,7 +255,7 @@
                                         <div class="col-md-6">
                                             <div class="form-group">
                                                 <label>{{ __('Google map url') }}</label>
-                                                <input type="url" class="form-control" name="google_map_url" placeholder="Google map url"
+                                                <input type="text" class="form-control" name="google_map_url" placeholder="Google map url"
                                                     value="{{ old('google_map_url', $cms->google_map_url) }}" autocomplete="google_map_url">
 
                                                 @if ($errors->has('google_map_url'))
@@ -254,7 +269,7 @@
 
                                 <div class="card-inner mb-3 p-3">
 
-                                    <h4 class="mb-3">Footer Settings</h4>
+                                    <h4 class="mb-3">Home Banner Settings</h4>
 
                                     <div class="row">
                                         <div class="col-md-6">
@@ -314,6 +329,38 @@
 
                                             </div>
                                         </div>
+                                    </div>
+
+                                </div>
+
+                                <div class="card-inner mb-3 p-3">
+
+                                    <h4 class="mb-3">Page Banner image Settings</h4>
+
+                                    <div class="row">
+
+                                        <div class="col-md-12">
+                                            <div class="form-group">
+                                                <label>{{ __('Page Banner image') }}</label>
+                                                <input type="file" class="form-control" name="page_banner_img" placeholder="Page banner thumbnail">
+
+                                                @if ($errors->has('page_banner_img'))
+                                                    <span class="text-danger">{{ $errors->first('page_banner_img') }}</span>
+                                                @endif
+
+                                                {{-- Show previous image --}}
+                                                @if($cms->page_banner_img)
+
+                                                    <img src="{{ asset(url($cms->page_banner_img)) }}" class="admin-profile-photo mw-100 mt-2 mb-2">
+
+                                                @else
+                                                    <p>No image found!</p>
+                                                @endif
+                                                {{-- Show previous image --}}
+
+                                            </div>
+                                        </div>
+
                                     </div>
 
                                 </div>

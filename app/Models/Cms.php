@@ -15,6 +15,7 @@ class Cms extends Model
         'site_mobile',
         'site_support_text',
         'site_address',
+        'site_country',
         'free_shipping_text',
         'facebook_url',
         'twitter_url',
@@ -30,6 +31,7 @@ class Cms extends Model
         'banner_title',
         'banner_text',
         // 'banner_shop_url',
-        'banner_img'
+        'banner_img',
+        'page_banner_img'
     ];
 }
