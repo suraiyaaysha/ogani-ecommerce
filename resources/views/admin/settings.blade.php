@@ -275,14 +275,36 @@
                                         <div class="col-md-6">
                                             <div class="form-group">
                                                 <label>{{ __('Banner category name') }}</label>
-                                                <input type="text" class="form-control" name="banner_category_name" placeholder="Banner category name"
-                                                    value="{{ old('banner_category_name', $cms->banner_category_name) }}" autocomplete="banner_category_name">
+                                                {{-- <input type="text" class="form-control" name="banner_category_name" placeholder="Banner category name"
+                                                    value="{{ old('banner_category_name', $cms->banner_category_name) }}" autocomplete="banner_category_name"> --}}
+
+                                                <select class="form-control" name="banner_category_name" autocomplete="banner_category_name">
+                                                    <option value="">Select a category</option>
+                                                    @foreach($productCategories as $category)
+                                                        <option value="{{ $category->name }}" {{ old('banner_category_name', $cms->banner_category_name) == $category->name ? 'selected' : '' }}>
+                                                            {{ $category->name }}
+                                                        </option>
+                                                    @endforeach
+                                                </select>
 
                                                 @if ($errors->has('banner_category_name'))
                                                     <span class="text-danger">{{ $errors->first('banner_category_name') }}</span>
                                                 @endif
                                             </div>
                                         </div>
+
+                                        <div class="col-md-6 d-none">
+                                            <div class="form-group">
+                                                <label>{{ __('Banner URL') }}</label>
+                                                    <input type="text" hidden class="form-control" name="banner_shop_url" id="banner_shop_url" placeholder="Banner URL"
+                                                    value="{{ old('banner_shop_url', $cms->banner_shop_url) }}" autocomplete="banner_shop_url">
+
+                                                @if ($errors->has('banner_shop_url'))
+                                                    <span class="text-danger">{{ $errors->first('banner_shop_url') }}</span>
+                                                @endif
+                                            </div>
+                                        </div>
+
                                         <div class="col-md-6">
                                             <div class="form-group">
                                                 <label>{{ __('Banner Title') }}</label>
@@ -363,6 +385,124 @@
 
                                     </div>
 
+                                </div>
+
+
+                                <div class="card-inner mb-3 p-3">
+
+                                    <h4 class="mb-3">Home Category Banner Section Settings</h4>
+
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label>{{ __('Category Banner name 1') }}</label>
+
+                                                <select class="form-control" name="category_banner_name1" autocomplete="category_banner_name1">
+                                                    <option value="">Select a category</option>
+                                                    @foreach($productCategories as $category)
+                                                        <option value="{{ $category->name }}" {{ old('category_banner_name1', $cms->category_banner_name1) == $category->name ? 'selected' : '' }}>
+                                                            {{ $category->name }}
+                                                        </option>
+                                                    @endforeach
+                                                </select>
+
+                                                @if ($errors->has('category_banner_name1'))
+                                                    <span class="text-danger">{{ $errors->first('category_banner_name1') }}</span>
+                                                @endif
+                                            </div>
+                                        </div>
+
+                                        <div class="col-md-6 d-none">
+                                            <div class="form-group">
+                                                <label>{{ __('Category Banner slug for URL 1') }}</label>
+                                                    <input type="text" hidden class="form-control" name="category_banner_slug1" id="category_banner_slug1" placeholder="Banner URL"
+                                                    value="{{ old('category_banner_slug1', $cms->category_banner_slug1) }}" autocomplete="category_banner_slug1">
+
+                                                @if ($errors->has('category_banner_slug1'))
+                                                    <span class="text-danger">{{ $errors->first('category_banner_slug1') }}</span>
+                                                @endif
+                                            </div>
+                                        </div>
+
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label>{{ __('Category Banner image 1') }}</label>
+                                                <input type="file" class="form-control" name="category_banner_img1" placeholder="Post thumbnail">
+
+                                                @if ($errors->has('category_banner_img1'))
+                                                    <span class="text-danger">{{ $errors->first('category_banner_img1') }}</span>
+                                                @endif
+
+                                                {{-- Show previous image --}}
+                                                @if($cms->category_banner_img1)
+
+                                                    <img src="{{ asset(url($cms->category_banner_img1)) }}" class="admin-profile-photo mt-2 mb-2">
+
+                                                @else
+                                                    <p>No image found!</p>
+                                                @endif
+                                                {{-- Show previous image --}}
+
+                                            </div>
+                                        </div>
+
+                                    </div>
+
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label>{{ __('Category Banner name 2') }}</label>
+
+                                                <select class="form-control" name="category_banner_name2" autocomplete="category_banner_name2">
+                                                    <option value="">Select a category</option>
+                                                    @foreach($productCategories as $category)
+                                                        <option value="{{ $category->name }}" {{ old('category_banner_name2', $cms->category_banner_name2) == $category->name ? 'selected' : '' }}>
+                                                            {{ $category->name }}
+                                                        </option>
+                                                    @endforeach
+                                                </select>
+
+                                                @if ($errors->has('category_banner_name2'))
+                                                    <span class="text-danger">{{ $errors->first('category_banner_name2') }}</span>
+                                                @endif
+                                            </div>
+                                        </div>
+
+                                        <div class="col-md-6 d-none">
+                                            <div class="form-group">
+                                                <label>{{ __('Category Banner slug for URL 2') }}</label>
+                                                    <input type="text" hidden class="form-control" name="category_banner_slug2" id="category_banner_slug2" placeholder="Banner URL"
+                                                    value="{{ old('category_banner_slug2', $cms->category_banner_slug2) }}" autocomplete="category_banner_slug2">
+
+                                                @if ($errors->has('category_banner_slug2'))
+                                                    <span class="text-danger">{{ $errors->first('category_banner_slug2') }}</span>
+                                                @endif
+                                            </div>
+                                        </div>
+
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label>{{ __('Category Banner image 2') }}</label>
+                                                <input type="file" class="form-control" name="category_banner_img2" placeholder="Post thumbnail">
+
+                                                @if ($errors->has('category_banner_img2'))
+                                                    <span class="text-danger">{{ $errors->first('category_banner_img2') }}</span>
+                                                @endif
+
+                                                {{-- Show previous image --}}
+                                                @if($cms->category_banner_img2)
+
+                                                    <img src="{{ asset(url($cms->category_banner_img2)) }}" class="admin-profile-photo mt-2 mb-2">
+
+                                                @else
+                                                    <p>No image found!</p>
+                                                @endif
+                                                {{-- Show previous image --}}
+
+                                            </div>
+                                        </div>
+
+                                    </div>
                                 </div>
 
                                 <button type="submit" class="btn btn-primary me-2">{{ __('Update Now') }}</button>

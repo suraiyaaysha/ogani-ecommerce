@@ -30,8 +30,16 @@ class Cms extends Model
         'banner_category_name',
         'banner_title',
         'banner_text',
-        // 'banner_shop_url',
+        'banner_shop_url',
         'banner_img',
-        'page_banner_img'
+        'page_banner_img',
+
+        'category_banner_name1',
+        'category_banner_slug1',
+        'category_banner_img1',
+
+        'category_banner_name2',
+        'category_banner_slug2',
+        'category_banner_img2',
     ];
 }

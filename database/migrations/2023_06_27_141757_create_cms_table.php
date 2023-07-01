@@ -33,9 +33,18 @@ return new class extends Migration
             $table->text('banner_category_name');
             $table->text('banner_title');
             $table->text('banner_text');
-            // $table->string('banner_shop_url')->nullable();
+            $table->text('banner_shop_url');
             $table->string('banner_img')->nullable();
             $table->string('page_banner_img')->nullable();
+
+
+            $table->text('category_banner_name1');
+            $table->text('category_banner_slug1');
+            $table->string('category_banner_img1')->nullable();
+
+            $table->text('category_banner_name2');
+            $table->text('category_banner_slug2');
+            $table->string('category_banner_img2')->nullable();
 
             $table->timestamps();
         });

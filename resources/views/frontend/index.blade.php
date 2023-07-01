@@ -15,7 +15,8 @@
                             <span>{{ $cms->banner_category_name }}</span>
                             <h2>{!! $cms->banner_title !!}</h2>
                             <p>{{ $cms->banner_text }}</p>
-                            <a href="{{ route('frontend.shop') }}" class="primary-btn">{{ __('SHOP NOW') }}</a>
+                            <a href="{{ route('frontend.productsByCategory', $cms->banner_shop_url) }}" class="primary-btn">{{ __('SHOP NOW') }}</a>
+                            {{-- <a href="{{ route('frontend.shop') }}" class="primary-btn">{{ __('SHOP NOW') }}</a> --}}
                         </div>
                     </div>
                 </div>
@@ -112,17 +113,21 @@
     <!-- Featured Section End -->
 
     <!-- Banner Begin -->
-    <div class="banner">
+    <div class="banner category-banner-section">
         <div class="container">
             <div class="row">
                 <div class="col-lg-6 col-md-6 col-sm-6">
                     <div class="banner__pic">
-                        <img src="{{ url('frontend/assets/img/banner/banner-1.jpg') }}" alt="">
+                        <a href="{{ route('frontend.productsByCategory', $cms->category_banner_slug1) }}">
+                            <img src="{{ $cms->category_banner_img1 }}" alt="">
+                        </a>
                     </div>
                 </div>
                 <div class="col-lg-6 col-md-6 col-sm-6">
                     <div class="banner__pic">
-                        <img src="{{ url('frontend/assets/img/banner/banner-2.jpg') }}" alt="">
+                        <a href="{{ route('frontend.productsByCategory', $cms->category_banner_slug2) }}">
+                            <img src="{{ $cms->category_banner_img2 }}" alt="">
+                        </a>
                     </div>
                 </div>
             </div>

@@ -7,12 +7,18 @@ use Illuminate\Http\Request;
 
 use App\Models\Cms;
 use Illuminate\Support\Facades\File;
+use App\Models\ProductCategory;
+use Illuminate\Support\Str;
 
 class CmsController extends Controller
 {
     public function cmsShow() {
         $cms = Cms::first();
-        return view('admin.settings', compact('cms'));
+
+        $productCategories = ProductCategory::all(); // Fetch all product categories
+
+        // return view('admin.settings', compact('cms'));
+        return view('admin.settings', compact('cms', 'productCategories'));
     }
 
     public function cmsUpdate(Request $request){
@@ -37,6 +43,7 @@ class CmsController extends Controller
             'banner_category_name'=> 'required',
             'banner_title'=> 'required',
             'banner_text'=> 'required',
+            'banner_shop_url'=> 'required',
             'banner_img'=> 'nullable|mimes:jpeg,jpg,png,svg|max:15000',
             'page_banner_img'=> 'nullable|mimes:jpeg,jpg,png,svg|max:15000',
         ]);
@@ -113,6 +120,40 @@ class CmsController extends Controller
             $cms->page_banner_img = 'uploads/cms/' . $filename4; // Set the new profile photo URL
         }
 
+        // Page banner photo
+        if ($request->hasFile('category_banner_img1')) {
+            $file5 = $request->file('category_banner_img1');
+            $filename5 = $file5->hashName();
+            $file5->move('uploads/cms', $filename5);
+
+            // Delete previous photo
+            if ($cms->category_banner_img1 !== 'frontend/assets/img/breadcrumb.jpg') {
+                $previousPhotoPath5 = public_path($cms->category_banner_img1);
+                if (file_exists($previousPhotoPath5)) {
+                    File::delete($previousPhotoPath5);
+                }
+            }
+
+            $cms->category_banner_img1 = 'uploads/cms/' . $filename5; // Set the new profile photo URL
+        }
+
+        // Page banner photo
+        if ($request->hasFile('category_banner_img2')) {
+            $file6 = $request->file('category_banner_img2');
+            $filename6 = $file6->hashName();
+            $file6->move('uploads/cms', $filename6);
+
+            // Delete previous photo
+            if ($cms->category_banner_img2 !== 'frontend/assets/img/breadcrumb.jpg') {
+                $previousPhotoPath6 = public_path($cms->category_banner_img2);
+                if (file_exists($previousPhotoPath6)) {
+                    File::delete($previousPhotoPath6);
+                }
+            }
+
+            $cms->category_banner_img2 = 'uploads/cms/' . $filename6; // Set the new profile photo URL
+        }
+
         $cms->update([
             // 'home_banner_img'=> $request->home_banner_img,
             'site_email'=> $request->site_email,
@@ -132,6 +173,15 @@ class CmsController extends Controller
             'banner_category_name'=> $request->banner_category_name,
             'banner_title'=> $request->banner_title,
             'banner_text'=> $request->banner_text,
+            // 'banner_shop_url'=> $request->banner_shop_url,
+            'banner_shop_url'=> Str::slug($request->banner_category_name,),
+
+
+            'category_banner_name1'=> $request->category_banner_name1,
+            'category_banner_slug1'=> Str::slug($request->category_banner_name1,),
+
+            'category_banner_name2'=> $request->category_banner_name2,
+            'category_banner_slug2'=> Str::slug($request->category_banner_name2,),
         ]);
 
         return back()->with('success', 'Site Content Updated Successfully');
