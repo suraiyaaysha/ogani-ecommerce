@@ -20859,4 +20859,14 @@ div.tagsinput {
 select.form-control {
     color: #fff;
 }
+
+/* sweet alart css */
+div:where(.swal2-container) div:where(.swal2-popup) {
+    padding: 1.25em 0 1.25em!important;
+}
+.swal2-modal .swal2-title {
+    color: inherit!important;
+}
+/* sweet alart css */
+
 /* My Custom css for Admin */

@@ -25,6 +25,9 @@ use App\Http\Controllers\Frontend\WishlistController;
 use App\Http\Controllers\Frontend\NewsletterController;
 use App\Http\Controllers\Frontend\FrontendController;
 
+
+use App\Http\Controllers\Admin\AdminContactController;
+
 use Illuminate\Http\Request;
 use Stripe\Stripe;
 
@@ -186,5 +189,11 @@ Route::middleware(['auth','admin'])->group(function () {
     // CMS routes
     Route::get('admin/settings',[CmsController::class,'cmsShow'])->name('admin.cmsShow');
     Route::put('admin/cms',[CmsController::class,'cmsUpdate'])->name('admin.cmsUpdate');
+
+    // contact routs
+    Route::get('/admin/contact-list', [AdminContactController::class, 'contactList'])->name('admin.contactList');
+    // Route::get('/admin/{contact}/show', [AdminContactController::class, 'contactShow'])->name('admin.contactShow');
+    Route::get('/admin/contact/{contact}', [AdminContactController::class, 'contactShow'])->name('admin.contact.show');
+    Route::delete('/admin/contact/{contact}', [AdminContactController::class, 'destroy'])->name('admin.contact.destroy');
 
 });

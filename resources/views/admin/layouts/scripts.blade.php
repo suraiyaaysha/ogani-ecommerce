@@ -8,6 +8,7 @@
     <script src="{{ url('admin/assets/vendors/jvectormap/jquery-jvectormap-world-mill-en.js') }}"></script>
     <script src="{{ url('admin/assets/vendors/owl-carousel-2/owl.carousel.min.js') }}"></script>
     <script src="{{ url('admin/assets/js/jquery.cookie.js') }}"></script>
+
     <!-- End plugin js for this page -->
     <!-- inject:js -->
     <script src="{{ url('admin/assets/js/off-canvas.js') }}"></script>
@@ -19,3 +20,10 @@
     <!-- Custom js for this page -->
     <script src="assets/js/dashboard.js"></script>
     <!-- End custom js for this page -->
+
+    {{-- sweet alert --}}
+    {{-- <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script> --}}
+    <script src="
+        https://cdn.jsdelivr.net/npm/sweetalert2@11.7.12/dist/sweetalert2.all.min.js
+        "></script>
+    {{-- sweet alert --}}
