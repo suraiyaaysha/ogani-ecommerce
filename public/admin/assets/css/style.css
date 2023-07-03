@@ -20869,4 +20869,12 @@ div:where(.swal2-container) div:where(.swal2-popup) {
 }
 /* sweet alart css */
 
+/* table img */
+.admin-product-cat-img {
+    width: 100px!important;
+    height: auto!important;
+    border-radius: 0!important;
+}
+/* table img */
+
 /* My Custom css for Admin */

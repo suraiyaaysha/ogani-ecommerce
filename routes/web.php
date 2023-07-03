@@ -196,4 +196,17 @@ Route::middleware(['auth','admin'])->group(function () {
     Route::get('/admin/contact/{contact}', [AdminContactController::class, 'contactShow'])->name('admin.contact.show');
     Route::delete('/admin/contact/{contact}', [AdminContactController::class, 'destroy'])->name('admin.contact.destroy');
 
+    // Product Category
+    Route::prefix('admin')->group(function () {
+        Route::resource('product-categories', App\Http\Controllers\Admin\ProductCategoryController::class);
+        // GET /admin/product-categories (index)
+        // GET /admin/product-categories/create (create)
+        // POST /admin/product-categories (store)
+        // GET /admin/product-categories/{product_category} (show)
+        // GET /admin/product-categories/{product_category}/edit (edit)
+        // PUT/PATCH /admin/product-categories/{product_category} (update)
+        // DELETE /admin/product-categories/{product_category} (destroy)
+    });
+
+
 });
