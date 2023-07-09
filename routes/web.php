@@ -27,6 +27,7 @@ use App\Http\Controllers\Frontend\FrontendController;
 
 
 use App\Http\Controllers\Admin\AdminContactController;
+use App\Http\Controllers\Admin\ProductController;
 
 use Illuminate\Http\Request;
 use Stripe\Stripe;
@@ -196,16 +197,12 @@ Route::middleware(['auth','admin'])->group(function () {
     Route::get('/admin/contact/{contact}', [AdminContactController::class, 'contactShow'])->name('admin.contact.show');
     Route::delete('/admin/contact/{contact}', [AdminContactController::class, 'destroy'])->name('admin.contact.destroy');
 
-    // Product Category
     Route::prefix('admin')->group(function () {
+        // Product Category
         Route::resource('product-categories', App\Http\Controllers\Admin\ProductCategoryController::class);
-        // GET /admin/product-categories (index)
-        // GET /admin/product-categories/create (create)
-        // POST /admin/product-categories (store)
-        // GET /admin/product-categories/{product_category} (show)
-        // GET /admin/product-categories/{product_category}/edit (edit)
-        // PUT/PATCH /admin/product-categories/{product_category} (update)
-        // DELETE /admin/product-categories/{product_category} (destroy)
+
+        // Product Routes
+        Route::resource('products', ProductController::class);
     });
 
 

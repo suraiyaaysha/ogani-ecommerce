@@ -61,8 +61,8 @@
             </a>
             <div class="collapse" id="product_list">
               <ul class="nav flex-column sub-menu">
-                <li class="nav-item"> <a class="nav-link" href="#">{{ __('Product List') }}</a></li>
-                <li class="nav-item"> <a class="nav-link" href="#">{{ __('Create new Product') }}</a></li>
+                <li class="nav-item"> <a class="nav-link" href="{{ url('/admin/products') }}">{{ __('Product List') }}</a></li>
+                <li class="nav-item"> <a class="nav-link" href="{{ url('/admin/products/create') }}">{{ __('Create new Product') }}</a></li>
               </ul>
             </div>
           </li>
@@ -98,7 +98,7 @@
               </ul>
             </div>
           </li>
-          
+
           <li class="nav-item menu-items">
             <a class="nav-link" href="{{ url('admin/profile/') }}">
               <span class="menu-icon">

@@ -11,17 +11,19 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('product_color', function (Blueprint $table) {
-            $table->id();
+        // Schema::create('product_size', function (Blueprint $table) {
+        //     $table->id();
+        //     $table->timestamps();
+        // });
+         Schema::create('product_size', function (Blueprint $table) {
             $table->unsignedBigInteger('product_id');
-            $table->unsignedBigInteger('color_id');
+            $table->unsignedBigInteger('size_id');
 
             $table->foreign('product_id')->references('id')->on('products')->onDelete('cascade');
-            $table->foreign('color_id')->references('id')->on('colors')->onDelete('cascade');
+            $table->foreign('size_id')->references('id')->on('sizes')->onDelete('cascade');
 
-            $table->timestamps();
+            $table->primary(['product_id', 'size_id']);
         });
-        
     }
 
     /**
@@ -29,6 +31,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('product_color');
+        Schema::dropIfExists('product_size');
     }
 };

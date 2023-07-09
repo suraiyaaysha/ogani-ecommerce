@@ -20,11 +20,11 @@ class Product extends Model
         'price',
         'discount',
         'quantity',
-        'featured_image',
-        'gallery_images',
         'weight',
         'shipping_duration',
         'shipping_charge',
+        'featured_image',
+        'gallery_images',
         'is_featured',
         'status',
 
@@ -55,6 +55,7 @@ class Product extends Model
     // with colors
     public function colors() {
         return $this->belongsToMany(Color::class, 'product_color');
+        // return $this->belongsToMany(Color::class, 'color_product');
     }
 
     // with tags

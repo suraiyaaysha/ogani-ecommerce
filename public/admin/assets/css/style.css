@@ -20875,6 +20875,9 @@ div:where(.swal2-container) div:where(.swal2-popup) {
     height: auto!important;
     border-radius: 0!important;
 }
+select.multiple-select {
+    height: 100px;
+}
 /* table img */
 
 /* My Custom css for Admin */

@@ -20,11 +20,11 @@ return new class extends Migration
             // $table->decimal('price', 8, 2);
             // $table->decimal('discount', 8, 2);
 
-             $table->unsignedBigInteger('price');
+            $table->unsignedBigInteger('price');
             $table->unsignedBigInteger('discount')->default(0);
 
             $table->integer('quantity');
-            $table->string('featured_image');
+            $table->string('featured_image')->nullable();
             $table->json('gallery_images')->nullable();
             $table->decimal('weight', 8, 2);
             // $table->string('color');
@@ -49,7 +49,8 @@ return new class extends Migration
             $table->unsignedDecimal('star_rating', 3, 1);
             $table->boolean('approved')->default(false);
             $table->foreignId('user_id')->constrained();
-            $table->foreignId('product_id')->constrained();
+            // $table->foreignId('product_id')->constrained();
+            $table->foreignId('product_id')->constrained()->onDelete('cascade');
             $table->integer('parent_id')->unsigned()->nullable();
 
             $table->timestamps();
