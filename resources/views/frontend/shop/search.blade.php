@@ -63,7 +63,7 @@
                          @forelse ($products as $product)
                             <div class="col-lg-4 col-md-6 col-sm-6">
                                 <div class="featured__item">
-                                    <div class="featured__item__pic set-bg" data-setbg="{{ $product->featured_image }}">
+                                    <div class="featured__item__pic set-bg" data-setbg="{{ asset($product->featured_image) }}">
                                         <ul class="featured__item__pic__hover">
 
                                             <!-- Start add to wishlist button -->

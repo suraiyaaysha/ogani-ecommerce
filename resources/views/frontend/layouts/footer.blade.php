@@ -17,7 +17,7 @@
                 <div class="col-lg-3 col-md-6 col-sm-6">
                     <div class="footer__about">
                         <div class="footer__about__logo">
-                            <a href="{{ url('/') }}"><img src="{{ $cms->site_logo }}" alt=""></a>
+                            <a href="{{ url('/') }}"><img src="{{ url($cms->site_logo) }}" alt=""></a>
                         </div>
                         <ul>
                             <li>{{ __('Address:') }} {{ $cms->site_address }}</li>
@@ -77,11 +77,9 @@
                 <div class="col-lg-12">
                     <div class="footer__copyright">
                         <div class="footer__copyright__text">
-                            <p><!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
-                            Copyright &copy;<script>document.write(new Date().getFullYear());</script> {{ $cms->copyright_text }}</a>
-                            <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. --></p>
-                            </div>
-                        <div class="footer__copyright__payment"><img src="{{ $cms->payment_method_img }}" alt=""></div>
+                            <p>Copyright &copy;<script>document.write(new Date().getFullYear());</script> {{ $cms->copyright_text }}</a></p>
+                        </div>
+                        <div class="footer__copyright__payment"><img src="{{ url($cms->payment_method_img) }}" alt=""></div>
                     </div>
                 </div>
             </div>

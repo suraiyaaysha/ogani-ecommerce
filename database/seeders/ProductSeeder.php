@@ -19,7 +19,7 @@ class ProductSeeder extends Seeder
     {
         // For color
         $colors = Color::pluck('id')->toArray();
-         $sizes = Size::pluck('id')->toArray();
+        $sizes = Size::pluck('id')->toArray();
         $faker = Faker::create();
 
         // Create 10 Products

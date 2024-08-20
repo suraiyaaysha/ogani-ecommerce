@@ -10,7 +10,7 @@
                 <div class="col-lg-3">
                 </div>
                 <div class="col-lg-9">
-                    <div class="hero__item set-bg" data-setbg="{{ $cms->banner_img }}">
+                    <div class="hero__item set-bg" data-setbg="{{ asset($cms->banner_img) }}">
                         <div class="hero__text">
                             <span>{{ $cms->banner_category_name }}</span>
                             <h2>{!! $cms->banner_title !!}</h2>
@@ -66,7 +66,7 @@
                 @foreach ($featuredProducts as $product)
                     <div class="col-lg-3 col-md-4 col-sm-6 mix {{ $product->productCategory->slug }}">
                         <div class="featured__item">
-                            <div class="featured__item__pic set-bg" data-setbg="{{ $product->featured_image }}">
+                            <div class="featured__item__pic set-bg" data-setbg="{{ asset($product->featured_image) }}">
                                 <ul class="featured__item__pic__hover">
                                     <!-- Start add to wishlist button -->
                                     <li>
@@ -119,14 +119,14 @@
                 <div class="col-lg-6 col-md-6 col-sm-6">
                     <div class="banner__pic">
                         <a href="{{ route('frontend.productsByCategory', $cms->category_banner_slug1) }}">
-                            <img src="{{ $cms->category_banner_img1 }}" alt="">
+                            <img src="{{ asset($cms->category_banner_img1) }}" alt="">
                         </a>
                     </div>
                 </div>
                 <div class="col-lg-6 col-md-6 col-sm-6">
                     <div class="banner__pic">
                         <a href="{{ route('frontend.productsByCategory', $cms->category_banner_slug2) }}">
-                            <img src="{{ $cms->category_banner_img2 }}" alt="">
+                            <img src="{{ asset($cms->category_banner_img2) }}" alt="">
                         </a>
                     </div>
                 </div>
@@ -149,7 +149,7 @@
                                     @foreach ($chunk as $product)
                                         <a href="{{ route('frontend.productDetails', $product->slug) }}" class="latest-product__item">
                                             <div class="latest-product__item__pic">
-                                                <img src="{{ $product->featured_image }}" alt="{{ $product->name }}">
+                                                <img src="{{ asset($product->featured_image) }}" alt="{{ $product->name }}">
                                             </div>
                                             <div class="latest-product__item__text">
                                                 <h6>{{ $product->name }}</h6>
@@ -173,7 +173,7 @@
                                     @foreach ($chunk as $product)
                                         <a href="{{ route('frontend.productDetails', $product->slug) }}" class="latest-product__item">
                                             <div class="latest-product__item__pic">
-                                                <img src="{{ $product->featured_image }}" alt="{{ $product->name }}">
+                                                <img src="{{ asset($product->featured_image) }}" alt="{{ $product->name }}">
                                             </div>
                                             <div class="latest-product__item__text">
                                                 <h6>{{ $product->name }}</h6>
@@ -196,7 +196,7 @@
                                     @foreach ($chunk as $product)
                                         <a href="{{ route('frontend.productDetails', $product->slug) }}" class="latest-product__item">
                                             <div class="latest-product__item__pic">
-                                                <img src="{{ $product->featured_image }}" alt="{{ $product->name }}">
+                                                <img src="{{ asset($product->featured_image) }}" alt="{{ $product->name }}">
                                             </div>
                                             <div class="latest-product__item__text">
                                                 <h6>{{ $product->name }}</h6>
@@ -227,7 +227,7 @@
                         <div class="col-lg-4">
                             <div class="product__discount__item">
                                 <div class="product__discount__item__pic set-bg"
-                                    data-setbg="{{ $product->featured_image }}">
+                                    data-setbg="{{ asset($product->featured_image) }}">
                                     <div class="product__discount__percent">-{{ $product->discount }}%</div>
                                     <ul class="product__item__pic__hover">
                                         <!-- Start add to wishlist button -->

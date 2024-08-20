@@ -3,11 +3,11 @@
 
 <head>
     <meta charset="UTF-8">
-    <meta name="description" content="Ogani Template">
-    <meta name="keywords" content="Ogani, unica, creative, html">
+    <meta name="description" content="LinkMart Template">
+    <meta name="keywords" content="LinkMart, unica, creative, html">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Ogani | Template</title>
+    <title>LinkMart | Template</title>
 
     <!-- Google Font -->
     <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@200;300;400;600;900&display=swap" rel="stylesheet">
@@ -45,7 +45,7 @@
     <div class="humberger__menu__overlay"></div>
     <div class="humberger__menu__wrapper">
         <div class="humberger__menu__logo">
-            <a href="{{ url('/') }}"><img src="{{ $cms->site_logo }}" alt=""></a>
+            <a href="{{ url('/') }}"><img src="{{ asset($cms->site_logo) }}" alt=""></a>
         </div>
         <div class="humberger__menu__cart">
             <ul>
@@ -80,7 +80,8 @@
         </div>
         <div class="humberger__menu__widget">
             <div class="header__top__right__language">
-                <img src="frontend/assets/img/language.png" alt="">
+                <img src="{{ asset('frontend/assets/img/language.png') }}" alt="">
+
                 <div>{{ __('English') }}</div>
                 <span class="arrow_carrot-down"></span>
                 <ul>
@@ -166,7 +167,8 @@
                                 <a href="{{ $cms->pinterest_url }}"><i class="fa fa-pinterest-p"></i></a>
                             </div>
                             <div class="header__top__right__language">
-                                <img src="frontend/assets/img/language.png" alt="">
+                                <img src="{{ asset('frontend/assets/img/language.png') }}" alt="">
+                                
                                 <div>{{ __('English') }}</div>
                                 <span class="arrow_carrot-down"></span>
                                 <ul>
@@ -218,7 +220,7 @@
             <div class="row">
                 <div class="col-lg-3">
                     <div class="header__logo">
-                        <a href="{{ url('/') }}"><img src="{{ $cms->site_logo }}" alt=""></a>
+                        <a href="{{ url('/') }}"><img src="{{ asset($cms->site_logo) }}" alt=""></a>
                     </div>
                 </div>
                 <div class="col-lg-6">

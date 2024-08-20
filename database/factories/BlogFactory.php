@@ -30,6 +30,9 @@ class BlogFactory extends Factory
 
         // Get a random blog category
         $blogCategory = BlogCategory::inRandomOrder()->first();
+        
+        // Generate a random ID for the Picsum image
+        $randomId = rand(1, 100);
 
         return [
             'user_id' => User::where('email', 'admin@gmail.com')->first()->id, //Only Admin Can create posts
@@ -39,7 +42,8 @@ class BlogFactory extends Factory
             'title' => $title,
             'slug' => Str::slug($title),
             'details' => $this->faker->paragraph,
-            'thumbnail' => $this->faker->imageUrl(),
+            // 'thumbnail' => $this->faker->imageUrl(),
+            'thumbnail' => 'https://picsum.photos/id/' . $randomId . '/700/600',
         ];
     }
 }

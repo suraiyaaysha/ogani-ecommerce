@@ -26,7 +26,7 @@ class CmsSeeder extends Seeder
             'linkedin_url' => 'https://www.linkedin.com',
             'pinterest_url' => 'https://www.pinterest.com',
             'newsletter_text' => 'Get E-mail updates about our latest shop and special offers.',
-            'copyright_text' => 'All rights reserved | This template is made with  by Colorlib',
+            'copyright_text' => 'All rights reserved | Developed by AyshaTech',
             'payment_method_img' => 'frontend/assets/img/payment-item.png',
             'business_open_time' => '10:00 am to 23:00 pm',
             'google_map_url' => 'https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d235215.58200312319!2d89.3944127!3d22.904389!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x39ff9071cb47152f%3A0xf04b212290718952!2sKhulna!5e0!3m2!1sen!2sbd!4v1688195509554!5m2!1sen!2sbd',
@@ -39,7 +39,7 @@ class CmsSeeder extends Seeder
 
             'page_banner_img' => 'frontend/assets/img/breadcrumb.jpg',
 
-            'category_banner_name1' =>'Fruit & Nut Gifts',
+            'category_banner_name1' => 'Fruit & Nut Gifts',
             'category_banner_slug1' => 'fruit-&-nut-gifts',
             'category_banner_img1' => 'frontend/assets/img/banner/banner-1.jpg',
 

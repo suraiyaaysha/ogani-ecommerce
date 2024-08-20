@@ -18,7 +18,7 @@ class ProductCategorySeeder extends Seeder
         ProductCategory::create([
             'name' => 'Fresh Meat',
             'slug' => 'fresh-meat',
-            'thumbnail' => 'https://via.placeholder.com/640x480.png/00dd00?text=doloribus',
+            'thumbnail' => 'frontend/assets/img/categories/cat-1.jpg',
             'status' => 'active',
             'is_featured' => true,
             // 'product_id' => '1',
@@ -27,7 +27,7 @@ class ProductCategorySeeder extends Seeder
         ProductCategory::create([
             'name' => 'Vegetables',
             'slug' => 'vegetables',
-            'thumbnail' => 'https://via.placeholder.com/640x480.png/0066ee?text=magni',
+            'thumbnail' => 'frontend/assets/img/categories/cat-2.jpg',
             'status' => 'active',
             'is_featured' => false,
             // 'product_id' => '1',
@@ -36,7 +36,7 @@ class ProductCategorySeeder extends Seeder
         ProductCategory::create([
             'name' => 'Fruit & Nut Gifts',
             'slug' => 'fruit-nut-gifts',
-            'thumbnail' => 'https://via.placeholder.com/640x480.png/009955?text=aut',
+            'thumbnail' => 'frontend/assets/img/categories/cat-3.jpg',
             'status' => 'active',
             'is_featured' => true,
         ]);
@@ -44,7 +44,7 @@ class ProductCategorySeeder extends Seeder
         ProductCategory::create([
             'name' => 'Fresh Berries',
             'slug' => 'fresh-berries',
-            'thumbnail' => 'https://via.placeholder.com/640x480.png/00dd66?text=excepturi',
+            'thumbnail' => 'frontend/assets/img/categories/cat-4.jpg',
             'status' => 'active',
             'is_featured' => false,
             // 'product_id' => '1',
@@ -53,7 +53,7 @@ class ProductCategorySeeder extends Seeder
         ProductCategory::create([
             'name' => 'Ocean Foods',
             'slug' => 'ocean-foods',
-            'thumbnail' => 'https://via.placeholder.com/640x480.png/00dd66?text=excepturi',
+            'thumbnail' => 'frontend/assets/img/categories/cat-5.jpg',
             'status' => 'active',
             'is_featured' => false,
             // 'product_id' => '1',
@@ -62,7 +62,7 @@ class ProductCategorySeeder extends Seeder
         ProductCategory::create([
             'name' => 'Butter & Eggs',
             'slug' => 'butter-eggs',
-            'thumbnail' => 'https://via.placeholder.com/640x480.png/00dd66?text=excepturi',
+            'thumbnail' => 'frontend/assets/img/categories/cat-1.jpg',
             'status' => 'active',
             'is_featured' => false,
             // 'product_id' => '1',
@@ -71,7 +71,7 @@ class ProductCategorySeeder extends Seeder
         ProductCategory::create([
             'name' => 'Fastfood',
             'slug' => 'fastfood',
-            'thumbnail' => 'https://via.placeholder.com/640x480.png/00dd66?text=excepturi',
+            'thumbnail' => 'frontend/assets/img/categories/cat-2.jpg',
             'status' => 'active',
             'is_featured' => false,
             // 'product_id' => '1',
@@ -80,7 +80,7 @@ class ProductCategorySeeder extends Seeder
         ProductCategory::create([
             'name' => 'Fresh Onion',
             'slug' => 'fresh-onion',
-            'thumbnail' => 'https://via.placeholder.com/640x480.png/00dd66?text=excepturi',
+            'thumbnail' => 'frontend/assets/img/categories/cat-3.jpg',
             'status' => 'active',
             'is_featured' => false,
             // 'product_id' => '1',
@@ -89,7 +89,7 @@ class ProductCategorySeeder extends Seeder
         ProductCategory::create([
             'name' => 'Papayaya & Crisps',
             'slug' => 'papayaya-crisps',
-            'thumbnail' => 'https://via.placeholder.com/640x480.png/00dd66?text=excepturi',
+            'thumbnail' => 'frontend/assets/img/categories/cat-4.jpg',
             'status' => 'active',
             'is_featured' => false,
             // 'product_id' => '1',
@@ -98,7 +98,7 @@ class ProductCategorySeeder extends Seeder
         ProductCategory::create([
             'name' => 'Oatmeal',
             'slug' => 'oatmeal',
-            'thumbnail' => 'https://via.placeholder.com/640x480.png/00dd66?text=excepturi',
+            'thumbnail' => 'frontend/assets/img/categories/cat-5.jpg',
             'status' => 'active',
             'is_featured' => false,
             // 'product_id' => '1',
@@ -107,7 +107,7 @@ class ProductCategorySeeder extends Seeder
         ProductCategory::create([
             'name' => 'Fresh Bananas',
             'slug' => 'fresh-bananas',
-            'thumbnail' => 'https://via.placeholder.com/640x480.png/00dd66?text=excepturi',
+            'thumbnail' => 'frontend/assets/img/categories/cat-1.jpg',
             'status' => 'active',
             'is_featured' => false,
             // 'product_id' => '1',

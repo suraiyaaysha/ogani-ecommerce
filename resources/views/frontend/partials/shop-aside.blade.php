@@ -92,7 +92,7 @@
                         @foreach ($chunk as $product)
                             <a href="{{ route('frontend.productDetails', $product->slug) }}" class="latest-product__item">
                                 <div class="latest-product__item__pic">
-                                    <img src="{{ $product->featured_image }}" alt="{{ $product->name }}">
+                                    <img src="{{ asset($product->featured_image) }}" alt="{{ $product->name }}">
                                 </div>
                                 <div class="latest-product__item__text">
                                     <h6>{{ $product->name }}</h6>

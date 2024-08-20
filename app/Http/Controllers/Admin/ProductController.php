@@ -29,84 +29,83 @@ class ProductController extends Controller
         return view('admin.products.create', compact('categories', 'colors', 'sizes'));
     }
 
-public function store(Request $request)
-{
-    $request->validate([
-        'name' => 'required',
-        'description' => 'required',
-        'information' => 'required',
-        'price' => 'required',
-        'discount' => 'nullable',
-        'quantity' => 'required',
-        'featured_image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
-        'gallery_images' => 'nullable|array',
-        'gallery_images.*' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
-        'weight' => 'nullable',
-        'shipping_duration' => 'nullable',
-        'shipping_charge' => 'nullable',
-        // 'is_featured' => 'required',
-        'status' => 'required',
-        'product_category_id' => 'required|exists:product_categories,id',
-        'colors' => 'required|array',
-        'colors.*' => 'exists:colors,id',
-        'sizes' => 'required|array',
-        'sizes.*' => 'exists:sizes,id',
-    ]);
+    public function store(Request $request)
+    {
+        $request->validate([
+            'name' => 'required',
+            'description' => 'required',
+            'information' => 'required',
+            'price' => 'required',
+            'discount' => 'nullable',
+            'quantity' => 'required',
+            'featured_image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
+            'gallery_images' => 'nullable|array',
+            'gallery_images.*' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
+            'weight' => 'nullable',
+            'shipping_duration' => 'nullable',
+            'shipping_charge' => 'nullable',
+            // 'is_featured' => 'required',
+            'status' => 'required',
+            'product_category_id' => 'required|exists:product_categories,id',
+            'colors' => 'required|array',
+            'colors.*' => 'exists:colors,id',
+            'sizes' => 'required|array',
+            'sizes.*' => 'exists:sizes,id',
+        ]);
 
-    // Retrieve the authenticated user
-    $user = Auth::user();
+        // Retrieve the authenticated user
+        $user = Auth::user();
 
-    // Handle featured image
-    $featuredImagePath = null;
-    if ($request->hasFile('featured_image')) {
-        $featuredImage = $request->file('featured_image');
-        $featuredImageName = time() . '_' . $featuredImage->getClientOriginalName();
-        $featuredImage->move(public_path('uploads/products'), $featuredImageName);
-        $featuredImagePath = 'uploads/products/' . $featuredImageName;
-    }
-
-    // Handle gallery images
-    $galleryImagePaths = [];
-    if ($request->hasFile('gallery_images')) {
-        foreach ($request->file('gallery_images') as $galleryImage) {
-            $galleryImageName = time() . '_' . $galleryImage->getClientOriginalName();
-            $galleryImage->move(public_path('uploads/products'), $galleryImageName);
-            $galleryImagePaths[] = 'uploads/products/' . $galleryImageName;
+        // Handle featured image
+        $featuredImagePath = null;
+        if ($request->hasFile('featured_image')) {
+            $featuredImage = $request->file('featured_image');
+            $featuredImageName = time() . '_' . $featuredImage->getClientOriginalName();
+            $featuredImage->move(public_path('uploads/products'), $featuredImageName);
+            $featuredImagePath = 'uploads/products/' . $featuredImageName;
         }
+
+        // Handle gallery images
+        $galleryImagePaths = [];
+        if ($request->hasFile('gallery_images')) {
+            foreach ($request->file('gallery_images') as $galleryImage) {
+                $galleryImageName = time() . '_' . $galleryImage->getClientOriginalName();
+                $galleryImage->move(public_path('uploads/products'), $galleryImageName);
+                $galleryImagePaths[] = 'uploads/products/' . $galleryImageName;
+            }
+        }
+
+        // Convert gallery images array to string
+        $galleryImagesString = json_encode($galleryImagePaths);
+
+        // Save the product
+        $product = new Product;
+        $product->name = $request->name;
+        $product->slug = Str::slug($request->name);
+        $product->description = $request->description;
+        $product->information = $request->information;
+        $product->price = $request->price;
+        $product->discount = $request->discount;
+        $product->quantity = $request->quantity;
+        $product->featured_image = $featuredImagePath;
+        $product->gallery_images = $galleryImagesString;
+        $product->weight = $request->weight;
+        $product->shipping_duration = $request->shipping_duration;
+        $product->shipping_charge = $request->shipping_charge;
+        $product->is_featured = $request->is_featured;
+        $product->status = $request->status;
+        $product->user_id = $user->id;
+        $product->product_category_id = $request->product_category_id;
+        $product->save();
+
+        // Attach colors to the product
+        $product->colors()->attach($request->colors);
+
+        // Attach sizes to the product
+        $product->sizes()->attach($request->sizes);
+
+        return redirect()->route('products.index')->with('success', 'Product created successfully.');
     }
-
-    // Convert gallery images array to string
-    $galleryImagesString = json_encode($galleryImagePaths);
-
-    // Save the product
-    $product = new Product;
-    $product->name = $request->name;
-    $product->slug = Str::slug($request->name);
-    $product->description = $request->description;
-    $product->information = $request->information;
-    $product->price = $request->price;
-    $product->discount = $request->discount;
-    $product->quantity = $request->quantity;
-    $product->featured_image = $featuredImagePath;
-    $product->gallery_images = $galleryImagesString;
-    $product->weight = $request->weight;
-    $product->shipping_duration = $request->shipping_duration;
-    $product->shipping_charge = $request->shipping_charge;
-    $product->is_featured = $request->is_featured;
-    $product->status = $request->status;
-    $product->user_id = $user->id;
-    $product->product_category_id = $request->product_category_id;
-    $product->save();
-
-    // Attach colors to the product
-    $product->colors()->attach($request->colors);
-
-    // Attach sizes to the product
-    $product->sizes()->attach($request->sizes);
-
-    return redirect()->route('products.index')->with('success', 'Product created successfully.');
-}
-
 
     public function show(Product $product)
     {

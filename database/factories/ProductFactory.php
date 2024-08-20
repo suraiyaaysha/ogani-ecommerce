@@ -2,12 +2,13 @@
 
 namespace Database\Factories;
 
-use Illuminate\Database\Eloquent\Factories\Factory;
-use Illuminate\Support\Str;
-
-use App\Models\Product;
 use App\Models\User;
+use App\Models\Product;
+
+use Illuminate\Support\Facades\File;
+use Illuminate\Support\Str;
 use App\Models\ProductCategory;
+use Illuminate\Database\Eloquent\Factories\Factory;
 // use App\Models\Color;
 // use App\Models\Size;
 
@@ -35,6 +36,9 @@ class ProductFactory extends Factory
                 $this->faker->imageUrl(),
                 $this->faker->imageUrl(),
                 $this->faker->imageUrl(),
+                // $this->getRandomImage(),
+                // $this->getRandomImage(),
+                // $this->getRandomImage(),
             ];
         }
 
@@ -58,6 +62,7 @@ class ProductFactory extends Factory
             'discount' => $discount,
             'quantity' => $this->faker->numberBetween(1, 100),
             'featured_image' => $this->faker->imageUrl(),
+            // 'featured_image' => $this->getRandomImage(),
             // 'gallery_images' => json_encode([]),
              'gallery_images' => json_encode($galleryImages),
 
@@ -69,4 +74,34 @@ class ProductFactory extends Factory
             // 'sizes' => $sizes, // Attach random sizes to the product
         ];
     }
+
+    /**
+     * Get a random image URL from the storage.
+     */
+    private function getRandomImage()
+    {
+        // Directory where the images are stored
+        $directory = public_path('frontend/assets/img/product');
+
+        // Get all files from the directory
+        $files = File::files($directory);
+
+        // Pick a random file
+        $randomFile = $this->faker->randomElement($files);
+
+        // Return the file URL relative to the public directory
+        return 'frontend/assets/img/product/' . $randomFile->getFilename();
+
+
+
+                // // Generate a random number between 1 and 12
+                // $randomNumber = rand(1, 12);
+
+                // // Construct the file name using the random number
+                // $fileName = "product-$randomNumber.jpg";
+        
+                // // Return the file URL relative to the public directory
+                // return "frontend/assets/img/product/$fileName";
+    }
+
 }

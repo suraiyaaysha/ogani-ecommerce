@@ -49,12 +49,12 @@
                     <div class="product__details__pic">
                         <div class="product__details__pic__item">
                             <img class="product__details__pic__item--large"
-                                src="{{ $product->featured_image }}" alt="">
+                                src="{{ asset($product->featured_image) }}" alt="">
                         </div>
                         <div class="product__details__pic__slider owl-carousel">
 
                             @foreach ($product->gallery_images as $image)
-                                <img data-imgbigurl="{{ $image }}" src="{{ $image }}" alt="">
+                                <img data-imgbigurl="{{ asset($image) }}" src="{{ asset($image) }}" alt="">
                             @endforeach
 
                         </div>
@@ -271,7 +271,7 @@
                 @foreach ($relatedProducts as $product)
                     <div class="col-lg-3 col-md-4 col-sm-6 {{ $product->productCategory->slug }}">
                         <div class="featured__item">
-                            <div class="featured__item__pic set-bg" data-setbg="{{ $product->featured_image }}">
+                            <div class="featured__item__pic set-bg" data-setbg="{{ asset($product->featured_image) }}">
                                 <ul class="featured__item__pic__hover">
                                     <li><a href="#"><i class="fa fa-heart"></i></a></li>
                                     <li><a href="#"><i class="fa fa-retweet"></i></a></li>

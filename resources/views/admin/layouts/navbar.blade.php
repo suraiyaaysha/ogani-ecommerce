@@ -1,6 +1,6 @@
 <nav class="navbar p-0 fixed-top d-flex flex-row">
     <div class="navbar-brand-wrapper d-flex d-lg-none align-items-center justify-content-center">
-        <a class="navbar-brand brand-logo-mini text-white fw-bold" href="{{ url('/') }}">Ogani</a>
+        <a class="navbar-brand brand-logo-mini text-white fw-bold" href="{{ url('/') }}">LinkMart</a>
     </div>
     <div class="navbar-menu-wrapper flex-grow d-flex align-items-stretch">
 

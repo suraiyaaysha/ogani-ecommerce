@@ -29,9 +29,25 @@ class ProductCategoryFactory extends Factory
         return [
             'name' => $name,
             'slug' => Str::slug($name),
-            'thumbnail' => $this->faker->imageUrl(),
+            // 'thumbnail' => $this->faker->imageUrl(),
+            'thumbnail' => $this->getRandomLocalImage(),
             'status' => $this->faker->randomElement(['active', 'inactive']),
             'is_featured' => $this->faker->boolean(),
         ];
+    }
+
+        /**
+     * Get a random image URL from the storage.
+     */
+    private function getRandomLocalImage()
+    {
+        // Generate a random number between 1 and 12
+        $randomNumber = rand(1, 5);
+
+        // Construct the file name using the random number
+        $fileName = "cat-$randomNumber.jpg";
+
+        // Return the file URL relative to the public directory
+        return "frontend/assets/img/categories/$fileName";
     }
 }
